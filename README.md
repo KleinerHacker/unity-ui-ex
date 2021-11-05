@@ -8,6 +8,11 @@ Use this repository directly in Unity.
 * https://github.com/KleinerHacker/unity-extension
 * https://github.com/KleinerHacker/unity-animation
 
+### Open UPM
+URL: https://package.openupm.com
+
+Scope: org.pcsoft
+
 # usage
 
 ### Components
