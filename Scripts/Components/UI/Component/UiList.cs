@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -84,7 +85,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Components.UI.Component
 
         #endregion
 
-        public void Refresh()
+        public virtual void Refresh()
         {
             ClearList();
             FillList();
@@ -94,8 +95,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Components.UI.Component
         {
             foreach (var listItem in _listItems)
             {
-                Destroy(listItem.gameObject);
-                OnRemoveItem(listItem);
+                RemoveItem(listItem);
             }
 
             _listItems.Clear();
@@ -108,14 +108,41 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Components.UI.Component
         
             foreach (var data in ContentData)
             {
-                var go = Instantiate(itemPrefab.gameObject, Vector3.zero, Quaternion.identity, content);
-
-                var listItem = go.GetComponent<TI>();
-                listItem.Model = data;
-
-                _listItems.Add(listItem);
-                OnAddItem(listItem);
+                AddItem(data);
             }
+        }
+
+        protected void AddItem(TM data)
+        {
+            var go = InstantiateItem(itemPrefab.gameObject, Vector3.zero, Quaternion.identity, content);
+
+            var listItem = go.GetComponent<TI>();
+            listItem.Model = data;
+
+            _listItems.Add(listItem);
+            OnAddItem(listItem);
+        }
+
+        protected void RemoveItem(TM data)
+        {
+            var item = _listItems.First(x => Equals(x.Model, data));
+            RemoveItem(item);
+        }
+
+        private void RemoveItem(TI listItem)
+        {
+            DestroyItem(listItem);
+            OnRemoveItem(listItem);
+        }
+
+        protected virtual GameObject InstantiateItem(GameObject prefab, Vector3 pos, Quaternion rot, Transform target)
+        {
+            return Instantiate(prefab, pos, rot, target);
+        }
+
+        protected virtual void DestroyItem(TI listItem)
+        {
+            Destroy(listItem.gameObject);
         }
 
         protected virtual void OnAddItem(TI item)
