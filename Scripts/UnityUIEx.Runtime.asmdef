@@ -1,0 +1,17 @@
+{
+    "name": "UnityUIEx.Runtime",
+    "rootNamespace": "UnityUIEx.Runtime",
+    "references": [
+        "GUID:6753ff2140978d34db1d9899e49b3857",
+        "GUID:7e0e70507eb6bf44e9f9fd2a3026ac35"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

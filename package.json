@@ -1,0 +1,17 @@
+{
+  "name": "org.pcsoft.unity.ui-ex",
+  "version": "1.0.0",
+  "displayName": "Unity UI Extension",
+  "description": "Extension for Unity UI system.",
+  "unity": "2021.1",
+  "keywords": [
+    "Unity",
+    "extension",
+    "tooling"
+  ],
+  "author": {
+    "name": "Pfeiffer C Soft",
+    "email": "kl3in3rhack3r@gmail.com",
+    "url": "https://github.com/KleinerHacker/unity-ui-ex"
+  }
+}
