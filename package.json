@@ -1,6 +1,6 @@
 {
   "name": "org.pcsoft.ui-ex",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "displayName": "Unity UI Extension",
   "description": "Extension for Unity UI system.",
   "unity": "2021.1",
@@ -9,6 +9,10 @@
     "extension",
     "tooling"
   ],
+  "dependencies": {
+    "org.pcsoft.extension": "1.0.1",
+    "org.pcsoft.animation": "1.0.1"
+  },
   "author": {
     "name": "Pfeiffer C Soft",
     "email": "kl3in3rhack3r@gmail.com",
