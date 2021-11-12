@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityExtension.Runtime.extension.Scripts.Runtime.Utils;
+using UnityExtension.Runtime.extension.Scripts.Utils;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Components.UI.Window
 {

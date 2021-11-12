@@ -10,7 +10,7 @@
     "tooling"
   ],
   "dependencies": {
-    "org.pcsoft.extension": "1.0.1",
+    "org.pcsoft.extension": "1.1.0",
     "org.pcsoft.animation": "1.0.1"
   },
   "author": {
