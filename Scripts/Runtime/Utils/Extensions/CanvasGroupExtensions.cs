@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace UnityUIEx.Runtime.ui_ex.Scripts.Utils.Extensions
+namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Utils.Extensions
 {
     internal static class CanvasGroupExtensions
     {

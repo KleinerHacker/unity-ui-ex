@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace UnityUIEx.Runtime.ui_ex.Scripts.Components.UI.Component
+namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component
 {
     [AddComponentMenu(UnityUIExConstants.Menus.Components.Ui.ComponentMenu + "/Progress Bar")]
     [DisallowMultipleComponent]

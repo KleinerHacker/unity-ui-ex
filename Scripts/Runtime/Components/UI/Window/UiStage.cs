@@ -1,12 +1,12 @@
 using System;
-using UnityAnimation.Runtime.animation.Scripts.Types;
-using UnityAnimation.Runtime.animation.Scripts.Utils;
+using UnityAnimation.Runtime.animation.Scripts.Runtime.Types;
+using UnityAnimation.Runtime.animation.Scripts.Runtime.Utils;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityUIEx.Runtime.ui_ex.Scripts.Utils.Extensions;
+using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Utils.Extensions;
 
-namespace UnityUIEx.Runtime.ui_ex.Scripts.Components.UI.Window
+namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
 {
     public abstract class UiStage : UIBehaviour, IViewable
     {

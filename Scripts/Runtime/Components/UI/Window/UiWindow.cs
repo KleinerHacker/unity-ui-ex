@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityExtension.Runtime.extension.Scripts.Utils;
+using UnityExtension.Runtime.extension.Scripts.Runtime.Utils;
 
-namespace UnityUIEx.Runtime.ui_ex.Scripts.Components.UI.Window
+namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
 {
     [AddComponentMenu(UnityUIExConstants.Menus.Components.Ui.WindowMenu + "/Window")]
     [DisallowMultipleComponent]

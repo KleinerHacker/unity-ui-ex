@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace UnityUIEx.Runtime.ui_ex.Scripts.Components.UI.Component
+namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component
 {
     public abstract class UiList<TI, TM> : UIBehaviour where TI : UiListItem<TM>
     {

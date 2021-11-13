@@ -1,8 +1,8 @@
-using UnityAnimation.Runtime.animation.Scripts.Types;
-using UnityAnimation.Runtime.animation.Scripts.Utils;
+using UnityAnimation.Runtime.animation.Scripts.Runtime.Types;
+using UnityAnimation.Runtime.animation.Scripts.Runtime.Utils;
 using UnityEngine;
 
-namespace UnityUIEx.Runtime.ui_ex.Scripts.Components.UI.Window
+namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
 {
     [AddComponentMenu(UnityUIExConstants.Menus.Components.Ui.WindowMenu + "/Notification")]
     [DisallowMultipleComponent]

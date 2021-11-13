@@ -1,7 +1,7 @@
 using System;
 using UnityEngine.EventSystems;
 
-namespace UnityUIEx.Runtime.ui_ex.Scripts.Components.UI.Component
+namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component
 {
     public abstract class UiListItem<TM> : UIBehaviour
     {

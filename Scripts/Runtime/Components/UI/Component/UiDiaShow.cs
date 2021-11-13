@@ -1,12 +1,12 @@
 using System;
-using UnityAnimation.Runtime.animation.Scripts.Types;
-using UnityAnimation.Runtime.animation.Scripts.Utils;
+using UnityAnimation.Runtime.animation.Scripts.Runtime.Types;
+using UnityAnimation.Runtime.animation.Scripts.Runtime.Utils;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-namespace UnityUIEx.Runtime.ui_ex.Scripts.Components.UI.Component
+namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component
 {
     [AddComponentMenu(UnityUIExConstants.Menus.Components.Ui.ComponentMenu + "/Dia Show")]
     [DisallowMultipleComponent]

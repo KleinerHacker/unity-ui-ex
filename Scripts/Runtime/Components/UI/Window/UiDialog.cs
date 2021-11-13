@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace UnityUIEx.Runtime.ui_ex.Scripts.Components.UI.Window
+namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
 {
     [AddComponentMenu(UnityUIExConstants.Menus.Components.Ui.WindowMenu + "/Dialog")]
     [DisallowMultipleComponent]

@@ -1,6 +1,6 @@
 using System;
 
-namespace UnityUIEx.Runtime.ui_ex.Scripts.Components.UI.Window
+namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
 {
     public interface IViewable
     {
