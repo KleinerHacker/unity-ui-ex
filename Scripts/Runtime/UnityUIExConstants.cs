@@ -16,6 +16,11 @@
                 {
                     public const string ComponentMenu = UiMenu + "/Components";
                     public const string WindowMenu = UiMenu + "/Window";
+
+                    public static class Window
+                    {
+                        public const string MiscMenu = WindowMenu + "/Misc";
+                    }
                 }
             }
         }

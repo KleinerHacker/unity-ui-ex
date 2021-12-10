@@ -15,20 +15,6 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
         [SerializeField]
         private DialogEscapeAction escapeAction = DialogEscapeAction.None;
 
-        [Header("SFX")]
-        [SerializeField]
-        private AudioMixerGroup audioMixerGroup;
-
-        [SerializeField]
-        private AudioClip openClip;
-
-        [Header("Game Behavior")]
-        [SerializeField]
-        private bool blockingGame = false;
-
-        [SerializeField]
-        private bool changeCursorSystem = false;
-
         #endregion
 
         #region Properties
@@ -37,19 +23,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
 
         #endregion
 
-        private AudioSource _audioSource;
-
         #region Builtin Methods
-
-        protected override void Awake()
-        {
-            base.Awake();
-
-            _audioSource = gameObject.AddComponent<AudioSource>();
-            _audioSource.playOnAwake = false;
-            _audioSource.loop = false;
-            _audioSource.outputAudioMixerGroup = audioMixerGroup;
-        }
 
         #endregion
 
@@ -80,42 +54,6 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
                     break;
                 default:
                     throw new NotImplementedException();
-            }
-        }
-
-        protected override void OnShowing()
-        {
-            if (openClip != null)
-            {
-                _audioSource.PlayOneShot(openClip);
-            }
-
-            if (blockingGame)
-            {
-                GameTimeController.Pause(this, fadingCurve, fadingSpeed);
-            }
-        }
-
-        protected override void OnShown()
-        {
-            if (changeCursorSystem)
-            {
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
-            }
-        }
-
-        protected override void OnHiding()
-        {
-            if (changeCursorSystem)
-            {
-                Cursor.visible = false;
-                Cursor.lockState = CursorLockMode.Locked;
-            }
-
-            if (blockingGame)
-            {
-                GameTimeController.Resume(this, fadingCurve, fadingSpeed);
             }
         }
     }
