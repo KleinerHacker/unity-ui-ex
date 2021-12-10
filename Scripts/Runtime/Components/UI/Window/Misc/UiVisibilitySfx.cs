@@ -52,11 +52,17 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window.Misc
 
         private void WindowOnShowing(object sender, EventArgs e)
         {
+            if (showClip == null)
+                return;
+            
             _audioSource.PlayOneShot(showClip);
         }
 
         private void WindowOnHiding(object sender, EventArgs e)
         {
+            if (hideClip == null)
+                return;
+            
             _audioSource.PlayOneShot(hideClip);
         }
     }
