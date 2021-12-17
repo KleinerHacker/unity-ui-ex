@@ -27,3 +27,10 @@ Scope: org.pcsoft
 ### Windows
 * `UiDialog` - A simple dialog
 * `UiNotification` - A simple temporary shown notification
+
+### Input
+* `UiInputPresenter` - Present inputs like buttons based on active system (see project settings -> UI Input)
+* `UiButtonInput` - Direct Input for a Button
+* `UiToggleInput` - Direct Input for a Toggle
+* `UiToggleGroupInput` - Direct Input for a complete Toggle Group
+* `UiSliderInput` - Direct Input for a Slider
