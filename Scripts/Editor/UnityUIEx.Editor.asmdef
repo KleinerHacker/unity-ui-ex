@@ -1,0 +1,20 @@
+{
+    "name": "UnityUIEx.Editor",
+    "rootNamespace": "UnityUIEx.Editor",
+    "references": [
+        "GUID:f038db6d5194feb459e744a110d08027",
+        "GUID:5d0595cabca3f65418ec01a472735d07",
+        "GUID:626cca1954403c942aaa892ce194af26"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

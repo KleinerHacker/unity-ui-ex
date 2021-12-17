@@ -15,6 +15,7 @@
                 public static class Ui
                 {
                     public const string ComponentMenu = UiMenu + "/Components";
+                    public const string InputMenu = UiMenu + "/Input";
                     public const string WindowMenu = UiMenu + "/Window";
 
                     public static class Window
