@@ -21,7 +21,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Input
 
         [Space]
         [SerializeField]
-        private UiInputPresenter inputPresenter;
+        private UIInputPresenter inputPresenter;
 
         #endregion
         

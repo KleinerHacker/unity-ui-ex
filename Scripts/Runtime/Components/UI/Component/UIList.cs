@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component
 {
-    public abstract class UiList<TI, TM> : UIBehaviour where TI : UiListItem<TM>
+    public abstract class UIList<TI, TM> : UIBehaviour where TI : UIListItem<TM>
     {
         #region Inspector Data
 
@@ -154,7 +154,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component
         }
     }
 
-    public abstract class UiSelectionList<TI, TM> : UiList<TI, TM> where TI : UiSelectableListItem<TM>
+    public abstract class UiSelectionList<TI, TM> : UIList<TI, TM> where TI : UiSelectableListItem<TM>
     {
         #region Properties
 

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Input
 {
-    [AddComponentMenu(UnityUIExConstants.Menus.Components.Ui.InputMenu + "/Button Input")]
+    [AddComponentMenu(UnityUIExConstants.Menus.Components.UI.InputMenu + "/Button Input")]
     [DisallowMultipleComponent]
     [RequireComponent(typeof(Button))]
     public sealed class UIButtonInput : UIInput

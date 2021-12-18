@@ -4,10 +4,10 @@ using UnityEngine;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
 {
-    [AddComponentMenu(UnityUIExConstants.Menus.Components.Ui.WindowMenu + "/Notification")]
+    [AddComponentMenu(UnityUIExConstants.Menus.Components.UI.WindowMenu + "/Notification")]
     [DisallowMultipleComponent]
     [RequireComponent(typeof(CanvasGroup))]
-    public sealed class UiNotification : UiPopup
+    public sealed class UINotification : UIPopup
     {
         #region Inspector Data
 

@@ -12,7 +12,7 @@
             {
                 private const string UiMenu = ComponentMenu + "/UI";
 
-                public static class Ui
+                public static class UI
                 {
                     public const string ComponentMenu = UiMenu + "/Components";
                     public const string InputMenu = UiMenu + "/Input";

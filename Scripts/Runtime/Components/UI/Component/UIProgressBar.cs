@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component
 {
-    [AddComponentMenu(UnityUIExConstants.Menus.Components.Ui.ComponentMenu + "/Progress Bar")]
+    [AddComponentMenu(UnityUIExConstants.Menus.Components.UI.ComponentMenu + "/Progress Bar")]
     [DisallowMultipleComponent]
-    public sealed class UiProgressBar : UIBehaviour
+    public sealed class UIProgressBar : UIBehaviour
     {
         #region Inspector Data
 

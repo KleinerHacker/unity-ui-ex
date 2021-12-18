@@ -8,9 +8,9 @@ using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Utils.Extensions;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component
 {
-    [AddComponentMenu(UnityUIExConstants.Menus.Components.Ui.ComponentMenu + "/Input Presenter")]
+    [AddComponentMenu(UnityUIExConstants.Menus.Components.UI.ComponentMenu + "/Input Presenter")]
     [DisallowMultipleComponent]
-    public sealed class UiInputPresenter : UIBehaviour
+    public sealed class UIInputPresenter : UIBehaviour
     {
         #region Inspector Data
 

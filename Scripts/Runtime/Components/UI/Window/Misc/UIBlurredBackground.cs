@@ -12,10 +12,10 @@ using UnityEngine.Rendering.HighDefinition;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window.Misc
 {
-    [AddComponentMenu(UnityUIExConstants.Menus.Components.Ui.Window.MiscMenu + "/Blurred Background")]
+    [AddComponentMenu(UnityUIExConstants.Menus.Components.UI.Window.MiscMenu + "/Blurred Background")]
     [DisallowMultipleComponent]
-    [RequireComponent(typeof(UiWindow))]
-    public sealed class UiBlurredBackground : UIBehaviour
+    [RequireComponent(typeof(UIStage))]
+    public sealed class UIBlurredBackground : UIBehaviour
     {
         #region Inspector Data
 
@@ -39,7 +39,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window.Misc
 
         #endregion
 
-        private UiWindow _window;
+        private UIStage _stage;
         private DepthOfField _depthOfField;
 
         private float _dofOriginalValue;
@@ -48,7 +48,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window.Misc
 
         protected override void Awake()
         {
-            _window = GetComponent<UiWindow>();
+            _stage = GetComponent<UIWindow>();
             if (!volume.profile.TryGet(out _depthOfField))
                 throw new InvalidOperationException("Depth of field not found in volume!");
 
@@ -77,19 +77,19 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window.Misc
 
         protected override void OnEnable()
         {
-            _window.Showing += WindowOnShown;
-            _window.Hiding += WindowOnHidden;
+            _stage.Showing += StageOnShown;
+            _stage.Hiding += StageOnHidden;
         }
 
         protected override void OnDisable()
         {
-            _window.Shown += WindowOnShown;
-            _window.Hidden += WindowOnHidden;
+            _stage.Shown += StageOnShown;
+            _stage.Hidden += StageOnHidden;
         }
 
         #endregion
 
-        private void WindowOnShown(object sender, EventArgs e)
+        private void StageOnShown(object sender, EventArgs e)
         {
             switch (mode)
             {
@@ -120,7 +120,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window.Misc
             }
         }
 
-        private void WindowOnHidden(object sender, EventArgs e)
+        private void StageOnHidden(object sender, EventArgs e)
         {
             switch (mode)
             {

@@ -8,7 +8,7 @@ using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Utils.Extensions;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
 {
-    public abstract class UiStage : UIBehaviour, IViewable
+    public abstract class UIStage : UIBehaviour, IViewable
     {
         #region Inspector Data
 
