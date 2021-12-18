@@ -41,6 +41,13 @@ namespace UnityUIEx.Editor.ui_ex.Scripts.Editor.Provider
             _settings.Update();
 
             EditorGUILayout.PropertyField(_presetsProperty, new GUIContent("Presets"));
+            if (GUILayout.Button("Re-Generate GUIDs"))
+            {
+                if (EditorUtility.DisplayDialog("Re-Generate GUIDs", "You are sure? All created links in scenes will be lost!", "yes", "no"))
+                {
+                    UIInputSettings.Singleton.UpdateGuids();
+                }
+            }
 
             _settings.ApplyModifiedProperties();
         }
