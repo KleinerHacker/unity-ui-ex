@@ -5,10 +5,10 @@ using UnityExtension.Runtime.extension.Scripts.Runtime.Utils;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window.Misc
 {
-    [AddComponentMenu(UnityUIExConstants.Menus.Components.Ui.Window.MiscMenu + "/Game Time Stopper")]
+    [AddComponentMenu(UnityUIExConstants.Menus.Components.UI.Window.MiscMenu + "/Game Time Stopper")]
     [DisallowMultipleComponent]
-    [RequireComponent(typeof(UiWindow))]
-    public sealed class UiGameTimeStopper : UIBehaviour
+    [RequireComponent(typeof(UIStage))]
+    public sealed class UIGameTimeStopper : UIBehaviour
     {
         #region Inspector Data
 
@@ -21,35 +21,35 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window.Misc
 
         #endregion
 
-        private UiWindow _window;
+        private UIStage _stage;
 
         #region Builtin Methods
 
         protected override void Awake()
         {
-            _window = GetComponent<UiWindow>();
+            _stage = GetComponent<UIWindow>();
         }
 
         protected override void OnEnable()
         {
-            _window.Showing += WindowOnShowing;
-            _window.Hiding += WindowOnHiding;
+            _stage.Showing += StageOnShowing;
+            _stage.Hiding += StageOnHiding;
         }
 
         protected override void OnDisable()
         {
-            _window.Showing -= WindowOnShowing;
-            _window.Hiding -= WindowOnHiding;
+            _stage.Showing -= StageOnShowing;
+            _stage.Hiding -= StageOnHiding;
         }
 
         #endregion
 
-        private void WindowOnShowing(object sender, EventArgs e)
+        private void StageOnShowing(object sender, EventArgs e)
         {
             GameTimeController.Pause(this, stopAnimation, stopSpeed);
         }
 
-        private void WindowOnHiding(object sender, EventArgs e)
+        private void StageOnHiding(object sender, EventArgs e)
         {
             GameTimeController.Resume(this, stopAnimation, stopSpeed);
         }

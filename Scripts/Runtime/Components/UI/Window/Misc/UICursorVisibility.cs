@@ -5,40 +5,40 @@ using UnityExtension.Runtime.extension.Scripts.Runtime.Components;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window.Misc
 {
-    [AddComponentMenu(UnityUIExConstants.Menus.Components.Ui.Window.MiscMenu + "/Cursor Visibility")]
+    [AddComponentMenu(UnityUIExConstants.Menus.Components.UI.Window.MiscMenu + "/Cursor Visibility")]
     [DisallowMultipleComponent]
-    [RequireComponent(typeof(UiWindow))]
-    public sealed class UiCursorVisibility : UIBehaviour
+    [RequireComponent(typeof(UIStage))]
+    public sealed class UICursorVisibility : UIBehaviour
     {
-        private UiWindow _window;
+        private UIStage _stage;
 
         #region Builtin Methods
 
         protected override void Awake()
         {
-            _window = GetComponent<UiWindow>();
+            _stage = GetComponent<UIWindow>();
         }
 
         protected override void OnEnable()
         {
-            _window.Showing += WindowOnShowing;
-            _window.Hiding += WindowOnHiding;
+            _stage.Showing += StageOnShowing;
+            _stage.Hiding += StageOnHiding;
         }
 
         protected override void OnDisable()
         {
-            _window.Showing -= WindowOnShowing;
-            _window.Hiding -= WindowOnHiding;
+            _stage.Showing -= StageOnShowing;
+            _stage.Hiding -= StageOnHiding;
         }
 
         #endregion
 
-        private void WindowOnShowing(object sender, EventArgs e)
+        private void StageOnShowing(object sender, EventArgs e)
         {
             CursorSystem.Singleton.IsCursorVisible = true;
         }
 
-        private void WindowOnHiding(object sender, EventArgs e)
+        private void StageOnHiding(object sender, EventArgs e)
         {
             CursorSystem.Singleton.IsCursorVisible = false;
         }

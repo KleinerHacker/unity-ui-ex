@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component
 {
-    public abstract class UiListItem<TM> : UIBehaviour
+    public abstract class UIListItem<TM> : UIBehaviour
     {
         #region Properties
 
@@ -74,7 +74,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component
         }
     }
 
-    public abstract class UiSelectableListItem<TM> : UiListItem<TM>
+    public abstract class UiSelectableListItem<TM> : UIListItem<TM>
     {
         #region Properties
 

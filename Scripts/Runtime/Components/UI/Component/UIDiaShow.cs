@@ -8,9 +8,9 @@ using Random = UnityEngine.Random;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component
 {
-    [AddComponentMenu(UnityUIExConstants.Menus.Components.Ui.ComponentMenu + "/Dia Show")]
+    [AddComponentMenu(UnityUIExConstants.Menus.Components.UI.ComponentMenu + "/Dia Show")]
     [DisallowMultipleComponent]
-    public sealed class UiDiaShow : UIBehaviour
+    public sealed class UIDiaShow : UIBehaviour
     {
         #region Inspector Data
 

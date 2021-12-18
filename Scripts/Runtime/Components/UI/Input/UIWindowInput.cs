@@ -1,38 +1,34 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
-using UnityEngine.UI;
+using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Input
 {
-    [AddComponentMenu(UnityUIExConstants.Menus.Components.UI.InputMenu + "/Toggle Input")]
+    [AddComponentMenu(UnityUIExConstants.Menus.Components.UI.InputMenu + "/Window Input")]
     [DisallowMultipleComponent]
-    [RequireComponent(typeof(Toggle))]
-    public sealed class UIToggleInput : UIInput
+    [RequireComponent(typeof(UIWindow))]
+    public sealed class UIWindowInput : UIInput
     {
         #region Inspector Data
 
         [Space]
         [SerializeField]
-        private GamepadButton gamepadButton = GamepadButton.A;
+        private GamepadButton gamepadButton = GamepadButton.Start;
 
         [SerializeField]
-        private Key key = Key.Digit0;
-
-        [Space]
-        [SerializeField]
-        private bool allowDisableToggle = true;
+        private Key key = Key.Escape;
 
         #endregion
         
-        private Toggle _toggle;
+        private UIWindow _window;
 
         #region Builtin Methods
 
         protected override void Awake()
         {
             base.Awake();
-            _toggle = GetComponent<Toggle>();
+            _window = GetComponent<UIWindow>();
         }
 
         protected override void LateUpdate()
@@ -40,7 +36,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Input
             if ((GamepadAvailable && Gamepad.current[gamepadButton].wasPressedThisFrame) ||
                 (KeyboardAvailable && Keyboard.current[key].wasPressedThisFrame))
             {
-                _toggle.isOn = !allowDisableToggle || !_toggle.isOn;
+                _window.ToggleVisibility();
             }
         }
 
