@@ -1,8 +1,10 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+#if !UNITY_EDITOR
+using UnityAssetLoader.Runtime.asset_loader.Scripts.Runtime.Loader;
+#endif
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets
 {
@@ -10,12 +12,15 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets
     {
         #region Static Area
 
-        private const string Path = "Assets/ui-input.asset";
+#if UNITY_EDITOR
+        private const string Path = "Assets/Resources/ui-input.asset";
+#endif
 
         public static UIInputSettings Singleton
         {
             get
             {
+#if UNITY_EDITOR
                 var settings = AssetDatabase.LoadAssetAtPath<UIInputSettings>(Path);
                 if (settings == null)
                 {
@@ -28,10 +33,15 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets
                 }
 
                 return settings;
+#else
+                return AssetResourcesLoader.Instance.GetAsset<UIInputSettings>();
+#endif
             }
         }
 
+#if UNITY_EDITOR
         public static SerializedObject SerializedSingleton => new SerializedObject(Singleton);
+#endif
 
         #endregion
 
@@ -65,7 +75,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets
                     set.Remove(inputPreset.Guid);
                     inputPreset.UpdateGuid();
                 }
-                
+
                 set.Add(inputPreset.Guid);
             }
         }
