@@ -4,6 +4,7 @@ using UnityAnimation.Runtime.animation.Scripts.Runtime.Utils;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Input;
 using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Utils.Extensions;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
@@ -41,12 +42,26 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
         #endregion
         
         private CanvasGroup _canvasGroup;
+        private UIInput[] _inputs;
 
         #region Builtin Methods
 
         protected override void Awake()
         {
             _canvasGroup = GetComponent<CanvasGroup>();
+            _inputs = GetComponentsInChildren<UIInput>();
+
+            switch (initialState)
+            {
+                case ViewableState.Hidden:
+                    DisableInputs();
+                    break;
+                case ViewableState.Shown:
+                    EnableInputs();
+                    break;
+                default:
+                    throw new NotImplementedException();
+            }
         }
         
 #if UNITY_EDITOR
@@ -98,6 +113,8 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
                 .WithFinisher(() =>
                 {
                     _canvasGroup.Show();
+                    EnableInputs();
+                    
                     OnShown();
                     Shown?.Invoke(this, EventArgs.Empty);
                     onFinished?.Invoke();
@@ -126,6 +143,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
 
             _canvasGroup.Hide();
             _canvasGroup.alpha = 1f;
+            DisableInputs();
             AnimationBuilder.Create(this, AnimationType.Unscaled)
                 .Animate(fadingCurve, fadingSpeed, v => _canvasGroup.alpha = 1f - v)
                 .WithFinisher(() =>
@@ -135,6 +153,22 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
                     onFinished?.Invoke();
                 })
                 .Start();
+        }
+
+        private void EnableInputs()
+        {
+            foreach (var input in _inputs)
+            {
+                input.enabled = true;
+            }
+        }
+
+        private void DisableInputs()
+        {
+            foreach (var input in _inputs)
+            {
+                input.enabled = false;
+            }
         }
         
         protected virtual void OnShowing() {}
