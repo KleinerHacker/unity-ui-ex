@@ -12,10 +12,10 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Utils.Extensions
 {
     internal static class UIInputExtensions
     {
-        public static bool Requires(this UIInputPreset preset, UIInputDevice inputDevice) => preset.RequiredInputDevices.Contains(inputDevice);
+        public static bool Requires(this UIInputPreset preset, UIInputDevice inputDevice) => preset != null && preset.RequiredInputDevices.Contains(inputDevice);
         
         public static bool IsUsable(this UIInputPreset preset) => 
-            preset.RequiredInputDevices.All(x => x.IsAvailable()) && preset.Constraints.CheckConstraints();
+            preset != null && preset.RequiredInputDevices.All(x => x.IsAvailable()) && preset.Constraints.CheckConstraints();
 
         public static bool IsAvailable(this UIInputDevice type)
         {
