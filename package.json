@@ -16,7 +16,8 @@
     "org.pcsoft.editor-ex": "1.1.0",
     "org.pcsoft.input-ex": "1.1.2",
     "org.pcsoft.common-ex": "1.0.5",
-    "org.pcsoft.android-ex": "1.0.0"
+    "org.pcsoft.android-ex": "1.0.0",
+    "org.pcsoft.analytics-ex": "1.0.0"
   },
   "author": {
     "name": "Pfeiffer C Soft",

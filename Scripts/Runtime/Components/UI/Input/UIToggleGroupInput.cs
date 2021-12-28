@@ -21,9 +21,17 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Input
 
         protected override int CurrentIndex => toggles.IndexOf(x => x.isOn);
         protected override int ListLength => toggles.Length;
+        protected override bool Interactable => true;
 
         #endregion
 
-        protected override void ActivateItem(int index) => toggles[index].isOn = true;
+        protected override bool ActivateItem(int index)
+        {
+            if (!toggles[index].interactable)
+                return false;
+            
+            toggles[index].isOn = true;
+            return true;
+        }
     }
 }

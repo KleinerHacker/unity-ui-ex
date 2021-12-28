@@ -12,6 +12,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Input
 
         protected override int CurrentIndex => _dropdown.value;
         protected override int ListLength => _dropdown.options.Count;
+        protected override bool Interactable => _dropdown.interactable;
 
         #endregion
 
@@ -27,6 +28,10 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Input
 
         #endregion
         
-        protected override void ActivateItem(int index) => _dropdown.value = index;
+        protected override bool ActivateItem(int index)
+        {
+            _dropdown.value = index;
+            return true;
+        }
     }
 }
