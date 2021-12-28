@@ -47,12 +47,18 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Input
             if ((GamepadAvailable && Gamepad.current[negativeGamepadButton].isPressed) ||
                 (KeyboardAvailable && Keyboard.current[negativeKey].isPressed))
             {
-                _slider.value -= CalculatedChange;
+                if (_slider.interactable)
+                {
+                    _slider.value -= CalculatedChange;
+                }
             }
             else if ((GamepadAvailable && Gamepad.current[positiveGamepadButton].isPressed) ||
                      (KeyboardAvailable && Keyboard.current[positiveKey].isPressed))
             {
-                _slider.value += _slider.wholeNumbers ? 1f : sensibility * Time.deltaTime;
+                if (_slider.interactable)
+                {
+                    _slider.value += _slider.wholeNumbers ? 1f : sensibility * Time.deltaTime;
+                }
             }
         }
 

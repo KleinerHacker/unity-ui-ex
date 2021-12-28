@@ -34,6 +34,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Input
 
         protected abstract int CurrentIndex { get; }
         protected abstract int ListLength { get; }
+        protected abstract bool Interactable { get; }
 
         #endregion
         
@@ -52,12 +53,18 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Input
             if ((GamepadAvailable && Gamepad.current[negativeGamepadButton].wasPressedThisFrame) ||
                 (KeyboardAvailable && Keyboard.current[negativeKey].wasPressedThisFrame))
             {
-                GotoPrev();
+                if (Interactable)
+                {
+                    GotoPrev();
+                }
             }
             else if ((GamepadAvailable && Gamepad.current[positiveGamepadButton].wasPressedThisFrame) ||
                      (KeyboardAvailable && Keyboard.current[positiveKey].wasPressedThisFrame))
             {
-                GotoNext();
+                if (Interactable)
+                {
+                    GotoNext();
+                }
             }
         }
 
@@ -74,9 +81,15 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Input
                     UIListInputBehavior.Circle => 0,
                     _ => throw new NotImplementedException(behavior.ToString())
                 };
+                
+                if (behavior == UIListInputBehavior.Stays)
+                    return;
             }
 
-            ActivateItem(_index);
+            if (!ActivateItem(_index))
+            {
+                GotoNext();
+            }
         }
 
         private void GotoPrev()
@@ -90,12 +103,18 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Input
                     UIListInputBehavior.Circle => ListLength - 1,
                     _ => throw new NotImplementedException(behavior.ToString())
                 };
+                
+                if (behavior == UIListInputBehavior.Stays)
+                    return;
             }
 
-            ActivateItem(_index);
+            if (!ActivateItem(_index))
+            {
+                GotoPrev();
+            }
         }
 
-        protected abstract void ActivateItem(int index);
+        protected abstract bool ActivateItem(int index);
     }
     
     public enum UIListInputBehavior

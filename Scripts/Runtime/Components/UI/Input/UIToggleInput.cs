@@ -40,7 +40,10 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Input
             if ((GamepadAvailable && Gamepad.current[gamepadButton].wasPressedThisFrame) ||
                 (KeyboardAvailable && Keyboard.current[key].wasPressedThisFrame))
             {
-                _toggle.isOn = !allowDisableToggle || !_toggle.isOn;
+                if (_toggle.interactable)
+                {
+                    _toggle.isOn = !allowDisableToggle || !_toggle.isOn;
+                }
             }
         }
 

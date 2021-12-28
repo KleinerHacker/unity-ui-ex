@@ -37,7 +37,10 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Input
             if ((GamepadAvailable && Gamepad.current[gamepadButton].wasPressedThisFrame) ||
                 (KeyboardAvailable && Keyboard.current[key].wasPressedThisFrame))
             {
-                _button.OnPointerClick(new PointerEventData(EventSystem.current));
+                if (_button.interactable)
+                {
+                    _button.OnPointerClick(new PointerEventData(EventSystem.current));
+                }
             }
         }
 
