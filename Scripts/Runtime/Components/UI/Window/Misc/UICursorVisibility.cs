@@ -5,7 +5,7 @@ using UnityExtension.Runtime.extension.Scripts.Runtime.Components;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window.Misc
 {
-    [AddComponentMenu(UnityUIExConstants.Menus.Components.UI.Window.MiscMenu + "/Cursor Visibility")]
+    [AddComponentMenu(UnityUIExConstants.Menu.Component.UI.Window.MiscMenu + "/Cursor Visibility")]
     [DisallowMultipleComponent]
     [RequireComponent(typeof(UIStage))]
     public sealed class UICursorVisibility : UIBehaviour

@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component
 {
-    [AddComponentMenu(UnityUIExConstants.Menus.Components.UI.ComponentMenu + "/Dia Show")]
+    [AddComponentMenu(UnityUIExConstants.Menu.Component.UI.ComponentMenu + "/Dia Show")]
     [DisallowMultipleComponent]
     public sealed class UIDiaShow : UIBehaviour
     {

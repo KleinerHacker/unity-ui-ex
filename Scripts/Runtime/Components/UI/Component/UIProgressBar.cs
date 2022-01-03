@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component
 {
-    [AddComponentMenu(UnityUIExConstants.Menus.Components.UI.ComponentMenu + "/Progress Bar")]
+    [AddComponentMenu(UnityUIExConstants.Menu.Component.UI.ComponentMenu + "/Progress Bar")]
     [DisallowMultipleComponent]
     public sealed class UIProgressBar : UIBehaviour
     {
