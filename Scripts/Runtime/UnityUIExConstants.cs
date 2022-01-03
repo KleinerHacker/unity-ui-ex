@@ -4,19 +4,20 @@
     {
         public const string Root = "Unity UI Extension";
 
-        public static class Menus
+        public static class Menu
         {
             private const string ComponentMenu = Root + "/Component";
             
-            public static class Components
+            public static class Component
             {
-                private const string UiMenu = ComponentMenu + "/UI";
+                private const string UIMenu = ComponentMenu + "/UI";
 
                 public static class UI
                 {
-                    public const string ComponentMenu = UiMenu + "/Components";
-                    public const string InputMenu = UiMenu + "/Input";
-                    public const string WindowMenu = UiMenu + "/Window";
+                    public const string ComponentMenu = UIMenu + "/Components";
+                    public const string InputMenu = UIMenu + "/Input";
+                    public const string WindowMenu = UIMenu + "/Window";
+                    public const string AudioMenu = UIMenu + "/Audio";
 
                     public static class Window
                     {

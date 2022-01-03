@@ -5,7 +5,7 @@ using UnityExtension.Runtime.extension.Scripts.Runtime.Utils;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
 {
-    [AddComponentMenu(UnityUIExConstants.Menus.Components.UI.WindowMenu + "/Window")]
+    [AddComponentMenu(UnityUIExConstants.Menu.Component.UI.WindowMenu + "/Window")]
     [DisallowMultipleComponent]
     [RequireComponent(typeof(CanvasGroup))]
     public class UIWindow : UIStage

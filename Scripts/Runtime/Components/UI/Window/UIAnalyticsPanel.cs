@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
 {
-    [AddComponentMenu(UnityUIExConstants.Menus.Components.UI.WindowMenu + "/Analytics Window")]
+    [AddComponentMenu(UnityUIExConstants.Menu.Component.UI.WindowMenu + "/Analytics Window")]
     [DisallowMultipleComponent]
     [RequireComponent(typeof(UIWindow))]
     public sealed class UIAnalyticsPanel : UIBehaviour

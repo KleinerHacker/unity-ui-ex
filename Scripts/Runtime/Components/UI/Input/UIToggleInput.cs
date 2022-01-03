@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Input
 {
-    [AddComponentMenu(UnityUIExConstants.Menus.Components.UI.InputMenu + "/Toggle Input")]
+    [AddComponentMenu(UnityUIExConstants.Menu.Component.UI.InputMenu + "/Toggle Input")]
     [DisallowMultipleComponent]
     [RequireComponent(typeof(Toggle))]
     public sealed class UIToggleInput : UIInput

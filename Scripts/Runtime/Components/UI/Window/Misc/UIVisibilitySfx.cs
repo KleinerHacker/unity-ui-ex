@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window.Misc
 {
-    [AddComponentMenu(UnityUIExConstants.Menus.Components.UI.Window.MiscMenu + "/Visibility Sfx")]
+    [AddComponentMenu(UnityUIExConstants.Menu.Component.UI.Window.MiscMenu + "/Visibility Sfx")]
     [DisallowMultipleComponent]
     [RequireComponent(typeof(UIStage))]
     public sealed class UIVisibilitySfx : UIBehaviour

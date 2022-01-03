@@ -5,7 +5,7 @@ using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Input
 {
-    [AddComponentMenu(UnityUIExConstants.Menus.Components.UI.InputMenu + "/Window Input")]
+    [AddComponentMenu(UnityUIExConstants.Menu.Component.UI.InputMenu + "/Window Input")]
     [DisallowMultipleComponent]
     [RequireComponent(typeof(UIWindow))]
     public sealed class UIWindowInput : UIInput

@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component
 {
-    [AddComponentMenu(UnityUIExConstants.Menus.Components.UI.ComponentMenu + "/Progress Indicator")]
+    [AddComponentMenu(UnityUIExConstants.Menu.Component.UI.ComponentMenu + "/Progress Indicator")]
     [DisallowMultipleComponent]
     public class UIProgressIndicator : UIBehaviour
     {

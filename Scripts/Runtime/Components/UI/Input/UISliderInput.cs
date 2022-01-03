@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Input
 {
-    [AddComponentMenu(UnityUIExConstants.Menus.Components.UI.InputMenu + "/Slider Input")]
+    [AddComponentMenu(UnityUIExConstants.Menu.Component.UI.InputMenu + "/Slider Input")]
     [DisallowMultipleComponent]
     [RequireComponent(typeof(Slider))]
     public sealed class UISliderInput : UIInput
