@@ -36,3 +36,10 @@ Scope: org.pcsoft
 * `UISliderInput` - Direct Input for a Slider
 * `UIDropdownInput` - Direct Input for Dropdowns
 * `UIScrollViewInput` - Direct Input for Scroll Views
+
+### Audio
+* `UIButtonJingle` - Play a jingle on button click
+* `UIToggleJingle` - Play a jingle on toggle changed
+* `IOSliderJingle` - Play a jingle on slider value changed
+
+‼️ Please note: Audio system for UI will change in feature!
