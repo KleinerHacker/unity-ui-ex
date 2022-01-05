@@ -4,10 +4,9 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityInputEx.Runtime.input_ex.Scripts.Runtime.Utils.Extensions;
 using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets;
-using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component;
 using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Utils.Extensions;
 
-namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Input
+namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
 {
     public abstract class UIInput : UIBehaviour
     {

@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Input
+namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
 {
-    [AddComponentMenu(UnityUIExConstants.Menu.Component.UI.InputMenu + "/Dropdown Input")]
+    [AddComponentMenu(UnityUIExConstants.Menu.Component.UI.Component.InputMenu + "/Dropdown Input")]
     [DisallowMultipleComponent]
     [RequireComponent(typeof(Dropdown))]
     public sealed class UIDropdownInput : UIListInput

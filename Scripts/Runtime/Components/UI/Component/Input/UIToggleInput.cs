@@ -1,15 +1,14 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.UI;
 
-namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Input
+namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
 {
-    [AddComponentMenu(UnityUIExConstants.Menu.Component.UI.InputMenu + "/Button Input")]
+    [AddComponentMenu(UnityUIExConstants.Menu.Component.UI.Component.InputMenu + "/Toggle Input")]
     [DisallowMultipleComponent]
-    [RequireComponent(typeof(Button))]
-    public sealed class UIButtonInput : UIInput
+    [RequireComponent(typeof(Toggle))]
+    public sealed class UIToggleInput : UIInput
     {
         #region Inspector Data
 
@@ -20,16 +19,20 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Input
         [SerializeField]
         private Key key = Key.Digit0;
 
-        #endregion
+        [Space]
+        [SerializeField]
+        private bool allowDisableToggle = true;
 
-        private Button _button;
+        #endregion
+        
+        private Toggle _toggle;
 
         #region Builtin Methods
 
         protected override void Awake()
         {
             base.Awake();
-            _button = GetComponent<Button>();
+            _toggle = GetComponent<Toggle>();
         }
 
         protected override void LateUpdate()
@@ -37,9 +40,9 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Input
             if ((GamepadAvailable && Gamepad.current[gamepadButton].wasPressedThisFrame) ||
                 (KeyboardAvailable && Keyboard.current[key].wasPressedThisFrame))
             {
-                if (_button.interactable)
+                if (_toggle.interactable)
                 {
-                    _button.OnPointerClick(new PointerEventData(EventSystem.current));
+                    _toggle.isOn = !allowDisableToggle || !_toggle.isOn;
                 }
             }
         }

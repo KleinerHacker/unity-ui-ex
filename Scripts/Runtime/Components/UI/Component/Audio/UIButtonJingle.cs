@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Audio
+namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Audio
 {
-    [AddComponentMenu(UnityUIExConstants.Menu.Component.UI.AudioMenu + "/Button Jingle")]
+    [AddComponentMenu(UnityUIExConstants.Menu.Component.UI.Component.AudioMenu + "/Button Jingle")]
     [DisallowMultipleComponent]
     [RequireComponent(typeof(Button))]
     public sealed class UIButtonJingle : UIJingle<Button>

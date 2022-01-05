@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Audio
+namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Audio
 {
-    [AddComponentMenu(UnityUIExConstants.Menu.Component.UI.AudioMenu + "/Toggle Jingle")]
+    [AddComponentMenu(UnityUIExConstants.Menu.Component.UI.Component.AudioMenu + "/Toggle Jingle")]
     [DisallowMultipleComponent]
     [RequireComponent(typeof(Toggle))]
     public sealed class UIToggleJingle : UIJingle<Toggle>

@@ -4,9 +4,9 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityInputEx.Runtime.input_ex.Scripts.Runtime.Utils.Extensions;
 
-namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Input
+namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
 {
-    [AddComponentMenu(UnityUIExConstants.Menu.Component.UI.InputMenu + "/Scroll View Input")]
+    [AddComponentMenu(UnityUIExConstants.Menu.Component.UI.Component.InputMenu + "/Scroll View Input")]
     [DisallowMultipleComponent]
     [RequireComponent(typeof(ScrollRect))]
     public sealed class UIScrollViewInput : UIInput

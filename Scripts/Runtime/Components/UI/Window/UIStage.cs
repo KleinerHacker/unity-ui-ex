@@ -4,7 +4,7 @@ using UnityAnimation.Runtime.animation.Scripts.Runtime.Utils;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Input;
+using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input;
 using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Utils.Extensions;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
