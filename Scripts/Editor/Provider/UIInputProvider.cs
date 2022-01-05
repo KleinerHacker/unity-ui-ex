@@ -21,7 +21,7 @@ namespace UnityUIEx.Editor.ui_ex.Scripts.Editor.Provider
         private SerializedObject _settings;
         private SerializedProperty _presetsProperty;
         
-        public UIInputProvider() : base("Project/UI Input", SettingsScope.Project, new[] { "UI", "Input", "Input System" })
+        public UIInputProvider() : base("Project/Input System Package/UI Input", SettingsScope.Project, new[] { "UI", "Input", "Input System" })
         {
         }
 

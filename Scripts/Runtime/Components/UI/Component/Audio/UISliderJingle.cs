@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Audio
+namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Audio
 {
-    [AddComponentMenu(UnityUIExConstants.Menu.Component.UI.AudioMenu + "/Slider Jingle")]
+    [AddComponentMenu(UnityUIExConstants.Menu.Component.UI.Component.AudioMenu + "/Slider Jingle")]
     [DisallowMultipleComponent]
     [RequireComponent(typeof(Slider))]
     public sealed class UISliderJingle : UIJingle<Slider>

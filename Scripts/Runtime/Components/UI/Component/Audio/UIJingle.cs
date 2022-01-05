@@ -2,7 +2,7 @@ using UnityAnimation.Runtime.animation.Scripts.Runtime.Utils;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Audio
+namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Audio
 {
     public abstract class UIJingle<T> : UIBehaviour where T : UnityEngine.Component
     {

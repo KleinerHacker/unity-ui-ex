@@ -2,9 +2,9 @@ using UnityCommonEx.Runtime.common_ex.Scripts.Runtime.Utils.Extensions;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Input
+namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
 {
-    [AddComponentMenu(UnityUIExConstants.Menu.Component.UI.InputMenu + "/Toggle Group Input")]
+    [AddComponentMenu(UnityUIExConstants.Menu.Component.UI.Component.InputMenu + "/Toggle Group Input")]
     [DisallowMultipleComponent]
     [RequireComponent(typeof(ToggleGroup))]
     public sealed class UIToggleGroupInput : UIListInput

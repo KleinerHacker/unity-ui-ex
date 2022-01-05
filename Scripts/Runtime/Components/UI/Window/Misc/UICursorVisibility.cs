@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityExtension.Runtime.extension.Scripts.Runtime.Components;
+using UnityExtension.Runtime.extension.Scripts.Runtime;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window.Misc
 {
@@ -35,12 +35,12 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window.Misc
 
         private void StageOnShowing(object sender, EventArgs e)
         {
-            CursorSystem.Singleton.IsCursorVisible = true;
+            CursorSystem.IsVisible = true;
         }
 
         private void StageOnHiding(object sender, EventArgs e)
         {
-            CursorSystem.Singleton.IsCursorVisible = false;
+            CursorSystem.IsVisible = false;
         }
     }
 }

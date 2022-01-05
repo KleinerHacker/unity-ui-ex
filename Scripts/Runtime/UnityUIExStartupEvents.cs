@@ -4,7 +4,7 @@ using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime
 {
-    public static class UnityUIExEvents
+    public static class UnityUIExStartupEvents
     {
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)]
         public static void Initialize()
