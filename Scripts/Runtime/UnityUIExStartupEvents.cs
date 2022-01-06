@@ -11,6 +11,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime
         {
             Debug.Log("Initialize UI input");
             AssetResourcesLoader.Instance.LoadAssets<UIInputSettings>("");
+            AssetResourcesLoader.Instance.LoadAssets<UIAudioSettings>("");
         }
     }
 }

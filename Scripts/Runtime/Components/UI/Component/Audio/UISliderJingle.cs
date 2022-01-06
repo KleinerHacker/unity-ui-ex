@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnitySfx.Runtime.sfx_system.Scripts.Runtime.Assets;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Audio
 {
@@ -11,11 +12,19 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Audio
         #region Inspector Data
 
         [Header("Resources")]
+#if SFX_SYSTEM
+        [SerializeField]
+        private SfxClip jingleUp;
+
+        [SerializeField]
+        private SfxClip jingleDown;
+#else
         [SerializeField]
         private AudioClip jingleUp;
-        
+
         [SerializeField]
         private AudioClip jingleDown;
+#endif
 
         #endregion
 

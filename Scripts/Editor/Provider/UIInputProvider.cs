@@ -11,7 +11,7 @@ namespace UnityUIEx.Editor.ui_ex.Scripts.Editor.Provider
         #region Static Area
 
         [SettingsProvider]
-        public static SettingsProvider CreateGameSettingsProvider()
+        public static SettingsProvider CreateSettingsProvider()
         {
             return new UIInputProvider();
         }
@@ -24,8 +24,6 @@ namespace UnityUIEx.Editor.ui_ex.Scripts.Editor.Provider
         public UIInputProvider() : base("Project/Input System Package/UI Input", SettingsScope.Project, new[] { "UI", "Input", "Input System" })
         {
         }
-
-        #region Builtin Methods
 
         public override void OnActivate(string searchContext, VisualElement rootElement)
         {
@@ -51,7 +49,5 @@ namespace UnityUIEx.Editor.ui_ex.Scripts.Editor.Provider
 
             _settings.ApplyModifiedProperties();
         }
-
-        #endregion
     }
 }

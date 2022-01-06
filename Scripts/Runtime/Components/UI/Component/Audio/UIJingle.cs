@@ -1,6 +1,8 @@
 using UnityAnimation.Runtime.animation.Scripts.Runtime.Utils;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnitySfx.Runtime.sfx_system.Scripts.Runtime;
+using UnitySfx.Runtime.sfx_system.Scripts.Runtime.Assets;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Audio
 {
@@ -15,24 +17,37 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Audio
         [SerializeField]
         private float maxDelay;
 
+        [Space]
+        [SerializeField]
+        [Tooltip("Leave field empty to use default SFX system")]
+        private string sfxSystemName;
+
         #endregion
 
         protected T _component;
-        private AudioSource _audioSource; //TODO: Usage SFX System
+        private SfxSystemInstance _sfxSystem;
 
         #region Builtin Methods
 
         protected override void Awake()
         {
             _component = GetComponent<T>();
-            
-            _audioSource = gameObject.AddComponent<AudioSource>();
-            _audioSource.playOnAwake = false;
-            _audioSource.loop = false;
+            _sfxSystem = string.IsNullOrEmpty(sfxSystemName) ? SfxSystem.Default : SfxSystem.Get(sfxSystemName);
         }
 
         #endregion
 
+        protected void PlayJingle(SfxClip jingle)
+        {
+            if (jingle == null)
+                return;
+            
+            var delay = Random.Range(minDelay, maxDelay);
+            AnimationBuilder.Create(this)
+                .Wait(delay, () => _sfxSystem.PlayOneShot(jingle))
+                .Start();
+        }
+        
         protected void PlayJingle(AudioClip jingle)
         {
             if (jingle == null)
@@ -40,7 +55,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Audio
             
             var delay = Random.Range(minDelay, maxDelay);
             AnimationBuilder.Create(this)
-                .Wait(delay, () => _audioSource.PlayOneShot(jingle))
+                .Wait(delay, () => _sfxSystem.PlayOneShot(jingle))
                 .Start();
         }
     }
