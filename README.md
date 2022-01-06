@@ -42,4 +42,6 @@ Scope: org.pcsoft
 * `UIToggleJingle` - Play a jingle on toggle changed
 * `IOSliderJingle` - Play a jingle on slider value changed
 
+The audio settings can changed in project settings. You can switch to SFX system.
+
 ‼️ Please note: Audio system for UI will change in feature!
