@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnitySfx.Runtime.sfx_system.Scripts.Runtime;
 using UnitySfx.Runtime.sfx_system.Scripts.Runtime.Assets;
+using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Audio
 {
@@ -32,7 +33,9 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Audio
         protected override void Awake()
         {
             _component = GetComponent<T>();
-            _sfxSystem = string.IsNullOrEmpty(sfxSystemName) ? SfxSystem.Default : SfxSystem.Get(sfxSystemName);
+
+            var sfxName = sfxSystemName ?? UIAudioSettings.Singleton.SfxSystemName;
+            _sfxSystem = string.IsNullOrEmpty(sfxName) ? SfxSystem.Default : SfxSystem.Get(sfxName);
         }
 
         #endregion
