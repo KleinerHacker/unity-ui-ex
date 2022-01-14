@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityInputEx.Runtime.input_ex.Scripts.Runtime.Utils.Extensions;
+using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Types;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
 {
@@ -18,7 +19,14 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
         private GamepadAxis gamepad = GamepadAxis.RightStick;
 
         [SerializeField]
-        private KeyboardAxis keyboard = KeyboardAxis.Arrows;
+        private KeyAxis key = KeyAxis.Arrows;
+        
+        [Space]
+        [SerializeField]
+        private GameObject iconObject;
+        
+        [SerializeField]
+        private Image icon;
 
         [Space]
         [SerializeField]
@@ -52,11 +60,11 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
             
             if (KeyboardAvailable)
             {
-                velocity += keyboard switch
+                velocity += key switch
                 {
-                    KeyboardAxis.Arrows => Keyboard.current.GetArrows(),
-                    KeyboardAxis.Numpad => Keyboard.current.GetNumpad(),
-                    KeyboardAxis.WASD => Keyboard.current.GetWASD(),
+                    KeyAxis.Arrows => Keyboard.current.GetArrows(),
+                    KeyAxis.Numpad => Keyboard.current.GetNumpad(),
+                    KeyAxis.WASD => Keyboard.current.GetWASD(),
                     _ => throw new NotImplementedException()
                 } * velocityMultiplier;
             }
@@ -65,19 +73,10 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
         }
 
         #endregion
-    }
 
-    public enum GamepadAxis
-    {
-        LeftStick,
-        RightStick,
-        DPad,
-    }
-
-    public enum KeyboardAxis
-    {
-        Arrows,
-        Numpad,
-        WASD,
+        protected override void UpdateVisual()
+        {
+            UpdateIcon(key, gamepad, icon, iconObject);
+        }
     }
 }

@@ -25,6 +25,19 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
 
         [SerializeField]
         private Key positiveKey = Key.RightArrow;
+        
+        [Space]
+        [SerializeField]
+        private GameObject negativeIconObject;
+        
+        [SerializeField]
+        private Image negativeIcon;
+        
+        [SerializeField]
+        private GameObject positiveIconObject;
+        
+        [SerializeField]
+        private Image positiveIcon;
 
         [Space]
         [SerializeField]
@@ -65,5 +78,11 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
         #endregion
 
         private float CalculatedChange => _slider.wholeNumbers ? 1f : sensibility * Time.deltaTime;
+        
+        protected override void UpdateVisual()
+        {
+            UpdateIcon(positiveKey, positiveGamepadButton, positiveIcon, positiveIconObject);
+            UpdateIcon(negativeKey, negativeGamepadButton, negativeIcon, negativeIconObject);
+        }
     }
 }

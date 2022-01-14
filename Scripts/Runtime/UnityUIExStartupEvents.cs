@@ -10,7 +10,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime
         public static void Initialize()
         {
             Debug.Log("Initialize UI input");
-            AssetResourcesLoader.Instance.LoadAssets<UIInputSettings>("");
+            AssetResourcesLoader.Instance.LoadAssets<UIShortcutInputSettings>("");
             AssetResourcesLoader.Instance.LoadAssets<UIAudioSettings>("");
         }
     }
