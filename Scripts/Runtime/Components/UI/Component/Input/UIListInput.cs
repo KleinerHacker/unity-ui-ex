@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.UI;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
 {
@@ -27,6 +28,19 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
         [Tooltip("Behavior to define what is happen if first or last toggle was reached")]
         [SerializeField]
         private UIListInputBehavior behavior = UIListInputBehavior.Circle;
+        
+        [Space]
+        [SerializeField]
+        private GameObject negativeIconObject;
+        
+        [SerializeField]
+        private Image negativeIcon;
+        
+        [SerializeField]
+        private GameObject positiveIconObject;
+        
+        [SerializeField]
+        private Image positiveIcon;
 
         #endregion
 
@@ -115,6 +129,12 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
         }
 
         protected abstract bool ActivateItem(int index);
+
+        protected override void UpdateVisual()
+        {
+            UpdateIcon(positiveKey, positiveGamepadButton, positiveIcon, positiveIconObject);
+            UpdateIcon(negativeKey, negativeGamepadButton, negativeIcon, negativeIconObject);
+        }
     }
     
     public enum UIListInputBehavior

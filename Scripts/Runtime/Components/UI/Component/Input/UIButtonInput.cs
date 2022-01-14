@@ -20,6 +20,13 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
         [SerializeField]
         private Key key = Key.Digit0;
 
+        [Space]
+        [SerializeField]
+        private GameObject iconObject;
+        
+        [SerializeField]
+        private Image icon;
+
         #endregion
 
         private Button _button;
@@ -45,5 +52,10 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
         }
 
         #endregion
+
+        protected override void UpdateVisual()
+        {
+            UpdateIcon(key, gamepadButton, icon, iconObject);
+        }
     }
 }

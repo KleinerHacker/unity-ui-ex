@@ -41,5 +41,9 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
         }
 
         #endregion
+
+        protected override void UpdateVisual()
+        {
+        }
     }
 }

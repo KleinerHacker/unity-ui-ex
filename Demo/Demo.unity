@@ -737,7 +737,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 490213291}
-  - component: {fileID: 490213292}
   m_Layer: 5
   m_Name: Presenter
   m_TagString: Untagged
@@ -767,24 +766,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &490213292
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 490213290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f45698ee3d34952babc48a521455437, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  items:
-  - presetGuid: 5d285575-55ce-43d9-a755-55c92a53e58c
-    presenter: {fileID: 1600946197}
-  - presetGuid: 6f54534d-a786-4a19-8329-0c14ba902edc
-    presenter: {fileID: 1489633413}
-  allowMultiplePresets: 0
 --- !u!1 &508701248
 GameObject:
   m_ObjectHideFlags: 0
@@ -1651,10 +1632,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gamepadSupport: 0
+  showGamepadIcon: 1
   keyboardSupport: 0
-  inputPresenter: {fileID: 0}
+  showKeyboardIcon: 1
   gamepad: 1
-  keyboard: 1
+  key: 0
+  iconObject: {fileID: 0}
+  icon: {fileID: 0}
   velocityMultiplier: 100
 --- !u!114 &680270832
 MonoBehaviour:
@@ -2808,13 +2792,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gamepadSupport: 0
+  showGamepadIcon: 1
   keyboardSupport: 0
-  inputPresenter: {fileID: 0}
+  showKeyboardIcon: 1
   negativeGamepadButton: 10
   positiveGamepadButton: 11
   negativeKey: 61
   positiveKey: 62
   behavior: 1
+  negativeIconObject: {fileID: 0}
+  negativeIcon: {fileID: 0}
+  positiveIconObject: {fileID: 0}
+  positiveIcon: {fileID: 0}
 --- !u!114 &1349000166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3365,6 +3354,7 @@ GameObject:
   - component: {fileID: 1507874421}
   - component: {fileID: 1507874420}
   - component: {fileID: 1507874419}
+  - component: {fileID: 1507874422}
   m_Layer: 5
   m_Name: Button (Legacy)
   m_TagString: Untagged
@@ -3476,6 +3466,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1507874417}
   m_CullTransparentMesh: 1
+--- !u!114 &1507874422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1507874417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef805f8faa7a4458a4c6a033bbad3d19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gamepadSupport: 0
+  showGamepadIcon: 1
+  keyboardSupport: 0
+  showKeyboardIcon: 0
+  gamepadButton: 6
+  key: 50
+  iconObject: {fileID: 490213290}
+  icon: {fileID: 1600946199}
 --- !u!1 &1530630634
 GameObject:
   m_ObjectHideFlags: 0
@@ -3720,13 +3730,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gamepadSupport: 0
+  showGamepadIcon: 1
   keyboardSupport: 0
-  inputPresenter: {fileID: 0}
+  showKeyboardIcon: 1
   negativeGamepadButton: 0
   positiveGamepadButton: 1
   negativeKey: 63
   positiveKey: 64
   behavior: 1
+  negativeIconObject: {fileID: 0}
+  negativeIcon: {fileID: 0}
+  positiveIconObject: {fileID: 0}
+  positiveIcon: {fileID: 0}
   toggles:
   - {fileID: 1464573221}
   - {fileID: 1296062672}
