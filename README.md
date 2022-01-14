@@ -29,7 +29,6 @@ Scope: org.pcsoft
 * `UINotification` - A simple temporary shown notification
 
 ### Input
-* `UIInputPresenter` - Present inputs like buttons based on active system (see project settings -> UI Input)
 * `UIButtonInput` - Direct Input for a Button
 * `UIToggleInput` - Direct Input for a Toggle
 * `UIToggleGroupInput` - Direct Input for a complete Toggle Group
@@ -45,5 +44,3 @@ Setup via Project Settings.
 * `IOSliderJingle` - Play a jingle on slider value changed
 
 The audio settings can changed in project settings. You can switch to SFX system.
-
-‼️ Please note: Audio system for UI will change in feature!
