@@ -37,6 +37,8 @@ Scope: org.pcsoft
 * `UIDropdownInput` - Direct Input for Dropdowns
 * `UIScrollViewInput` - Direct Input for Scroll Views
 
+Setup via Project Settings.
+
 ### Audio
 * `UIButtonJingle` - Play a jingle on button click
 * `UIToggleJingle` - Play a jingle on toggle changed
