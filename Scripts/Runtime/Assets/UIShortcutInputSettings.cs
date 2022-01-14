@@ -41,7 +41,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets
 
                 return settings;
 #else
-                return AssetResourcesLoader.Instance.GetAsset<UIInputSettings>();
+                return AssetResourcesLoader.Instance.GetAsset<UIShortcutInputSettings>();
 #endif
             }
         }
@@ -53,7 +53,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets
         #endregion
 
         #region Inspector Data
-        
+
         [SerializeField]
         private UIShortcutInput shortcutInput = UIShortcutInput.Keyboard;
 
@@ -65,13 +65,13 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets
 
         [SerializeField]
         private KeyboardButtonShortcutImageItem[] keyboardButtonShortcutImageItems = Array.Empty<KeyboardButtonShortcutImageItem>();
-        
+
         [SerializeField]
         private KeyboardAxisShortcutImageItem[] keyboardAxisShortcutImageItems = Array.Empty<KeyboardAxisShortcutImageItem>();
-        
+
         [SerializeField]
         private GamepadButtonShortcutImageItem[] gamepadButtonShortcutImageItems = Array.Empty<GamepadButtonShortcutImageItem>();
-        
+
         [SerializeField]
         private GamepadAxisShortcutImageItem[] gamepadAxisShortcutImageItems = Array.Empty<GamepadAxisShortcutImageItem>();
 
@@ -105,6 +105,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets
 
         #region Builtin Methods
 
+#if UNITY_EDITOR
         private void Awake()
         {
             OnValidate();
@@ -122,8 +123,9 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets
                 .ToArray();
 
             constraintItems = constraintItems.Where(x => !removed.Contains(x.EnvironmentGuid)).ToArray();
-            constraintItems = constraintItems.Concat(added.Select(x => new ShortcutConstraintItem {EnvironmentGuid = x}).ToArray()).ToArray();
+            constraintItems = constraintItems.Concat(added.Select(x => new ShortcutConstraintItem { EnvironmentGuid = x }).ToArray()).ToArray();
         }
+#endif
 
         #endregion
 
@@ -168,7 +170,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets
         {
         }
     }
-    
+
     [Serializable]
     public sealed class KeyboardAxisShortcutImageItem : ShortcutImageItem<KeyAxis>
     {
@@ -184,7 +186,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets
         {
         }
     }
-    
+
     [Serializable]
     public sealed class GamepadAxisShortcutImageItem : ShortcutImageItem<GamepadAxis>
     {
