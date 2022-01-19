@@ -28,6 +28,14 @@ Scope: org.pcsoft
 * `UIDialog` - A simple dialog
 * `UINotification` - A simple temporary shown notification
 
+### Hover System
+You can find the hover settings in projects settings. There are default settings and specific settings identified by a key.
+* Scale - Setup min and max values for UI scaling dependend on min and max distance values.
+* Alpha - Setup min and max values for UI alpha (`CanvasGroup`) depend on min and max distance values.
+* Interpolation - Scale and Alpha have an interpolation curve to evaluate changes of values by distance.
+
+The last action is to add `UIHoverPanel` component to your UI object, setup the target transform and the camera to use (or default the main camera). Than this element follows the 3D transformation point with all settings of Alpha and Scaling behavior.
+
 ### Input
 * `UIButtonInput` - Direct Input for a Button
 * `UIToggleInput` - Direct Input for a Toggle
