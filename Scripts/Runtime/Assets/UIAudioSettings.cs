@@ -22,9 +22,14 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets
                 var settings = AssetDatabase.LoadAssetAtPath<UIAudioSettings>(Path);
                 if (settings == null)
                 {
-                    Debug.Log("Unable to find game settings, create new");
+                    Debug.Log("Unable to find UI audio settings, create new");
 
                     settings = new UIAudioSettings();
+                    if (!AssetDatabase.IsValidFolder("Assets/Resources"))
+                    {
+                        AssetDatabase.CreateFolder("Assets", "Resources");
+                    }
+                    
                     AssetDatabase.CreateAsset(settings, Path);
                     AssetDatabase.SaveAssets();
                     AssetDatabase.Refresh();

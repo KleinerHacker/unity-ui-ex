@@ -22,7 +22,7 @@ namespace UnityUIEx.Editor.ui_ex.Scripts.Editor.Provider
         private bool _foldButton, _foldAxis;
         
         protected UIShortcutInputImageProvider(string path, string keyword) : 
-            base("Project/Input System Package/UI Shortcut Input/" + path, SettingsScope.Project, new []{"UI", "Input", "Image", keyword})
+            base("Project/UI/Shortcut Input/" + path, SettingsScope.Project, new []{"UI", "Input", "Image", keyword})
         {
             _enumNamesButton = Enum.GetNames(typeof(TButton));
             _enumNamesAxis = Enum.GetNames(typeof(TAxis));

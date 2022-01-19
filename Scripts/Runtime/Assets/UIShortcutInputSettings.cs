@@ -31,9 +31,14 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets
                 var settings = AssetDatabase.LoadAssetAtPath<UIShortcutInputSettings>(Path);
                 if (settings == null)
                 {
-                    Debug.Log("Unable to find game settings, create new");
+                    Debug.Log("Unable to find UI Shortcut settings, create new");
 
                     settings = new UIShortcutInputSettings();
+                    if (!AssetDatabase.IsValidFolder("Assets/Resources"))
+                    {
+                        AssetDatabase.CreateFolder("Assets", "Resources");
+                    }
+                    
                     AssetDatabase.CreateAsset(settings, Path);
                     AssetDatabase.SaveAssets();
                     AssetDatabase.Refresh();
