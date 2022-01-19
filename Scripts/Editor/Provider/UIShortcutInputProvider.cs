@@ -27,7 +27,7 @@ namespace UnityUIEx.Editor.ui_ex.Scripts.Editor.Provider
         private SerializedProperty _shortcutInputProperty;
         private SerializedProperty[] _constraintItemsProperties;
 
-        public UIShortcutInputProvider() : base("Project/Input System Package/UI Shortcut Input", SettingsScope.Project, new[] { "UI", "Input", "Input System", "Short", "Key" })
+        public UIShortcutInputProvider() : base("Project/UI/Shortcut Input", SettingsScope.Project, new[] { "UI", "Input", "Input System", "Short", "Key" })
         {
         }
 

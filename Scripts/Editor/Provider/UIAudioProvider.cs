@@ -28,7 +28,7 @@ namespace UnityUIEx.Editor.ui_ex.Scripts.Editor.Provider
         private SerializedProperty _sfxSystemNameProperty;
         private SerializedProperty _audioSystemProperty;
 
-        public UIAudioProvider() : base("Project/Audio/UI Audio", SettingsScope.Project, new[] { "tooling", "UI", "audio", "SFX" })
+        public UIAudioProvider() : base("Project/UI/Audio", SettingsScope.Project, new[] { "tooling", "UI", "audio", "SFX" })
         {
         }
 

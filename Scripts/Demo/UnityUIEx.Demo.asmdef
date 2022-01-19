@@ -1,0 +1,16 @@
+{
+    "name": "UnityUIEx.Demo",
+    "rootNamespace": "UnityUIEx.Demo",
+    "references": [
+        "GUID:f038db6d5194feb459e744a110d08027"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
