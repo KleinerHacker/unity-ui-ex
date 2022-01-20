@@ -55,7 +55,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets
         private UIHoverItem hoverDefault;
 
         [SerializeField]
-        private UINamedHoverItem[] hoverItems;
+        private UINamedHoverItem[] hoverItems = Array.Empty<UINamedHoverItem>();
 
         #endregion
 
