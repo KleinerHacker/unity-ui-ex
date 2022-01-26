@@ -31,10 +31,10 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components
             public void ShowIconNotification(long identifier, string title, string text, Sprite icon, UINotificationType type = UINotificationType.None) => 
                 _notificationSystem.ShowIconNotification(identifier, title, text, icon, type);
 
-            internal void ShowSimpleNotification(long identifier, string text, UINotificationType type = UINotificationType.None) => 
+            public void ShowSimpleNotification(long identifier, string text, UINotificationType type = UINotificationType.None) => 
                 _notificationSystem.ShowSimpleNotification(identifier, text, type);
 
-            internal void ShowSimpleNotification(long identifier, string title, string text, UINotificationType type = UINotificationType.None) => 
+            public void ShowSimpleNotification(long identifier, string title, string text, UINotificationType type = UINotificationType.None) => 
                 _notificationSystem.ShowSimpleNotification(identifier, title, text, type);
         }
     }
