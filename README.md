@@ -27,6 +27,7 @@ Scope: org.pcsoft
 ### Windows
 * `UIDialog` - A simple dialog
 * `UINotification` - A simple temporary shown notification
+* `UINotificationWindow` - For `UINotificationSystem`, see project settings and `NotificationSystem` class.
 
 ### Hover System
 You can find the hover settings in projects settings. There are default settings and specific settings identified by a key.
