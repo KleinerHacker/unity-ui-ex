@@ -1,6 +1,6 @@
 {
   "name": "org.pcsoft.ui-ex",
-  "version": "1.7.1",
+  "version": "1.8.0",
   "displayName": "Unity UI Extension",
   "description": "Extension for Unity UI system.",
   "unity": "2021.1",

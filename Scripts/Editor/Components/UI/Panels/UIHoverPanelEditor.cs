@@ -32,16 +32,16 @@ namespace UnityUIEx.Editor.ui_ex.Scripts.Editor.Components.UI.Panels
         protected override void OnEnable()
         {
             base.OnEnable();
-            _keyOptions = new[] { "<default>" }.Concat(UISettings.Singleton.HoverItems.Select(x => x.Key).ToArray()).ToArray();
+            _keyOptions = new[] { "<default>" }.Concat(UISettings.Singleton.Hover.HoverItems.Select(x => x.Key).ToArray()).ToArray();
         }
 
         protected override void DoInspectorGUI()
         {
-            var index = UISettings.Singleton.HoverItems.IndexOf(x => string.Equals(x.Key, _keyProperty.stringValue, StringComparison.Ordinal)) + 1;
+            var index = UISettings.Singleton.Hover.HoverItems.IndexOf(x => string.Equals(x.Key, _keyProperty.stringValue, StringComparison.Ordinal)) + 1;
             var newIndex = EditorGUILayout.Popup("Hover Key", index, _keyOptions);
             if (index != newIndex)
             {
-                _keyProperty.stringValue = newIndex <= 0 ? null : UISettings.Singleton.HoverItems[newIndex - 1].Key;
+                _keyProperty.stringValue = newIndex <= 0 ? null : UISettings.Singleton.Hover.HoverItems[newIndex - 1].Key;
             }
         }
     }
