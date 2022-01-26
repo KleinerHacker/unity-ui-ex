@@ -17,6 +17,7 @@
                     public const string ComponentMenu = UIMenu + "/Components";
                     public const string PanelMenu = UIMenu + "/Panel";
                     public const string WindowMenu = UIMenu + "/Window";
+                    public const string MiscMenu = UIMenu + "/Misc";
 
                     public static class Component
                     {

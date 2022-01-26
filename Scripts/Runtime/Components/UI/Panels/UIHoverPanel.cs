@@ -50,7 +50,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Panels
         protected override void Awake()
         {
             _canvasGroup = GetComponent<CanvasGroup>();
-            _item = string.IsNullOrEmpty(hoverKey) ? UISettings.Singleton.HoverDefault : UISettings.Singleton.HoverItems.FirstOrThrow(x => string.Equals(x.Key, hoverKey, StringComparison.Ordinal),
+            _item = string.IsNullOrEmpty(hoverKey) ? UISettings.Singleton.Hover.HoverDefault : UISettings.Singleton.Hover.HoverItems.FirstOrThrow(x => string.Equals(x.Key, hoverKey, StringComparison.Ordinal),
                 () => new InvalidOperationException("Key " + hoverKey + " not found for hover UI"));
         }
 
