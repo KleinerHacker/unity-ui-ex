@@ -57,7 +57,6 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
 #if UNITY_EDITOR
         protected override void OnValidate()
         {
-            Debug.LogError("***");
             UpdateIconOnValidate(key, gamepadButton, icon, iconObject);
         }
 #endif
