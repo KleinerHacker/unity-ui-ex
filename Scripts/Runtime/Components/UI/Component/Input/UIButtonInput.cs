@@ -1,8 +1,11 @@
+using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.UI;
+using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
 {
@@ -23,7 +26,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
         [Space]
         [SerializeField]
         private GameObject iconObject;
-        
+
         [SerializeField]
         private Image icon;
 
@@ -51,11 +54,16 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
             }
         }
 
+#if UNITY_EDITOR
+        protected override void OnValidate()
+        {
+            Debug.LogError("***");
+            UpdateIconOnValidate(key, gamepadButton, icon, iconObject);
+        }
+#endif
+
         #endregion
 
-        protected override void UpdateVisual()
-        {
-            UpdateIcon(key, gamepadButton, icon, iconObject);
-        }
+        protected override void UpdateVisual() => UpdateIcon(key, gamepadButton, icon, iconObject);
     }
 }

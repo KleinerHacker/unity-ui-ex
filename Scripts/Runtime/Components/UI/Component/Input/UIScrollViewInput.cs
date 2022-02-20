@@ -20,11 +20,11 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
 
         [SerializeField]
         private KeyAxis key = KeyAxis.Arrows;
-        
+
         [Space]
         [SerializeField]
         private GameObject iconObject;
-        
+
         [SerializeField]
         private Image icon;
 
@@ -57,7 +57,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
                     _ => throw new NotImplementedException()
                 } * velocityMultiplier;
             }
-            
+
             if (KeyboardAvailable)
             {
                 velocity += key switch
@@ -72,11 +72,15 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
             _scrollRect.velocity = velocity;
         }
 
+#if UNITY_EDITOR
+        protected override void OnValidate()
+        {
+            UpdateIconOnValidate(key, gamepad, icon, iconObject);
+        }
+#endif
+
         #endregion
 
-        protected override void UpdateVisual()
-        {
-            UpdateIcon(key, gamepad, icon, iconObject);
-        }
+        protected override void UpdateVisual() => UpdateIcon(key, gamepad, icon, iconObject);
     }
 }

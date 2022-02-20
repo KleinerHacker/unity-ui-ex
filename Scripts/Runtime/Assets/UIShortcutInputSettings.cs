@@ -1,6 +1,8 @@
 using System;
 using System.Linq;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEditorEx.Runtime.editor_ex.Scripts.Runtime.Types;
 using UnityEditorEx.Runtime.editor_ex.Scripts.Runtime.Utils;
 using UnityEngine;
@@ -8,6 +10,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 using UnityExtension.Runtime.extension.Scripts.Runtime;
 using UnityExtension.Runtime.extension.Scripts.Runtime.Assets;
+using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input;
 using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Types;
 #if !UNITY_EDITOR
 using UnityAssetLoader.Runtime.asset_loader.Scripts.Runtime.Loader;
@@ -17,6 +20,23 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets
 {
     public sealed class UIShortcutInputSettings : ScriptableObject
     {
+#if UNITY_EDITOR
+        private static UIShortcutInput? _displayedShortcut;
+        
+        public static UIShortcutInput? DisplayedShortcut
+        {
+            get => _displayedShortcut;
+            set
+            {
+                _displayedShortcut = value;
+                foreach (var input in FindObjectsOfType<UIInput>())
+                {
+                    input.SendMessage("OnValidate", null, SendMessageOptions.DontRequireReceiver);
+                }
+            }
+        }
+#endif
+
         #region Static Area
 
 #if UNITY_EDITOR
@@ -38,7 +58,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets
                     {
                         AssetDatabase.CreateFolder("Assets", "Resources");
                     }
-                    
+
                     AssetDatabase.CreateAsset(settings, Path);
                     AssetDatabase.SaveAssets();
                     AssetDatabase.Refresh();

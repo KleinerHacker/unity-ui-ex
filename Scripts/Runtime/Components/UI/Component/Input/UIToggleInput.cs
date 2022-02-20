@@ -18,11 +18,11 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
 
         [SerializeField]
         private Key key = Key.Digit0;
-        
+
         [Space]
         [SerializeField]
         private GameObject iconObject;
-        
+
         [SerializeField]
         private Image icon;
 
@@ -31,7 +31,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
         private bool allowDisableToggle = true;
 
         #endregion
-        
+
         private Toggle _toggle;
 
         #region Builtin Methods
@@ -54,11 +54,15 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
             }
         }
 
+#if UNITY_EDITOR
+        protected override void OnValidate()
+        {
+            UpdateIconOnValidate(key, gamepadButton, icon, iconObject);
+        }
+#endif
+
         #endregion
 
-        protected override void UpdateVisual()
-        {
-            UpdateIcon(key, gamepadButton, icon, iconObject);
-        }
+        protected override void UpdateVisual() => UpdateIcon(key, gamepadButton, icon, iconObject);
     }
 }

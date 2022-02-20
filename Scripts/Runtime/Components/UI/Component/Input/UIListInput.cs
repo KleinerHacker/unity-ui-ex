@@ -82,6 +82,14 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
             }
         }
 
+#if UNITY_EDITOR
+        protected override void OnValidate()
+        {
+            UpdateIconOnValidate(positiveKey, positiveGamepadButton, positiveIcon, positiveIconObject);
+            UpdateIconOnValidate(negativeKey, negativeGamepadButton, negativeIcon, negativeIconObject);
+        }
+#endif
+
         #endregion
         
         private void GotoNext()
