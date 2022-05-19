@@ -1,6 +1,7 @@
+using UnityAudio.Runtime.audio_system.Scripts.Runtime.Assets;
+using UnityAudio.Runtime.audio_system.Scripts.Runtime.Assets.Sfx;
 using UnityEngine;
 using UnityEngine.UI;
-using UnitySfx.Runtime.sfx_system.Scripts.Runtime.Assets;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Audio
 {
