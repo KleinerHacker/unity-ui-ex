@@ -4,8 +4,8 @@ using UnityAnimation.Runtime.animation.Scripts.Runtime.Utils;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
-using UnityEngine.Rendering.Universal;
 #if URP
+using UnityEngine.Rendering.Universal;
 #elif HDRP
 using UnityEngine.Rendering.HighDefinition;
 #endif
