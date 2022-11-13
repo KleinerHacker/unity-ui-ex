@@ -4,21 +4,28 @@ using UnityAnimation.Runtime.animation.Scripts.Runtime.Utils;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
+using UnityExtension.Runtime.extension.Scripts.Runtime.Utils.Extensions;
 using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input;
 using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Utils.Extensions;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
 {
-    public abstract class UIStage : UIBehaviour, IViewable
+    public abstract partial class UIStage : UIBehaviour, IViewable
     {
         #region Inspector Data
 
+        [FormerlySerializedAs("fadingCurve")]
         [Header("Animation")]
         [SerializeField]
-        protected AnimationCurve fadingCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
+        protected AnimationCurve animationCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
+
+        [FormerlySerializedAs("fadingSpeed")]
+        [SerializeField]
+        protected float animationSpeed = 1f;
 
         [SerializeField]
-        protected float fadingSpeed = 1f;
+        protected UIStageAnimationType animationType = UIStageAnimationType.Fading;
         
         [Header("Behavior")]
         [SerializeField]
@@ -44,12 +51,17 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
         private CanvasGroup _canvasGroup;
         private UIInput[] _inputs;
 
+        private Rect _originalRect;
+
         #region Builtin Methods
 
         protected override void Awake()
         {
             _canvasGroup = GetComponent<CanvasGroup>();
             _inputs = GetComponentsInChildren<UIInput>();
+
+            _originalRect = ((RectTransform)transform).CalculateAbsoluteRect(GetComponentInParent<Canvas>());
+            Debug.Log(_originalRect);
 
             switch (initialState)
             {
@@ -107,19 +119,26 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
             OnShowing();
             Showing?.Invoke(this, EventArgs.Empty);
 
-            _canvasGroup.Hide();
-            AnimationBuilder.Create(this, AnimationType.Unscaled)
-                .Animate(fadingCurve, fadingSpeed, v => _canvasGroup.alpha = v)
-                .WithFinisher(() =>
-                {
-                    _canvasGroup.Show();
-                    EnableInputs();
-                    
-                    OnShown();
-                    Shown?.Invoke(this, EventArgs.Empty);
-                    onFinished?.Invoke();
-                })
-                .Start();
+            switch (animationType)
+            {
+                case UIStageAnimationType.Fading:
+                    ShowFading(onFinished);
+                    break;
+                case UIStageAnimationType.SlidingLeft:
+                    ShowSlidingLeft(onFinished);
+                    break;
+                case UIStageAnimationType.SlidingRight:
+                    ShowSlidingRight(onFinished);
+                    break;
+                case UIStageAnimationType.SlidingTop:
+                    ShowSlidingTop(onFinished);
+                    break;
+                case UIStageAnimationType.SlidingBottom:
+                    ShowSlidingBottom(onFinished);
+                    break;
+                default:
+                    throw new NotImplementedException(animationType.ToString());
+            }
         }
 
         public void Hide()
@@ -141,18 +160,26 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
             OnHiding();
             Hiding?.Invoke(this, EventArgs.Empty);
 
-            _canvasGroup.Hide();
-            _canvasGroup.alpha = 1f;
-            DisableInputs();
-            AnimationBuilder.Create(this, AnimationType.Unscaled)
-                .Animate(fadingCurve, fadingSpeed, v => _canvasGroup.alpha = 1f - v)
-                .WithFinisher(() =>
-                {
-                    OnHidden();
-                    Hidden?.Invoke(this, EventArgs.Empty);
-                    onFinished?.Invoke();
-                })
-                .Start();
+            switch (animationType)
+            {
+                case UIStageAnimationType.Fading:
+                    HideFading(onFinished);
+                    break;
+                case UIStageAnimationType.SlidingLeft:
+                    HideSlidingLeft(onFinished);
+                    break;
+                case UIStageAnimationType.SlidingRight:
+                    HideSlidingRight(onFinished);
+                    break;
+                case UIStageAnimationType.SlidingTop:
+                    HideSlidingTop(onFinished);
+                    break;
+                case UIStageAnimationType.SlidingBottom:
+                    HideSlidingBottom(onFinished);
+                    break;
+                default:
+                    throw new NotImplementedException(animationType.ToString());
+            }
         }
 
         private void EnableInputs()
@@ -176,5 +203,14 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
         
         protected virtual void OnHiding() {}
         protected virtual void OnHidden() {}
+    }
+
+    public enum UIStageAnimationType
+    {
+        Fading,
+        SlidingLeft,
+        SlidingRight,
+        SlidingTop,
+        SlidingBottom
     }
 }
