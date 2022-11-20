@@ -1,49 +1,17 @@
-#if !UNITY_EDITOR
-using UnityAssetLoader.Runtime.asset_loader.Scripts.Runtime.Loader;
-#endif
 using UnityEditor;
+using UnityEditorEx.Runtime.editor_ex.Scripts.Runtime.Assets;
 using UnityEngine;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets
 {
-    public sealed class UIAudioSettings : ScriptableObject
+    public sealed class UIAudioSettings : ProviderAsset<UIAudioSettings>
     {
         #region Static Area
 
-#if UNITY_EDITOR
-        private const string Path = "Assets/Resources/ui-audio.asset";
-#endif
-
-        public static UIAudioSettings Singleton
-        {
-            get
-            {
-#if UNITY_EDITOR
-                var settings = AssetDatabase.LoadAssetAtPath<UIAudioSettings>(Path);
-                if (settings == null)
-                {
-                    Debug.Log("Unable to find UI audio settings, create new");
-
-                    settings = new UIAudioSettings();
-                    if (!AssetDatabase.IsValidFolder("Assets/Resources"))
-                    {
-                        AssetDatabase.CreateFolder("Assets", "Resources");
-                    }
-                    
-                    AssetDatabase.CreateAsset(settings, Path);
-                    AssetDatabase.SaveAssets();
-                    AssetDatabase.Refresh();
-                }
-
-                return settings;
-#else
-                return AssetResourcesLoader.Instance.GetAsset<UIAudioSettings>();
-#endif
-            }
-        }
+        public static UIAudioSettings Singleton => GetSingleton("UI Audio", "ui-audio.asset");
 
 #if UNITY_EDITOR
-        public static SerializedObject SerializedSingleton => new SerializedObject(Singleton);
+        public static SerializedObject SerializedSingleton => GetSerializedSingleton("UI Audio", "ui-audio.asset");
 #endif
 
         #endregion

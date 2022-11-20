@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using UnityEditorEx.Runtime.editor_ex.Scripts.Runtime.Assets;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -12,13 +13,10 @@ using UnityExtension.Runtime.extension.Scripts.Runtime;
 using UnityExtension.Runtime.extension.Scripts.Runtime.Assets;
 using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input;
 using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Types;
-#if !UNITY_EDITOR
-using UnityAssetLoader.Runtime.asset_loader.Scripts.Runtime.Loader;
-#endif
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets
 {
-    public sealed class UIShortcutInputSettings : ScriptableObject
+    public sealed class UIShortcutInputSettings : ProviderAsset<UIShortcutInputSettings>
     {
 #if UNITY_EDITOR
         private static UIShortcutInput? _displayedShortcut;
@@ -39,40 +37,10 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets
 
         #region Static Area
 
-#if UNITY_EDITOR
-        private const string Path = "Assets/Resources/ui-shortcut-input.asset";
-#endif
-
-        public static UIShortcutInputSettings Singleton
-        {
-            get
-            {
-#if UNITY_EDITOR
-                var settings = AssetDatabase.LoadAssetAtPath<UIShortcutInputSettings>(Path);
-                if (settings == null)
-                {
-                    Debug.Log("Unable to find UI Shortcut settings, create new");
-
-                    settings = new UIShortcutInputSettings();
-                    if (!AssetDatabase.IsValidFolder("Assets/Resources"))
-                    {
-                        AssetDatabase.CreateFolder("Assets", "Resources");
-                    }
-
-                    AssetDatabase.CreateAsset(settings, Path);
-                    AssetDatabase.SaveAssets();
-                    AssetDatabase.Refresh();
-                }
-
-                return settings;
-#else
-                return AssetResourcesLoader.Instance.GetAsset<UIShortcutInputSettings>();
-#endif
-            }
-        }
+        public static UIShortcutInputSettings Singleton => GetSingleton("UI Shortcut Input", "ui-shortcut-input.asset");
 
 #if UNITY_EDITOR
-        public static SerializedObject SerializedSingleton => new SerializedObject(Singleton);
+        public static SerializedObject SerializedSingleton => GetSerializedSingleton("UI Shortcut Input", "ui-shortcut-input.asset");
 #endif
 
         #endregion

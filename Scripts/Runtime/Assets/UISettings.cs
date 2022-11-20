@@ -1,49 +1,17 @@
-#if !UNITY_EDITOR
-using UnityAssetLoader.Runtime.asset_loader.Scripts.Runtime.Loader;
-#endif
 using UnityEditor;
+using UnityEditorEx.Runtime.editor_ex.Scripts.Runtime.Assets;
 using UnityEngine;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets
 {
-    public sealed class UISettings : ScriptableObject
+    public sealed class UISettings : ProviderAsset<UISettings>
     {
         #region Static Area
 
-#if UNITY_EDITOR
-        private const string Path = "Assets/Resources/ui.asset";
-#endif
-
-        public static UISettings Singleton
-        {
-            get
-            {
-#if UNITY_EDITOR
-                var settings = AssetDatabase.LoadAssetAtPath<UISettings>(Path);
-                if (settings == null)
-                {
-                    Debug.Log("Unable to find UI settings, create new");
-
-                    settings = new UISettings();
-                    if (!AssetDatabase.IsValidFolder("Assets/Resources"))
-                    {
-                        AssetDatabase.CreateFolder("Assets", "Resources");
-                    }
-                    
-                    AssetDatabase.CreateAsset(settings, Path);
-                    AssetDatabase.SaveAssets();
-                    AssetDatabase.Refresh();
-                }
-
-                return settings;
-#else
-                return AssetResourcesLoader.Instance.GetAsset<UISettings>();
-#endif
-            }
-        }
+            public static UISettings Singleton => GetSingleton("UI", "ui.asset");
 
 #if UNITY_EDITOR
-        public static SerializedObject SerializedSingleton => new SerializedObject(Singleton);
+        public static SerializedObject SerializedSingleton => GetSerializedSingleton("UI", "ui.asset");
 #endif
 
         #endregion
