@@ -3,6 +3,7 @@ using UnityCommonEx.Runtime.common_ex.Scripts.Runtime.Utils;
 using UnityCommonEx.Runtime.common_ex.Scripts.Runtime.Utils.Extensions;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Panels
@@ -20,8 +21,9 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Panels
         [SerializeField]
         private Transform target;
 
+        [FormerlySerializedAs("camera")]
         [SerializeField]
-        private Camera camera;
+        private Camera mainCamera;
 
         #endregion
 
@@ -35,8 +37,8 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Panels
 
         public Camera Camera
         {
-            get => camera;
-            set => camera = value;
+            get => mainCamera;
+            set => mainCamera = value;
         }
 
         #endregion
@@ -56,7 +58,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Panels
 
         protected override void Start()
         {
-            camera ??= Camera.main;
+            mainCamera ??= Camera.main;
         }
 
         private void LateUpdate()
