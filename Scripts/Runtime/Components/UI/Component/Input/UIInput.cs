@@ -1,12 +1,9 @@
 using System;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.UI;
-using UnityInputEx.Runtime.input_ex.Scripts.Runtime.Utils.Extensions;
-using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets;
 using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Types;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input

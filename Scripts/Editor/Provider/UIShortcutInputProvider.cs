@@ -1,11 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEditor;
-using UnityEditorEx.Editor.editor_ex.Scripts.Editor.Utils.Extensions;
+using UnityEditorEx.Editor.editor_ex.Scripts.Editor.Utils;
 using UnityEngine;
 using UnityEngine.UIElements;
-using UnityExtension.Runtime.extension.Scripts.Runtime.Assets;
 using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets;
 
 namespace UnityUIEx.Editor.ui_ex.Scripts.Editor.Provider
@@ -50,22 +46,46 @@ namespace UnityUIEx.Editor.ui_ex.Scripts.Editor.Provider
             _assignmentList = new UIShortcutInputAssignmentList(_settings, _assignmentsProperty);
         }
 
+        public override void OnTitleBarGUI()
+        {
+            GUILayout.BeginVertical();
+            {
+                ExtendedEditorGUILayout.SymbolField("Activate System", "PCSOFT_SHORTCUT");
+                EditorGUI.BeginDisabledGroup(
+#if PCSOFT_SHORTCUT
+                    false
+#else
+                    true
+#endif
+                );
+                {
+                    ExtendedEditorGUILayout.SymbolField("Verbose Logging", "PCSOFT_SHORTCUT_LOGGING");
+                }
+                EditorGUI.EndDisabledGroup();
+            }
+            GUILayout.EndVertical();
+        }
+
         public override void OnGUI(string searchContext)
         {
             _settings.Update();
-            
+
             GUILayout.Space(15f);
-            
+
+#if PCSOFT_SHORTCUT
             GUILayout.Label("Shortcut Actions", EditorStyles.boldLabel);
             _actionList.DoLayoutList();
-            
+
             GUILayout.Space(10f);
             GUILayout.Label("Shortcut Schemes", EditorStyles.boldLabel);
             _schemeList.DoLayoutList();
-            
+
             GUILayout.Space(10f);
             GUILayout.Label("Environment Assignment", EditorStyles.boldLabel);
             _assignmentList.DoLayoutList();
+#else
+            EditorGUILayout.HelpBox("Shortcut Input System deactivated", MessageType.Info);
+#endif
 
             _settings.ApplyModifiedProperties();
         }
