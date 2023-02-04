@@ -40,8 +40,8 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
 
         protected override void Start()
         {
-            GamepadAvailable = Gamepad.current.IsAvailable() && gamepadSupport == UIInputSupport.Yes && UIShortcutInputSettings.Singleton.CurrentInput == UIShortcutInput.Gamepad;
-            KeyboardAvailable = Keyboard.current.IsAvailable() && keyboardSupport == UIInputSupport.Yes && UIShortcutInputSettings.Singleton.CurrentInput == UIShortcutInput.Keyboard;
+            // GamepadAvailable = Gamepad.current.IsAvailable() && gamepadSupport == UIInputSupport.Yes && UIShortcutInputSettings.Singleton.CurrentInput == UIShortcutInput.Gamepad;
+            // KeyboardAvailable = Keyboard.current.IsAvailable() && keyboardSupport == UIInputSupport.Yes && UIShortcutInputSettings.Singleton.CurrentInput == UIShortcutInput.Keyboard;
             
             UpdateVisual();
         }
@@ -59,24 +59,30 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
             UpdateIcon(keyAxis, gamepadAxis, GamepadAvailable && showGamepadIcon, KeyboardAvailable && showKeyboardIcon, icon, iconObject);
 
 #if UNITY_EDITOR
-        protected void UpdateIconOnValidate(Key keyButton, GamepadButton gamepadButton, Image icon, GameObject iconObject) =>
-            UpdateIcon(keyButton, gamepadButton, UIShortcutInputSettings.DisplayedShortcut == UIShortcutInput.Gamepad, 
-                UIShortcutInputSettings.DisplayedShortcut == UIShortcutInput.Keyboard, icon, iconObject);
+        protected void UpdateIconOnValidate(Key keyButton, GamepadButton gamepadButton, Image icon, GameObject iconObject) {}
+            // UpdateIcon(keyButton, gamepadButton, UIShortcutInputSettings.DisplayedShortcut == UIShortcutInput.Gamepad, 
+            //     UIShortcutInputSettings.DisplayedShortcut == UIShortcutInput.Keyboard, icon, iconObject);
         
-        protected void UpdateIconOnValidate(KeyAxis keyAxis, GamepadAxis gamepadAxis, Image icon, GameObject iconObject) =>
-            UpdateIcon(keyAxis, gamepadAxis, UIShortcutInputSettings.DisplayedShortcut == UIShortcutInput.Gamepad, 
-                UIShortcutInputSettings.DisplayedShortcut == UIShortcutInput.Keyboard, icon, iconObject);
+        protected void UpdateIconOnValidate(KeyAxis keyAxis, GamepadAxis gamepadAxis, Image icon, GameObject iconObject)
+        {
+        }
+            // UpdateIcon(keyAxis, gamepadAxis, UIShortcutInputSettings.DisplayedShortcut == UIShortcutInput.Gamepad, 
+            //     UIShortcutInputSettings.DisplayedShortcut == UIShortcutInput.Keyboard, icon, iconObject);
 #endif
-        
-        private void UpdateIcon(Key keyButton, GamepadButton gamepadButton, bool showGamepadIcon, bool showKeyboardIcon, Image icon, GameObject iconObject) =>
-            UpdateIcon(icon, iconObject, showGamepadIcon, showKeyboardIcon, 
-                () => UIShortcutInputSettings.Singleton.GamepadButtonShortcutImageItems.First(x => x.Identifier == gamepadButton).Icon,
-                () => UIShortcutInputSettings.Singleton.KeyboardButtonShortcutImageItems.First(x => x.Identifier == keyButton).Icon);
 
-        private void UpdateIcon(KeyAxis keyAxis, GamepadAxis gamepadAxis, bool showGamepadIcon, bool showKeyboardIcon, Image icon, GameObject iconObject) =>
-            UpdateIcon(icon, iconObject, showGamepadIcon, showKeyboardIcon, 
-                () => UIShortcutInputSettings.Singleton.GamepadAxisShortcutImageItems.First(x => x.Identifier == gamepadAxis).Icon,
-                () => UIShortcutInputSettings.Singleton.KeyboardAxisShortcutImageItems.First(x => x.Identifier == keyAxis).Icon);
+        private void UpdateIcon(Key keyButton, GamepadButton gamepadButton, bool showGamepadIcon, bool showKeyboardIcon, Image icon, GameObject iconObject)
+        {
+        }
+        // UpdateIcon(icon, iconObject, showGamepadIcon, showKeyboardIcon, 
+            //     () => UIShortcutInputSettings.Singleton.GamepadButtonShortcutImageItems.First(x => x.Identifier == gamepadButton).Icon,
+            //     () => UIShortcutInputSettings.Singleton.KeyboardButtonShortcutImageItems.First(x => x.Identifier == keyButton).Icon);
+
+        private void UpdateIcon(KeyAxis keyAxis, GamepadAxis gamepadAxis, bool showGamepadIcon, bool showKeyboardIcon, Image icon, GameObject iconObject)
+        {
+        }
+        // UpdateIcon(icon, iconObject, showGamepadIcon, showKeyboardIcon, 
+            //     () => UIShortcutInputSettings.Singleton.GamepadAxisShortcutImageItems.First(x => x.Identifier == gamepadAxis).Icon,
+            //     () => UIShortcutInputSettings.Singleton.KeyboardAxisShortcutImageItems.First(x => x.Identifier == keyAxis).Icon);
 
         private static void UpdateIcon(Image icon, GameObject iconObject, bool showGamepadIcon, bool showKeyboardIcon, Func<Sprite> gamepadIconUpdater, Func<Sprite> keyIconUpdater)
         {

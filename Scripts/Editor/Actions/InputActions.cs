@@ -18,29 +18,29 @@ namespace UnityUIEx.Editor.ui_ex.Scripts.Editor.Actions
         [MenuItem(MenuNothing)]
         public static void ShowNothing()
         {
-            UIShortcutInputSettings.DisplayedShortcut = null;
+            // UIShortcutInputSettings.DisplayedShortcut = null;
             UpdateCheckmarks();
         }
         
         [MenuItem(MenuKeyboard)]
         public static void ShowKeyboard()
         {
-            UIShortcutInputSettings.DisplayedShortcut = UIShortcutInput.Keyboard;
+            // UIShortcutInputSettings.DisplayedShortcut = UIShortcutInput.Keyboard;
             UpdateCheckmarks();
         }
         
         [MenuItem(MenuGamepad)]
         public static void ShowGamepad()
         {
-            UIShortcutInputSettings.DisplayedShortcut = UIShortcutInput.Gamepad;
+            // UIShortcutInputSettings.DisplayedShortcut = UIShortcutInput.Gamepad;
             UpdateCheckmarks();
         }
 
         private static void UpdateCheckmarks()
         {
-            Menu.SetChecked(MenuNothing, UIShortcutInputSettings.DisplayedShortcut == null);
-            Menu.SetChecked(MenuKeyboard, UIShortcutInputSettings.DisplayedShortcut == UIShortcutInput.Keyboard);
-            Menu.SetChecked(MenuGamepad, UIShortcutInputSettings.DisplayedShortcut == UIShortcutInput.Gamepad);
+            // Menu.SetChecked(MenuNothing, UIShortcutInputSettings.DisplayedShortcut == null);
+            // Menu.SetChecked(MenuKeyboard, UIShortcutInputSettings.DisplayedShortcut == UIShortcutInput.Keyboard);
+            // Menu.SetChecked(MenuGamepad, UIShortcutInputSettings.DisplayedShortcut == UIShortcutInput.Gamepad);
         }
     }
 }

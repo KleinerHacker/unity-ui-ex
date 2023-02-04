@@ -23,9 +23,13 @@ namespace UnityUIEx.Editor.ui_ex.Scripts.Editor.Provider
         #endregion
 
         private SerializedObject _settings;
-        private SerializedProperty _useShortcutProperty;
-        private SerializedProperty _shortcutInputProperty;
-        private SerializedProperty[] _constraintItemsProperties;
+        private SerializedProperty _actionsProperty;
+        private SerializedProperty _schemesProperty;
+        private SerializedProperty _assignmentsProperty;
+
+        private UIShortcutInputActionList _actionList;
+        private UIShortcutInputSchemeList _schemeList;
+        private UIShortcutInputAssignmentList _assignmentList;
 
         public UIShortcutInputProvider() : base("Project/UI/Shortcut Input", SettingsScope.Project, new[] { "UI", "Input", "Input System", "Short", "Key" })
         {
@@ -37,55 +41,31 @@ namespace UnityUIEx.Editor.ui_ex.Scripts.Editor.Provider
             if (_settings == null)
                 return;
 
-            _useShortcutProperty = _settings.FindProperty("useShortcut");
-            _shortcutInputProperty = _settings.FindProperty("shortcutInput");
-            _constraintItemsProperties = _settings.FindProperties("constraintItems");
-        }
+            _actionsProperty = _settings.FindProperty("actions");
+            _schemesProperty = _settings.FindProperty("schemes");
+            _assignmentsProperty = _settings.FindProperty("assignments");
 
-        public override void OnInspectorUpdate()
-        {
-            base.OnInspectorUpdate();
-            _constraintItemsProperties = _settings.FindProperties("constraintItems");
+            _actionList = new UIShortcutInputActionList(_settings, _actionsProperty);
+            _schemeList = new UIShortcutInputSchemeList(_settings, _schemesProperty);
+            _assignmentList = new UIShortcutInputAssignmentList(_settings, _assignmentsProperty);
         }
 
         public override void OnGUI(string searchContext)
         {
             _settings.Update();
-
-            EditorGUILayout.LabelField("Environment Dependent Shortcuts", EditorStyles.boldLabel);
-            EditorGUILayout.Space();
             
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField("Fallback (Default)", EditorStyles.boldLabel, GUILayout.Width(350f));
-            EditorGUILayout.LabelField("Shortcut Input Usage: ", GUILayout.Width(125f));
-            var isActive = _useShortcutProperty.boolValue;
-            isActive = EditorGUILayout.Toggle(isActive, GUILayout.Width(20f));
-            _useShortcutProperty.boolValue = isActive;
-            EditorGUI.BeginDisabledGroup(!isActive);
-            EditorGUILayout.PropertyField(_shortcutInputProperty, GUIContent.none, GUILayout.ExpandWidth(true));
-            EditorGUI.EndDisabledGroup();
-            EditorGUILayout.EndHorizontal();
-
-            for (var i = 0; i < _constraintItemsProperties.Length; i++)
-            {
-                var constraintItemsProperty = _constraintItemsProperties[i];
-                var useShortcutProperty = constraintItemsProperty.FindPropertyRelative("useShortcut");
-                var inputProperty = constraintItemsProperty.FindPropertyRelative("shortcutInput");
-
-                var name = EnvironmentDetectionSettings.Singleton.Items
-                    .FirstOrDefault(x => string.Equals(x.Guid, constraintItemsProperty.FindPropertyRelative("environmentGuid").stringValue, StringComparison.Ordinal))?.Name ?? "<unknown>";
-
-                EditorGUILayout.BeginHorizontal();
-                EditorGUILayout.LabelField(name, EditorStyles.boldLabel, GUILayout.Width(350f));
-                EditorGUILayout.LabelField("Shortcut Input Usage: ", GUILayout.Width(125f));
-                var active = useShortcutProperty.boolValue;
-                active = EditorGUILayout.Toggle(active, GUILayout.Width(20f));
-                useShortcutProperty.boolValue = active;
-                EditorGUI.BeginDisabledGroup(!active);
-                EditorGUILayout.PropertyField(inputProperty, GUIContent.none, GUILayout.ExpandWidth(true));
-                EditorGUI.EndDisabledGroup();
-                EditorGUILayout.EndHorizontal();
-            }
+            GUILayout.Space(15f);
+            
+            GUILayout.Label("Shortcut Actions", EditorStyles.boldLabel);
+            _actionList.DoLayoutList();
+            
+            GUILayout.Space(10f);
+            GUILayout.Label("Shortcut Schemes", EditorStyles.boldLabel);
+            _schemeList.DoLayoutList();
+            
+            GUILayout.Space(10f);
+            GUILayout.Label("Environment Assignment", EditorStyles.boldLabel);
+            _assignmentList.DoLayoutList();
 
             _settings.ApplyModifiedProperties();
         }
