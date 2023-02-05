@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 using UnityExtension.Runtime.extension.Scripts.Runtime.Utils.Extensions;
-using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input;
+using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Components.Input;
 using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Utils.Extensions;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
@@ -61,7 +61,6 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
             _inputs = GetComponentsInChildren<UIInput>();
 
             _originalRect = ((RectTransform)transform).CalculateAbsoluteRect(GetComponentInParent<Canvas>());
-            Debug.Log(_originalRect);
 
             switch (initialState)
             {

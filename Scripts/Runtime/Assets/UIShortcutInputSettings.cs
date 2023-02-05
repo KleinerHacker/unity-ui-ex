@@ -1,40 +1,20 @@
 using System;
 using System.Linq;
+using UnityCommonEx.Runtime.common_ex.Scripts.Runtime.Utils.Extensions;
 using UnityEditorEx.Runtime.editor_ex.Scripts.Runtime.Assets;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
-using UnityEditorEx.Runtime.editor_ex.Scripts.Runtime.Types;
-using UnityEditorEx.Runtime.editor_ex.Scripts.Runtime.Utils;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
-using UnityExtension.Runtime.extension.Scripts.Runtime;
-using UnityExtension.Runtime.extension.Scripts.Runtime.Assets;
-using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input;
-using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Types;
+using UnityEngine.Serialization;
+using UnityInputEx.Runtime.input_ex.Scripts.Runtime.Types;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets
 {
     public sealed class UIShortcutInputSettings : ProviderAsset<UIShortcutInputSettings>
     {
-#if UNITY_EDITOR
-        private static UIShortcutInput? _displayedShortcut;
-        
-        public static UIShortcutInput? DisplayedShortcut
-        {
-            get => _displayedShortcut;
-            set
-            {
-                _displayedShortcut = value;
-                foreach (var input in FindObjectsOfType<UIInput>())
-                {
-                    input.SendMessage("OnValidate", null, SendMessageOptions.DontRequireReceiver);
-                }
-            }
-        }
-#endif
-
         #region Static Area
 
         public static UIShortcutInputSettings Singleton => GetSingleton("UI Shortcut Input", "ui-shortcut-input.asset");
@@ -48,94 +28,125 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets
         #region Inspector Data
 
         [SerializeField]
-        private UIShortcutInput shortcutInput = UIShortcutInput.Keyboard;
+        private UIShortcutAction[] actions = Array.Empty<UIShortcutAction>();
 
         [SerializeField]
-        private bool useShortcut;
+        private UIShortcutScheme[] schemes = Array.Empty<UIShortcutScheme>();
 
         [SerializeField]
-        private ShortcutConstraintItem[] constraintItems = Array.Empty<ShortcutConstraintItem>();
-
-        [SerializeField]
-        private KeyboardButtonShortcutImageItem[] keyboardButtonShortcutImageItems = Array.Empty<KeyboardButtonShortcutImageItem>();
-
-        [SerializeField]
-        private KeyboardAxisShortcutImageItem[] keyboardAxisShortcutImageItems = Array.Empty<KeyboardAxisShortcutImageItem>();
-
-        [SerializeField]
-        private GamepadButtonShortcutImageItem[] gamepadButtonShortcutImageItems = Array.Empty<GamepadButtonShortcutImageItem>();
-
-        [SerializeField]
-        private GamepadAxisShortcutImageItem[] gamepadAxisShortcutImageItems = Array.Empty<GamepadAxisShortcutImageItem>();
+        private UIShortcutEnvironmentAssignment[] assignments = Array.Empty<UIShortcutEnvironmentAssignment>();
 
         #endregion
 
         #region Properties
 
-        public UIShortcutInput ShortcutInput => shortcutInput;
+        public UIShortcutAction[] Actions => actions;
 
-        public bool UseShortcut => useShortcut;
+        public UIShortcutScheme[] Schemes => schemes;
 
-        public ShortcutConstraintItem[] ConstraintItems => constraintItems;
-
-        public KeyboardButtonShortcutImageItem[] KeyboardButtonShortcutImageItems => keyboardButtonShortcutImageItems;
-
-        public GamepadButtonShortcutImageItem[] GamepadButtonShortcutImageItems => gamepadButtonShortcutImageItems;
-
-        public KeyboardAxisShortcutImageItem[] KeyboardAxisShortcutImageItems => keyboardAxisShortcutImageItems;
-
-        public GamepadAxisShortcutImageItem[] GamepadAxisShortcutImageItems => gamepadAxisShortcutImageItems;
+        public UIShortcutEnvironmentAssignment[] Assignments => assignments;
 
         #endregion
-
-        public UIShortcutInputSettings()
-        {
-            keyboardButtonShortcutImageItems = ArrayUtils.CreateIdentifierArray<KeyboardButtonShortcutImageItem, Key>();
-            keyboardAxisShortcutImageItems = ArrayUtils.CreateIdentifierArray<KeyboardAxisShortcutImageItem, KeyAxis>();
-            gamepadButtonShortcutImageItems = ArrayUtils.CreateIdentifierArray<GamepadButtonShortcutImageItem, GamepadButton>();
-            gamepadAxisShortcutImageItems = ArrayUtils.CreateIdentifierArray<GamepadAxisShortcutImageItem, GamepadAxis>();
-        }
 
         #region Builtin Methods
 
 #if UNITY_EDITOR
-        private void Awake()
-        {
-            OnValidate();
-        }
-
         private void OnValidate()
         {
-            var removed = constraintItems
-                .Where(x => EnvironmentDetectionSettings.Singleton.Items.All(y => y.Guid != x.EnvironmentGuid))
-                .Select(x => x.EnvironmentGuid)
-                .ToArray();
-            var added = EnvironmentDetectionSettings.Singleton.Items
-                .Where(x => constraintItems.All(y => y.EnvironmentGuid != x.Guid))
-                .Select(x => x.Guid)
-                .ToArray();
+            foreach (var scheme in schemes)
+            {
+                var removeList = scheme.Items.Where(x => actions.All(y => y.Name != x.AssignedAction));
+                var addList = actions.Where(x => scheme.Items.All(y => y.AssignedAction != x.Name));
 
-            constraintItems = constraintItems.Where(x => !removed.Contains(x.EnvironmentGuid)).ToArray();
-            constraintItems = constraintItems.Concat(added.Select(x => new ShortcutConstraintItem { EnvironmentGuid = x }).ToArray()).ToArray();
+                scheme.Items = scheme.Items.RemoveAll(removeList.ToArray()).ToArray();
+                scheme.Items = scheme.Items.Concat(addList.Select(x => new UIShortcutSchemeItem { AssignedAction = x.Name })).ToArray();
+            }
         }
 #endif
 
         #endregion
 
-        public ShortcutConstraintItem CurrentItem => constraintItems
-            .Where(x => x.UseShortcut)
-            .FirstOrDefault(x => x.EnvironmentGuid == RuntimeEnvironment.GetDetectedEnvironment()?.ToString());
-
-        public UIShortcutInput? CurrentInput => CurrentItem?.ShortcutInput ?? (useShortcut ? shortcutInput : null);
+        public UIShortcutAction FindAction(string name) => actions.FirstOrDefault(x => x.Name == name);
     }
 
     [Serializable]
-    public abstract class ShortcutImageItem<T> : IIdentifiedObject<T> where T : Enum
+    public sealed class UIShortcutEnvironmentAssignment
     {
         #region Inspector Data
 
         [SerializeField]
-        private T identifier;
+        private string environmentGroupName;
+
+        [SerializeField]
+        private string inputSchemeName;
+
+        #endregion
+
+        #region Properties
+
+        public string EnvironmentGroupName => environmentGroupName;
+
+        public string InputSchemeName => inputSchemeName;
+
+        #endregion
+    }
+
+    [Serializable]
+    public sealed class UIShortcutScheme
+    {
+        #region Inspector Data
+
+        [SerializeField]
+        private string name;
+
+        [SerializeField]
+        private UIShortcutSchemeItem[] items = Array.Empty<UIShortcutSchemeItem>();
+
+        #endregion
+
+        #region Properties
+
+        public string Name => name;
+
+        public UIShortcutSchemeItem[] Items
+        {
+            get => items;
+#if UNITY_EDITOR
+            set => items = value;
+#endif
+        }
+
+        #endregion
+
+        public UIShortcutSchemeItem FindByAction(string action) =>
+            Items.FirstOrDefault(x => x.AssignedAction == action);
+    }
+
+    [Serializable]
+    public sealed class UIShortcutSchemeItem
+    {
+        #region Inspector Data
+
+        [SerializeField]
+        private string assignedAction;
+
+        [FormerlySerializedAs("inputType")]
+        [SerializeField]
+        private UIShortcutInput inputDevice = UIShortcutInput.Keyboard;
+
+        [FormerlySerializedAs("inputKey")]
+        [SerializeField]
+        private Key inputKeyButton = Key.Enter;
+
+        [SerializeField]
+        private KeyAxis inputKeyAxis = KeyAxis.Arrows;
+
+        [FormerlySerializedAs("inputGamepad")]
+        [SerializeField]
+        private GamepadButton inputGamepadButton = GamepadButton.A;
+
+        [SerializeField]
+        private GamepadAxis inputGamepadAxis = GamepadAxis.DPad;
 
         [SerializeField]
         private Sprite icon;
@@ -144,79 +155,47 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets
 
         #region Properties
 
-        public T Identifier => identifier;
+        public string AssignedAction
+        {
+            get => assignedAction;
+#if UNITY_EDITOR
+            set => assignedAction = value;
+#endif
+        }
+
+        public UIShortcutInput InputDevice => inputDevice;
+
+        public Key InputKeyButton => inputKeyButton;
+
+        public KeyAxis InputKeyAxis => inputKeyAxis;
+
+        public GamepadButton InputGamepadButton => inputGamepadButton;
+
+        public GamepadAxis InputGamepadAxis => inputGamepadAxis;
 
         public Sprite Icon => icon;
 
         #endregion
-
-        protected ShortcutImageItem(T identifier)
-        {
-            this.identifier = identifier;
-        }
     }
 
     [Serializable]
-    public sealed class KeyboardButtonShortcutImageItem : ShortcutImageItem<Key>
-    {
-        public KeyboardButtonShortcutImageItem(Key identifier) : base(identifier)
-        {
-        }
-    }
-
-    [Serializable]
-    public sealed class KeyboardAxisShortcutImageItem : ShortcutImageItem<KeyAxis>
-    {
-        public KeyboardAxisShortcutImageItem(KeyAxis identifier) : base(identifier)
-        {
-        }
-    }
-
-    [Serializable]
-    public sealed class GamepadButtonShortcutImageItem : ShortcutImageItem<GamepadButton>
-    {
-        public GamepadButtonShortcutImageItem(GamepadButton identifier) : base(identifier)
-        {
-        }
-    }
-
-    [Serializable]
-    public sealed class GamepadAxisShortcutImageItem : ShortcutImageItem<GamepadAxis>
-    {
-        public GamepadAxisShortcutImageItem(GamepadAxis identifier) : base(identifier)
-        {
-        }
-    }
-
-    [Serializable]
-    public sealed class ShortcutConstraintItem
+    public sealed class UIShortcutAction
     {
         #region Inspector Data
 
         [SerializeField]
-        private string environmentGuid;
+        private string name;
 
         [SerializeField]
-        private UIShortcutInput shortcutInput = UIShortcutInput.Keyboard;
-
-        [SerializeField]
-        private bool useShortcut;
+        private UIShortcutInputType inputType = UIShortcutInputType.Button;
 
         #endregion
 
         #region Properties
 
-        public string EnvironmentGuid
-        {
-            get => environmentGuid;
-#if UNITY_EDITOR
-            set => environmentGuid = value;
-#endif
-        }
+        public string Name => name;
 
-        public UIShortcutInput ShortcutInput => shortcutInput;
-
-        public bool UseShortcut => useShortcut;
+        public UIShortcutInputType InputType => inputType;
 
         #endregion
     }
@@ -224,6 +203,12 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets
     public enum UIShortcutInput
     {
         Keyboard,
-        Gamepad
+        Gamepad,
+    }
+
+    public enum UIShortcutInputType
+    {
+        Button,
+        Axis,
     }
 }
