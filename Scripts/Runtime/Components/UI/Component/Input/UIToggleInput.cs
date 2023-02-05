@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.UI;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
@@ -12,14 +10,9 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
     {
         #region Inspector Data
 
-        [Space]
         [SerializeField]
-        private GamepadButton gamepadButton = GamepadButton.A;
-
-        [SerializeField]
-        private Key key = Key.Digit0;
-
-        [Space]
+        private string clickAction;
+        
         [SerializeField]
         private GameObject iconObject;
 
@@ -29,6 +22,12 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
         [Space]
         [SerializeField]
         private bool allowDisableToggle = true;
+
+        #endregion
+
+        #region Properties
+
+        protected override string[] AssignedShortcutActions => new[] { clickAction };
 
         #endregion
 
@@ -44,8 +43,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
 
         protected override void LateUpdate()
         {
-            if ((GamepadAvailable && Gamepad.current[gamepadButton].wasPressedThisFrame) ||
-                (KeyboardAvailable && Keyboard.current[key].wasPressedThisFrame))
+            if (WasShortcutPressedThisFrame(clickAction))
             {
                 if (_toggle.interactable)
                 {
@@ -57,12 +55,12 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
 #if UNITY_EDITOR
         protected override void OnValidate()
         {
-            UpdateIconOnValidate(key, gamepadButton, icon, iconObject);
+            UpdateIconOnValidate(icon, iconObject, clickAction);
         }
 #endif
 
         #endregion
 
-        protected override void UpdateVisual() => UpdateIcon(key, gamepadButton, icon, iconObject);
+        protected override void UpdateVisual() => UpdateIcon(icon, iconObject, clickAction);
     }
 }

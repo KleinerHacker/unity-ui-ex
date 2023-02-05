@@ -1,7 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.UI;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
@@ -10,21 +8,12 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
     {
         #region Inspector Data
 
-        [Space]
         [SerializeField]
-        private GamepadButton negativeGamepadButton = GamepadButton.LeftShoulder;
+        private string negativeAction;
 
         [SerializeField]
-        private GamepadButton positiveGamepadButton = GamepadButton.RightShoulder;
-
-        [Space]
-        [SerializeField]
-        private Key negativeKey = Key.LeftArrow;
-
-        [SerializeField]
-        private Key positiveKey = Key.RightArrow;
-
-        [Space]
+        private string positiveAction;
+        
         [Tooltip("Behavior to define what is happen if first or last toggle was reached")]
         [SerializeField]
         private UIListInputBehavior behavior = UIListInputBehavior.Circle;
@@ -50,6 +39,8 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
         protected abstract int ListLength { get; }
         protected abstract bool Interactable { get; }
 
+        protected override string[] AssignedShortcutActions => new[] { negativeAction, positiveAction };
+
         #endregion
         
         private int _index;
@@ -64,16 +55,14 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
 
         protected override void LateUpdate()
         {
-            if ((GamepadAvailable && Gamepad.current[negativeGamepadButton].wasPressedThisFrame) ||
-                (KeyboardAvailable && Keyboard.current[negativeKey].wasPressedThisFrame))
+            if (WasShortcutPressedThisFrame(negativeAction))
             {
                 if (Interactable)
                 {
                     GotoPrev();
                 }
             }
-            else if ((GamepadAvailable && Gamepad.current[positiveGamepadButton].wasPressedThisFrame) ||
-                     (KeyboardAvailable && Keyboard.current[positiveKey].wasPressedThisFrame))
+            else if (WasShortcutPressedThisFrame(positiveAction))
             {
                 if (Interactable)
                 {
@@ -85,8 +74,8 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
 #if UNITY_EDITOR
         protected override void OnValidate()
         {
-            UpdateIconOnValidate(positiveKey, positiveGamepadButton, positiveIcon, positiveIconObject);
-            UpdateIconOnValidate(negativeKey, negativeGamepadButton, negativeIcon, negativeIconObject);
+            UpdateIconOnValidate(positiveIcon, positiveIconObject, positiveAction);
+            UpdateIconOnValidate(negativeIcon, negativeIconObject, negativeAction);
         }
 #endif
 
@@ -140,8 +129,8 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
 
         protected override void UpdateVisual()
         {
-            UpdateIcon(positiveKey, positiveGamepadButton, positiveIcon, positiveIconObject);
-            UpdateIcon(negativeKey, negativeGamepadButton, negativeIcon, negativeIconObject);
+            UpdateIcon(positiveIcon, positiveIconObject, positiveAction);
+            UpdateIcon(negativeIcon, negativeIconObject, negativeAction);
         }
     }
     

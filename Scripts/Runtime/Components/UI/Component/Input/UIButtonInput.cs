@@ -1,11 +1,6 @@
-using System.Linq;
-using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.UI;
-using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
 {
@@ -16,19 +11,20 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
     {
         #region Inspector Data
 
-        [Space]
         [SerializeField]
-        private GamepadButton gamepadButton = GamepadButton.A;
+        private string clickAction;
 
-        [SerializeField]
-        private Key key = Key.Digit0;
-
-        [Space]
         [SerializeField]
         private GameObject iconObject;
 
         [SerializeField]
         private Image icon;
+
+        #endregion
+
+        #region Properties
+
+        protected override string[] AssignedShortcutActions => new[] { clickAction };
 
         #endregion
 
@@ -44,8 +40,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
 
         protected override void LateUpdate()
         {
-            if ((GamepadAvailable && Gamepad.current[gamepadButton].wasPressedThisFrame) ||
-                (KeyboardAvailable && Keyboard.current[key].wasPressedThisFrame))
+            if (WasShortcutPressedThisFrame(clickAction))
             {
                 if (_button.interactable)
                 {
@@ -57,12 +52,12 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
 #if UNITY_EDITOR
         protected override void OnValidate()
         {
-            UpdateIconOnValidate(key, gamepadButton, icon, iconObject);
+            UpdateIconOnValidate(icon, iconObject, clickAction);
         }
 #endif
 
         #endregion
 
-        protected override void UpdateVisual() => UpdateIcon(key, gamepadButton, icon, iconObject);
+        protected override void UpdateVisual() => UpdateIcon(icon, iconObject, clickAction);
     }
 }

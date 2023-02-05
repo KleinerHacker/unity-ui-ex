@@ -1,10 +1,10 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.UI;
-using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Types;
+using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets;
+using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Utils.Extensions;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
 {
@@ -13,88 +13,140 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
         #region Inspector Data
 
         [SerializeField]
-        private UIInputSupport gamepadSupport = UIInputSupport.Yes;
+        protected UIInputSupport gamepadSupport = UIInputSupport.Yes;
 
         [SerializeField]
         private bool showGamepadIcon = true;
 
         [SerializeField]
-        private UIInputSupport keyboardSupport = UIInputSupport.Yes;
-        
+        protected UIInputSupport keyboardSupport = UIInputSupport.Yes;
+
         [SerializeField]
         private bool showKeyboardIcon = true;
 
         #endregion
 
-        protected bool GamepadAvailable { get; private set; }
-        protected bool KeyboardAvailable { get; private set; }
+        #region Properties
+        
+        /// <summary>
+        /// Returns all supported actions that must be assigned to a shortcut action
+        /// </summary>
+        protected abstract string[] AssignedShortcutActions { get; }
+
+        #endregion
+
+        private readonly IDictionary<string, UIShortcutSchemeItem> _shortcutSchemeItems = new Dictionary<string, UIShortcutSchemeItem>();
 
         #region Builtin Methods
 
         protected override void Awake()
         {
+            var currentInputScheme = UIShortcutInputSystem.CurrentInputScheme;
+            foreach (var assignedShortcutAction in AssignedShortcutActions)
+            {
+                var shortcutSchemeItem = currentInputScheme.FindByAction(assignedShortcutAction);
+                if (shortcutSchemeItem == null)
+                {
+                    Debug.LogError("[UI-INPUT] Unable to find shortcut action " + assignedShortcutAction + " in scheme " + currentInputScheme.Name, this);
+                    continue;
+                }
+                
+                _shortcutSchemeItems.Add(assignedShortcutAction, shortcutSchemeItem);
+            }
         }
 
         protected override void Start()
         {
-            // GamepadAvailable = Gamepad.current.IsAvailable() && gamepadSupport == UIInputSupport.Yes && UIShortcutInputSettings.Singleton.CurrentInput == UIShortcutInput.Gamepad;
-            // KeyboardAvailable = Keyboard.current.IsAvailable() && keyboardSupport == UIInputSupport.Yes && UIShortcutInputSettings.Singleton.CurrentInput == UIShortcutInput.Keyboard;
-            
             UpdateVisual();
         }
 
+        /// <summary>
+        /// Implement to check for device input
+        /// </summary>
         protected abstract void LateUpdate();
 
         #endregion
 
+        /// <summary>
+        /// Implement to update visuals
+        /// </summary>
         protected abstract void UpdateVisual();
 
-        protected void UpdateIcon(Key keyButton, GamepadButton gamepadButton, Image icon, GameObject iconObject) => 
-            UpdateIcon(keyButton, gamepadButton, GamepadAvailable && showGamepadIcon, KeyboardAvailable && showKeyboardIcon, icon, iconObject);
-
-        protected void UpdateIcon(KeyAxis keyAxis, GamepadAxis gamepadAxis, Image icon, GameObject iconObject) => 
-            UpdateIcon(keyAxis, gamepadAxis, GamepadAvailable && showGamepadIcon, KeyboardAvailable && showKeyboardIcon, icon, iconObject);
+        /// <summary>
+        /// Update icon at runtime for a specific action 
+        /// </summary>
+        /// <param name="icon">Image within icon</param>
+        /// <param name="iconObject">Game object of icon</param>
+        /// <param name="action">Associated shortcut action</param>
+        protected void UpdateIcon(Image icon, GameObject iconObject, string action) =>
+            UpdateIcon(showGamepadIcon && gamepadSupport == UIInputSupport.Yes || showKeyboardIcon && keyboardSupport == UIInputSupport.Yes, icon, iconObject, action);
 
 #if UNITY_EDITOR
-        protected void UpdateIconOnValidate(Key keyButton, GamepadButton gamepadButton, Image icon, GameObject iconObject) {}
-            // UpdateIcon(keyButton, gamepadButton, UIShortcutInputSettings.DisplayedShortcut == UIShortcutInput.Gamepad, 
-            //     UIShortcutInputSettings.DisplayedShortcut == UIShortcutInput.Keyboard, icon, iconObject);
-        
-        protected void UpdateIconOnValidate(KeyAxis keyAxis, GamepadAxis gamepadAxis, Image icon, GameObject iconObject)
-        {
-        }
-            // UpdateIcon(keyAxis, gamepadAxis, UIShortcutInputSettings.DisplayedShortcut == UIShortcutInput.Gamepad, 
-            //     UIShortcutInputSettings.DisplayedShortcut == UIShortcutInput.Keyboard, icon, iconObject);
+        /// <summary>
+        /// Update icon at editor time for a specific action 
+        /// </summary>
+        /// <param name="icon">Image within icon</param>
+        /// <param name="iconObject">Game object of icon</param>
+        /// <param name="action">Associated shortcut action</param>
+        protected void UpdateIconOnValidate(Image icon, GameObject iconObject, string action) =>
+            UpdateIcon(showGamepadIcon && gamepadSupport == UIInputSupport.Yes || showKeyboardIcon && keyboardSupport == UIInputSupport.Yes, icon, iconObject, action);
 #endif
 
-        private void UpdateIcon(Key keyButton, GamepadButton gamepadButton, bool showGamepadIcon, bool showKeyboardIcon, Image icon, GameObject iconObject)
-        {
-        }
-        // UpdateIcon(icon, iconObject, showGamepadIcon, showKeyboardIcon, 
-            //     () => UIShortcutInputSettings.Singleton.GamepadButtonShortcutImageItems.First(x => x.Identifier == gamepadButton).Icon,
-            //     () => UIShortcutInputSettings.Singleton.KeyboardButtonShortcutImageItems.First(x => x.Identifier == keyButton).Icon);
+        private void UpdateIcon(bool showIcon, Image icon, GameObject iconObject, string action) =>
+            UpdateIcon(icon, iconObject, showIcon, () => !_shortcutSchemeItems.ContainsKey(action) ? null : _shortcutSchemeItems[action].Icon);
 
-        private void UpdateIcon(KeyAxis keyAxis, GamepadAxis gamepadAxis, bool showGamepadIcon, bool showKeyboardIcon, Image icon, GameObject iconObject)
-        {
-        }
-        // UpdateIcon(icon, iconObject, showGamepadIcon, showKeyboardIcon, 
-            //     () => UIShortcutInputSettings.Singleton.GamepadAxisShortcutImageItems.First(x => x.Identifier == gamepadAxis).Icon,
-            //     () => UIShortcutInputSettings.Singleton.KeyboardAxisShortcutImageItems.First(x => x.Identifier == keyAxis).Icon);
-
-        private static void UpdateIcon(Image icon, GameObject iconObject, bool showGamepadIcon, bool showKeyboardIcon, Func<Sprite> gamepadIconUpdater, Func<Sprite> keyIconUpdater)
+        private static void UpdateIcon(Image icon, GameObject iconObject, bool showIcon, Func<Sprite> iconUpdater)
         {
             if (iconObject == null || icon == null)
                 return;
+
+            iconObject.SetActive(showIcon);
+            icon.sprite = iconUpdater();
+        }
+
+        /// <summary>
+        /// Find the fit shortcut scheme item for given action. <b>Can be <c>null</c></b>
+        /// </summary>
+        /// <param name="action">Action to search for</param>
+        /// <returns></returns>
+        protected UIShortcutSchemeItem FindShortcutSchemeItemByAction(string action) => !_shortcutSchemeItems.ContainsKey(action) ? null : _shortcutSchemeItems[action];
+
+        /// <summary>
+        /// Check that the given shortcut action was pressed this frame.<br/>
+        /// <br/>
+        /// This method checks on <c>null</c> and returns <c>false</c> if action was not found. It results in an error log message.
+        /// </summary>
+        /// <param name="action">Action to check for</param>
+        /// <returns></returns>
+        protected bool WasShortcutPressedThisFrame(string action)
+        {
+            var shortcutSchemeItem = FindShortcutSchemeItemByAction(action);
+            if (shortcutSchemeItem == null)
+            {
+                Debug.LogError("[UI-INPUT] Unable to handle shortcut: action " + action + " not available", this);
+                return false;
+            }
             
-            iconObject.SetActive(showGamepadIcon || showKeyboardIcon);
-            if (showGamepadIcon)
+            return shortcutSchemeItem.WasKeyPressed(keyboardSupport == UIInputSupport.Yes, gamepadSupport == UIInputSupport.Yes);
+        }
+
+        /// <summary>
+        /// Returns the axis value from given action. <br/>
+        /// <br/>
+        /// This method checks on <c>null</c> and returns <c>0</c> if action was not found. It results in an error log message.
+        /// </summary>
+        /// <param name="action">Action to get axis value for</param>
+        /// <returns></returns>
+        protected Vector2 GetShortcutAxis(string action)
+        {
+            var shortcutSchemeItem = FindShortcutSchemeItemByAction(action);
+            if (shortcutSchemeItem == null)
             {
-                icon.sprite = gamepadIconUpdater();
+                Debug.LogError("[UI-INPUT] Unable to handle shortcut: action " + action + " not available", this);
+                return Vector2.zero;
             }
-            else if (showKeyboardIcon)
-            {
-                icon.sprite = keyIconUpdater();
-            }
+
+            return shortcutSchemeItem.GetAxis(keyboardSupport == UIInputSupport.Yes, gamepadSupport == UIInputSupport.Yes);
         }
     }
 

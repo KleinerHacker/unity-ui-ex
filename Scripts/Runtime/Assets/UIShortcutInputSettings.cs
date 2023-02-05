@@ -5,6 +5,8 @@ using UnityEditorEx.Runtime.editor_ex.Scripts.Runtime.Assets;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.Serialization;
+using UnityInputEx.Runtime.input_ex.Scripts.Runtime.Types;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -113,6 +115,9 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets
         }
 
         #endregion
+
+        public UIShortcutSchemeItem FindByAction(string action) =>
+            Items.FirstOrDefault(x => x.AssignedAction == action);
     }
 
     [Serializable]
@@ -123,14 +128,26 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets
         [SerializeField]
         private string assignedAction;
 
+        [FormerlySerializedAs("inputType")]
         [SerializeField]
-        private UIShortcutInput inputType = UIShortcutInput.Keyboard;
+        private UIShortcutInput inputDevice = UIShortcutInput.Keyboard;
 
         [SerializeField]
-        private Key inputKey = Key.Enter;
+        private UIShortcutInputType inputType = UIShortcutInputType.Button;
+
+        [FormerlySerializedAs("inputKey")]
+        [SerializeField]
+        private Key inputKeyButton = Key.Enter;
 
         [SerializeField]
-        private GamepadButton inputGamepad = GamepadButton.A;
+        private KeyAxis inputKeyAxis = KeyAxis.Arrows;
+
+        [FormerlySerializedAs("inputGamepad")]
+        [SerializeField]
+        private GamepadButton inputGamepadButton = GamepadButton.A;
+
+        [SerializeField]
+        private GamepadAxis inputGamepadAxis = GamepadAxis.DPad;
 
         [SerializeField]
         private Sprite icon;
@@ -147,11 +164,17 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets
 #endif
         }
 
-        public UIShortcutInput InputType => inputType;
+        public UIShortcutInput InputDevice => inputDevice;
 
-        public Key InputKey => inputKey;
+        public UIShortcutInputType InputType => inputType;
 
-        public GamepadButton InputGamepad => inputGamepad;
+        public Key InputKeyButton => inputKeyButton;
+
+        public KeyAxis InputKeyAxis => inputKeyAxis;
+
+        public GamepadButton InputGamepadButton => inputGamepadButton;
+
+        public GamepadAxis InputGamepadAxis => inputGamepadAxis;
 
         public Sprite Icon => icon;
 
@@ -178,6 +201,12 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets
     public enum UIShortcutInput
     {
         Keyboard,
-        Gamepad
+        Gamepad,
+    }
+
+    public enum UIShortcutInputType
+    {
+        Button,
+        Axis,
     }
 }

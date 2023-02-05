@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.UI;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
@@ -11,22 +9,13 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
     public sealed class UISliderInput : UIInput
     {
         #region Inspector Data
-
-        [Space]
+        
         [SerializeField]
-        private GamepadButton negativeGamepadButton = GamepadButton.LeftShoulder;
-
-        [SerializeField]
-        private GamepadButton positiveGamepadButton = GamepadButton.RightShoulder;
-
-        [Space]
-        [SerializeField]
-        private Key negativeKey = Key.LeftArrow;
+        private string negativeAction;
 
         [SerializeField]
-        private Key positiveKey = Key.RightArrow;
-
-        [Space]
+        private string positiveAction;
+        
         [SerializeField]
         private GameObject negativeIconObject;
 
@@ -45,6 +34,12 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
 
         #endregion
 
+        #region Properties
+
+        protected override string[] AssignedShortcutActions => new[] { positiveAction, negativeAction };
+
+        #endregion
+
         private Slider _slider;
 
         #region Builtin Methods
@@ -57,16 +52,14 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
 
         protected override void LateUpdate()
         {
-            if ((GamepadAvailable && Gamepad.current[negativeGamepadButton].isPressed) ||
-                (KeyboardAvailable && Keyboard.current[negativeKey].isPressed))
+            if (WasShortcutPressedThisFrame(negativeAction))
             {
                 if (_slider.interactable)
                 {
                     _slider.value -= CalculatedChange;
                 }
             }
-            else if ((GamepadAvailable && Gamepad.current[positiveGamepadButton].isPressed) ||
-                     (KeyboardAvailable && Keyboard.current[positiveKey].isPressed))
+            else if (WasShortcutPressedThisFrame(positiveAction))
             {
                 if (_slider.interactable)
                 {
@@ -78,8 +71,8 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
 #if UNITY_EDITOR
         protected override void OnValidate()
         {
-            UpdateIconOnValidate(positiveKey, positiveGamepadButton, positiveIcon, positiveIconObject);
-            UpdateIconOnValidate(negativeKey, negativeGamepadButton, negativeIcon, negativeIconObject);
+            UpdateIconOnValidate(positiveIcon, positiveIconObject, positiveAction);
+            UpdateIconOnValidate(negativeIcon, negativeIconObject, negativeAction);
         }
 #endif
 
@@ -89,8 +82,8 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
 
         protected override void UpdateVisual()
         {
-            UpdateIcon(positiveKey, positiveGamepadButton, positiveIcon, positiveIconObject);
-            UpdateIcon(negativeKey, negativeGamepadButton, negativeIcon, negativeIconObject);
+            UpdateIcon(positiveIcon, positiveIconObject, positiveAction);
+            UpdateIcon(negativeIcon, negativeIconObject, negativeAction);
         }
     }
 }

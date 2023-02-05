@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.LowLevel;
 using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
@@ -12,12 +10,14 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
     {
         #region Inspector Data
 
-        [Space]
         [SerializeField]
-        private GamepadButton gamepadButton = GamepadButton.Start;
+        private string toggleAction;
 
-        [SerializeField]
-        private Key key = Key.Escape;
+        #endregion
+
+        #region Properties
+
+        protected override string[] AssignedShortcutActions => new[] { toggleAction };
 
         #endregion
         
@@ -33,8 +33,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
 
         protected override void LateUpdate()
         {
-            if ((GamepadAvailable && Gamepad.current[gamepadButton].wasPressedThisFrame) ||
-                (KeyboardAvailable && Keyboard.current[key].wasPressedThisFrame))
+            if (WasShortcutPressedThisFrame(toggleAction))
             {
                 _window.ToggleVisibility();
             }

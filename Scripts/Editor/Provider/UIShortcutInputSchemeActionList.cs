@@ -12,8 +12,9 @@ namespace UnityUIEx.Editor.ui_ex.Scripts.Editor.Provider
         public UIShortcutInputSchemeActionList(SerializedObject serializedObject, SerializedProperty elements) : base(serializedObject, elements, false, true, false, false)
         {
             Columns.Add(new FixedColumn {HeaderText = "Action Name", AbsoluteWidth = 150f, ElementCallback = NameElementCallback});
-            Columns.Add(new FixedColumn {HeaderText = "Target Input Device", AbsoluteWidth = 150f, ElementCallback = TargetDeviceElementCallback});
-            Columns.Add(new FixedColumn {HeaderText = "Input", AbsoluteWidth = 150f, ElementCallback = InputElementCallback});
+            Columns.Add(new FixedColumn {HeaderText = "Target Input Device", AbsoluteWidth = 100f, ElementCallback = TargetDeviceElementCallback});
+            Columns.Add(new FixedColumn {HeaderText = "Input Type", AbsoluteWidth = 100f, ElementCallback = InputTypeElementCallback});
+            Columns.Add(new FixedColumn {HeaderText = "Input", AbsoluteWidth = 100f, ElementCallback = InputElementCallback});
             Columns.Add(new FlexibleColumn {HeaderText = "Icon", MaxHeight = 20f, ElementCallback = IconElementCallback});
         }
 
@@ -24,22 +25,62 @@ namespace UnityUIEx.Editor.ui_ex.Scripts.Editor.Provider
 
         private void TargetDeviceElementCallback(Rect rect, int i, bool isactive, bool isfocused)
         {
+            EditorGUI.PropertyField(rect, serializedProperty.GetArrayElementAtIndex(i).FindPropertyRelative("inputDevice"), GUIContent.none);
+        }
+
+        private void InputTypeElementCallback(Rect rect, int i, bool isactive, bool isfocused)
+        {
             EditorGUI.PropertyField(rect, serializedProperty.GetArrayElementAtIndex(i).FindPropertyRelative("inputType"), GUIContent.none);
         }
 
         private void InputElementCallback(Rect rect, int i, bool isactive, bool isfocused)
         {
             var prop = serializedProperty.GetArrayElementAtIndex(i);
-            if (prop.GetRelativeInt("inputType") == (int)UIShortcutInput.Keyboard)
+            switch (prop.GetRelativeEnum<UIShortcutInput>("inputDevice"))
             {
-                EditorGUI.PropertyField(rect, prop.FindPropertyRelative("inputKey"), GUIContent.none);
-            } 
-            else if (prop.GetRelativeInt("inputType") == (int)UIShortcutInput.Gamepad)
-            {
-                EditorGUI.PropertyField(rect, prop.FindPropertyRelative("inputGamepad"), GUIContent.none);
+                case UIShortcutInput.Keyboard:
+                    HandleKeyboard();
+                    break;
+                case UIShortcutInput.Gamepad:
+                    HandleGamepad();
+                    break;
+                default:
+                    throw new NotImplementedException(prop.GetRelativeEnum<UIShortcutInput>("inputDevice").ToString());
             }
-            else
-                throw new NotImplementedException(prop.GetRelativeInt("inputType") + "");
+
+            #region Internal Methods
+
+            void HandleKeyboard()
+            {
+                switch (prop.GetRelativeEnum<UIShortcutInputType>("inputType"))
+                {
+                    case UIShortcutInputType.Button:
+                        EditorGUI.PropertyField(rect, prop.FindPropertyRelative("inputKeyButton"), GUIContent.none);
+                        break;
+                    case UIShortcutInputType.Axis:
+                        EditorGUI.PropertyField(rect, prop.FindPropertyRelative("inputKeyAxis"), GUIContent.none);
+                        break;
+                    default:
+                        throw new NotImplementedException(prop.GetRelativeEnum<UIShortcutInputType>("inputType").ToString());
+                }
+            }
+
+            void HandleGamepad()
+            {
+                switch (prop.GetRelativeEnum<UIShortcutInputType>("inputType"))
+                {
+                    case UIShortcutInputType.Button:
+                        EditorGUI.PropertyField(rect, prop.FindPropertyRelative("inputGamepadButton"), GUIContent.none);
+                        break;
+                    case UIShortcutInputType.Axis:
+                        EditorGUI.PropertyField(rect, prop.FindPropertyRelative("inputGamepadAxis"), GUIContent.none);
+                        break;
+                    default:
+                        throw new NotImplementedException(prop.GetRelativeEnum<UIShortcutInputType>("inputType").ToString());
+                }
+            }
+
+            #endregion
         }
 
         private void IconElementCallback(Rect rect, int i, bool isactive, bool isfocused)

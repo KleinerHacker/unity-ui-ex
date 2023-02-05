@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityInputEx.Runtime.input_ex.Scripts.Runtime.Utils.Extensions;
-using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Types;
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
 {
@@ -14,14 +13,9 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
     {
         #region Inspector Data
 
-        [Space]
         [SerializeField]
-        private GamepadAxis gamepad = GamepadAxis.RightStick;
-
-        [SerializeField]
-        private KeyAxis key = KeyAxis.Arrows;
-
-        [Space]
+        private string scrollAction;
+        
         [SerializeField]
         private GameObject iconObject;
 
@@ -31,6 +25,12 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
         [Space]
         [SerializeField]
         private float velocityMultiplier = 100f;
+
+        #endregion
+
+        #region Properties
+
+        protected override string[] AssignedShortcutActions => new[] { scrollAction };
 
         #endregion
 
@@ -46,41 +46,19 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Component.Input
 
         protected override void LateUpdate()
         {
-            var velocity = Vector2.zero;
-            if (GamepadAvailable)
-            {
-                velocity += gamepad switch
-                {
-                    GamepadAxis.LeftStick => Gamepad.current.leftStick.ReadValue(),
-                    GamepadAxis.RightStick => Gamepad.current.rightStick.ReadValue(),
-                    GamepadAxis.DPad => Gamepad.current.dpad.ReadValue(),
-                    _ => throw new NotImplementedException()
-                } * velocityMultiplier;
-            }
-
-            if (KeyboardAvailable)
-            {
-                velocity += key switch
-                {
-                    KeyAxis.Arrows => Keyboard.current.GetArrows(),
-                    KeyAxis.Numpad => Keyboard.current.GetNumpad(),
-                    KeyAxis.WASD => Keyboard.current.GetWASD(),
-                    _ => throw new NotImplementedException()
-                } * velocityMultiplier;
-            }
-
+            var velocity = GetShortcutAxis(scrollAction) * velocityMultiplier;
             _scrollRect.velocity = velocity;
         }
 
 #if UNITY_EDITOR
         protected override void OnValidate()
         {
-            UpdateIconOnValidate(key, gamepad, icon, iconObject);
+            UpdateIconOnValidate(icon, iconObject, scrollAction);
         }
 #endif
 
         #endregion
 
-        protected override void UpdateVisual() => UpdateIcon(key, gamepad, icon, iconObject);
+        protected override void UpdateVisual() => UpdateIcon(icon, iconObject, scrollAction);
     }
 }
