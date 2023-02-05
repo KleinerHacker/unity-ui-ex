@@ -9,17 +9,17 @@ using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Components.Input;
 namespace UnityUIEx.Editor.ui_ex.Scripts.Editor.Overlay
 {
     [Overlay(typeof(SceneView), "Shortcut Input")]
-    public class ScreenshotOverlay : ToolbarOverlay
+    public class ShortcutInputOverlay : ToolbarOverlay
     {
-        public ScreenshotOverlay() : base("UnityUI/ShortcutInput")
+        public ShortcutInputOverlay() : base("UnityUI/ShortcutInput")
         {
         }
     }
 
     [EditorToolbarElement("UnityUI/ShortcutInput", typeof(SceneView))]
-    public class ScreenshotButton : EditorToolbarButton
+    public class ShortcutInputButton : EditorToolbarButton
     {
-        public ScreenshotButton()
+        public ShortcutInputButton()
         {
             tooltip = "Change view of shortcut input";
             icon = (Texture2D)EditorGUIUtility.IconContent("d_Text Icon").image;
