@@ -12,9 +12,8 @@ namespace UnityUIEx.Editor.ui_ex.Scripts.Editor.Provider
         public UIShortcutInputSchemeActionList(SerializedObject serializedObject, SerializedProperty elements) : base(serializedObject, elements, false, true, false, false)
         {
             Columns.Add(new FixedColumn {HeaderText = "Action Name", AbsoluteWidth = 150f, ElementCallback = NameElementCallback});
-            Columns.Add(new FixedColumn {HeaderText = "Target Input Device", AbsoluteWidth = 100f, ElementCallback = TargetDeviceElementCallback});
-            Columns.Add(new FixedColumn {HeaderText = "Input Type", AbsoluteWidth = 100f, ElementCallback = InputTypeElementCallback});
-            Columns.Add(new FixedColumn {HeaderText = "Input", AbsoluteWidth = 100f, ElementCallback = InputElementCallback});
+            Columns.Add(new FixedColumn {HeaderText = "Target Input Device", AbsoluteWidth = 150f, ElementCallback = TargetDeviceElementCallback});
+            Columns.Add(new FixedColumn {HeaderText = "Input", AbsoluteWidth = 150f, ElementCallback = InputElementCallback});
             Columns.Add(new FlexibleColumn {HeaderText = "Icon", MaxHeight = 20f, ElementCallback = IconElementCallback});
         }
 
@@ -28,14 +27,16 @@ namespace UnityUIEx.Editor.ui_ex.Scripts.Editor.Provider
             EditorGUI.PropertyField(rect, serializedProperty.GetArrayElementAtIndex(i).FindPropertyRelative("inputDevice"), GUIContent.none);
         }
 
-        private void InputTypeElementCallback(Rect rect, int i, bool isactive, bool isfocused)
-        {
-            EditorGUI.PropertyField(rect, serializedProperty.GetArrayElementAtIndex(i).FindPropertyRelative("inputType"), GUIContent.none);
-        }
-
         private void InputElementCallback(Rect rect, int i, bool isactive, bool isfocused)
         {
             var prop = serializedProperty.GetArrayElementAtIndex(i);
+            var action = UIShortcutInputSettings.Singleton.FindAction(prop.GetRelativeString("assignedAction"));
+            if (action == null)
+            {
+                Debug.LogError("[UI-INPUT] Unable to find action " + prop.GetRelativeString("assignedAction"));
+                return;
+            }
+            
             switch (prop.GetRelativeEnum<UIShortcutInput>("inputDevice"))
             {
                 case UIShortcutInput.Keyboard:
@@ -52,7 +53,7 @@ namespace UnityUIEx.Editor.ui_ex.Scripts.Editor.Provider
 
             void HandleKeyboard()
             {
-                switch (prop.GetRelativeEnum<UIShortcutInputType>("inputType"))
+                switch (action.InputType)
                 {
                     case UIShortcutInputType.Button:
                         EditorGUI.PropertyField(rect, prop.FindPropertyRelative("inputKeyButton"), GUIContent.none);
@@ -61,13 +62,13 @@ namespace UnityUIEx.Editor.ui_ex.Scripts.Editor.Provider
                         EditorGUI.PropertyField(rect, prop.FindPropertyRelative("inputKeyAxis"), GUIContent.none);
                         break;
                     default:
-                        throw new NotImplementedException(prop.GetRelativeEnum<UIShortcutInputType>("inputType").ToString());
+                        throw new NotImplementedException(action.InputType.ToString());
                 }
             }
 
             void HandleGamepad()
             {
-                switch (prop.GetRelativeEnum<UIShortcutInputType>("inputType"))
+                switch (action.InputType)
                 {
                     case UIShortcutInputType.Button:
                         EditorGUI.PropertyField(rect, prop.FindPropertyRelative("inputGamepadButton"), GUIContent.none);
@@ -76,7 +77,7 @@ namespace UnityUIEx.Editor.ui_ex.Scripts.Editor.Provider
                         EditorGUI.PropertyField(rect, prop.FindPropertyRelative("inputGamepadAxis"), GUIContent.none);
                         break;
                     default:
-                        throw new NotImplementedException(prop.GetRelativeEnum<UIShortcutInputType>("inputType").ToString());
+                        throw new NotImplementedException(action.InputType.ToString());
                 }
             }
 

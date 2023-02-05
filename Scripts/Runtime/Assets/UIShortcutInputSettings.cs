@@ -65,6 +65,8 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets
 #endif
 
         #endregion
+
+        public UIShortcutAction FindAction(string name) => actions.FirstOrDefault(x => x.Name == name);
     }
 
     [Serializable]
@@ -132,9 +134,6 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets
         [SerializeField]
         private UIShortcutInput inputDevice = UIShortcutInput.Keyboard;
 
-        [SerializeField]
-        private UIShortcutInputType inputType = UIShortcutInputType.Button;
-
         [FormerlySerializedAs("inputKey")]
         [SerializeField]
         private Key inputKeyButton = Key.Enter;
@@ -166,8 +165,6 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets
 
         public UIShortcutInput InputDevice => inputDevice;
 
-        public UIShortcutInputType InputType => inputType;
-
         public Key InputKeyButton => inputKeyButton;
 
         public KeyAxis InputKeyAxis => inputKeyAxis;
@@ -189,11 +186,16 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets
         [SerializeField]
         private string name;
 
+        [SerializeField]
+        private UIShortcutInputType inputType = UIShortcutInputType.Button;
+
         #endregion
 
         #region Properties
 
         public string Name => name;
+
+        public UIShortcutInputType InputType => inputType;
 
         #endregion
     }

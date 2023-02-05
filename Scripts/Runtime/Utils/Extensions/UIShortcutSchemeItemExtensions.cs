@@ -11,9 +11,16 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Utils.Extensions
     {
         public static bool WasKeyPressed(this UIShortcutSchemeItem item, bool supportsKeyboard = true, bool supportsGamepad = true)
         {
-            if (item.InputType != UIShortcutInputType.Button)
+            var action = UIShortcutInputSettings.Singleton.FindAction(item.AssignedAction);
+            if (action == null)
             {
-                Debug.LogError("[UI-INPUT] Unable to call this method with input type " + item.InputType + " for action " + item.AssignedAction +
+                Debug.LogError("[UI-INPUT] Action " + item.AssignedAction + " cannot be found in shortcut settings");
+                return false;
+            }
+            
+            if (action.InputType != UIShortcutInputType.Button)
+            {
+                Debug.LogError("[UI-INPUT] Unable to call this method with input type " + action.InputType + " for action " + item.AssignedAction +
                                ". Requires " + nameof(UIShortcutInputType.Button));
                 return false;
             }
@@ -28,9 +35,16 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Utils.Extensions
 
         public static Vector2 GetAxis(this UIShortcutSchemeItem item, bool supportsKeyboard = true, bool supportsGamepad = true)
         {
-            if (item.InputType != UIShortcutInputType.Axis)
+            var action = UIShortcutInputSettings.Singleton.FindAction(item.AssignedAction);
+            if (action == null)
             {
-                Debug.LogError("[UI-INPUT] Unable to call this method with input type " + item.InputType + " for action " + item.AssignedAction +
+                Debug.LogError("[UI-INPUT] Action " + item.AssignedAction + " cannot be found in shortcut settings");
+                return Vector2.zero;
+            }
+
+            if (action.InputType != UIShortcutInputType.Axis)
+            {
+                Debug.LogError("[UI-INPUT] Unable to call this method with input type " + action.InputType + " for action " + item.AssignedAction +
                                ". Requires " + nameof(UIShortcutInputType.Axis));
                 return Vector2.zero;
             }
@@ -39,7 +53,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Utils.Extensions
             {
                 UIShortcutInput.Gamepad => !supportsGamepad ? Vector2.zero : InputUtils.GetValueFromDevice(Gamepad.current, gamepad => gamepad.GetAxis(item.InputGamepadAxis)),
                 UIShortcutInput.Keyboard => !supportsKeyboard ? Vector2.zero : InputUtils.GetValueFromDevice(Keyboard.current, keyboard => keyboard.GetAxis(item.InputKeyAxis)),
-                _ => throw new NotImplementedException(item.InputType.ToString())
+                _ => throw new NotImplementedException(action.InputType.ToString())
             };
         }
     }
