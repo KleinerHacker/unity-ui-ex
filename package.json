@@ -3,7 +3,7 @@
   "version": "1.9.0",
   "displayName": "Unity UI Extension",
   "description": "Extension for Unity UI system.",
-  "unity": "2021.1",
+  "unity": "2021.3",
   "keywords": [
     "UI",
     "extension",

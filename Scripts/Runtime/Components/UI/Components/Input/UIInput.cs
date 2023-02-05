@@ -43,28 +43,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Components.Input
 
         protected override void Awake()
         {
-            var currentInputScheme = UIShortcutInputSystem.CurrentInputScheme;
-            if (currentInputScheme == null)
-            {
-                Debug.Log("[UI-INPUT] No shortcut input scheme found", this);
-                _noScheme = true;
-                
-                return;
-            }
-            
-            foreach (var assignedShortcutAction in AssignedShortcutActions)
-            {
-                var shortcutSchemeItem = currentInputScheme.FindByAction(assignedShortcutAction);
-                if (shortcutSchemeItem == null)
-                {
-                    Debug.LogError("[UI-INPUT] Unable to find shortcut action " + assignedShortcutAction + " in scheme " + currentInputScheme.Name, this);
-                    continue;
-                }
-                
-                _shortcutSchemeItems.Add(assignedShortcutAction, shortcutSchemeItem);
-            }
-
-            _noScheme = false;
+            Refresh();
         }
 
         protected override void Start()
@@ -78,6 +57,35 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Components.Input
         protected abstract void LateUpdate();
 
         #endregion
+
+        public void Refresh()
+        {
+            var currentInputScheme = UIShortcutInputSystem.CurrentInputScheme;
+            if (currentInputScheme == null)
+            {
+                Debug.Log("[UI-INPUT] No shortcut input scheme found", this);
+                _noScheme = true;
+                UpdateVisual();
+                
+                return;
+            }
+            
+            _shortcutSchemeItems.Clear();
+            foreach (var assignedShortcutAction in AssignedShortcutActions)
+            {
+                var shortcutSchemeItem = currentInputScheme.FindByAction(assignedShortcutAction);
+                if (shortcutSchemeItem == null)
+                {
+                    Debug.LogError("[UI-INPUT] Unable to find shortcut action " + assignedShortcutAction + " in scheme " + currentInputScheme.Name, this);
+                    continue;
+                }
+                
+                _shortcutSchemeItems.Add(assignedShortcutAction, shortcutSchemeItem);
+            }
+
+            _noScheme = false;
+            UpdateVisual();
+        }
 
         /// <summary>
         /// Implement to update visuals

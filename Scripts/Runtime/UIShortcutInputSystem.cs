@@ -8,7 +8,15 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime
 {
     public static class UIShortcutInputSystem
     {
-        public static UIShortcutScheme CurrentInputScheme { get; private set; }
+        public static UIShortcutScheme CurrentInputScheme
+        {
+            get;
+#if UNITY_EDITOR
+            set;
+#else
+            private set;
+#endif
+        }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)]
         public static void Initialize()
