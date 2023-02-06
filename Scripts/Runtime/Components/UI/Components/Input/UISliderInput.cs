@@ -1,3 +1,4 @@
+#if PCSOFT_SHORTCUT && PCSOFT_ENV
 using UnityEngine;
 using UnityEngine.UI;
 using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets;
@@ -94,3 +95,4 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Components.Input
         }
     }
 }
+#endif

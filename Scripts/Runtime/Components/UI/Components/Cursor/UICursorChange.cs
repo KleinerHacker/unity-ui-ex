@@ -1,3 +1,4 @@
+#if PCSOFT_CURSOR
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityExtension.Runtime.extension.Scripts.Runtime;
@@ -26,3 +27,4 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Components.Curso
         }
     }
 }
+#endif

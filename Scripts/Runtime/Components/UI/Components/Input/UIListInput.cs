@@ -1,3 +1,4 @@
+#if PCSOFT_SHORTCUT && PCSOFT_ENV
 using System;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -149,3 +150,4 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Components.Input
         Circle,
     }
 }
+#endif

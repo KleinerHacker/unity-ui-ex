@@ -1,4 +1,4 @@
-﻿#if PCSOFT_SHORTCUT
+﻿#if PCSOFT_SHORTCUT && PCSOFT_ENV
 using System.Linq;
 using UnityEngine;
 using UnityExtension.Runtime.extension.Scripts.Runtime;
