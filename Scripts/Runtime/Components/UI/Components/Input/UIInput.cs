@@ -1,3 +1,4 @@
+#if PCSOFT_SHORTCUT && PCSOFT_ENV
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -187,3 +188,4 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Components.Input
         No
     }
 }
+#endif

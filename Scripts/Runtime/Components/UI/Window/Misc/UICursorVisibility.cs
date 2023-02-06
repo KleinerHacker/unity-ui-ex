@@ -1,3 +1,4 @@
+#if PCSOFT_CURSOR
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -44,3 +45,4 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window.Misc
         }
     }
 }
+#endif

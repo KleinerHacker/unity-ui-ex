@@ -1,13 +1,13 @@
 using System;
-using UnityAnimation.Runtime.animation.Scripts.Runtime.Types;
-using UnityAnimation.Runtime.animation.Scripts.Runtime.Utils;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 using UnityExtension.Runtime.extension.Scripts.Runtime.Utils.Extensions;
-using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Components.Input;
 using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Utils.Extensions;
+#if PCSOFT_SHORTCUT && PCSOFT_ENV
+using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Components.Input;
+#endif
 
 namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
 {
@@ -49,7 +49,9 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
         #endregion
         
         private CanvasGroup _canvasGroup;
+#if PCSOFT_SHORTCUT && PCSOFT_ENV
         private UIInput[] _inputs;
+#endif
 
         private Rect _originalRect;
 
@@ -58,7 +60,9 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
         protected override void Awake()
         {
             _canvasGroup = GetComponent<CanvasGroup>();
+#if PCSOFT_SHORTCUT && PCSOFT_ENV
             _inputs = GetComponentsInChildren<UIInput>();
+#endif
 
             _originalRect = ((RectTransform)transform).CalculateAbsoluteRect(GetComponentInParent<Canvas>());
 
@@ -183,18 +187,22 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
 
         private void EnableInputs()
         {
+#if PCSOFT_SHORTCUT && PCSOFT_ENV
             foreach (var input in _inputs)
             {
                 input.enabled = true;
             }
+#endif
         }
 
         private void DisableInputs()
         {
+#if PCSOFT_SHORTCUT && PCSOFT_ENV
             foreach (var input in _inputs)
             {
                 input.enabled = false;
             }
+#endif
         }
         
         protected virtual void OnShowing() {}

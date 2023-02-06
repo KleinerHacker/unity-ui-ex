@@ -50,16 +50,26 @@ namespace UnityUIEx.Editor.ui_ex.Scripts.Editor.Provider
         {
             GUILayout.BeginVertical();
             {
-                ExtendedEditorGUILayout.SymbolField("Activate System", "PCSOFT_SHORTCUT");
                 EditorGUI.BeginDisabledGroup(
-#if PCSOFT_SHORTCUT
+#if PCSOFT_ENV
                     false
 #else
                     true
 #endif
                 );
                 {
-                    ExtendedEditorGUILayout.SymbolField("Verbose Logging", "PCSOFT_SHORTCUT_LOGGING");
+                    ExtendedEditorGUILayout.SymbolField("Activate System", "PCSOFT_SHORTCUT");
+                    EditorGUI.BeginDisabledGroup(
+#if PCSOFT_SHORTCUT
+                    false
+#else
+                        true
+#endif
+                    );
+                    {
+                        ExtendedEditorGUILayout.SymbolField("Verbose Logging", "PCSOFT_SHORTCUT_LOGGING");
+                    }
+                    EditorGUI.EndDisabledGroup();
                 }
                 EditorGUI.EndDisabledGroup();
             }
@@ -72,7 +82,7 @@ namespace UnityUIEx.Editor.ui_ex.Scripts.Editor.Provider
 
             GUILayout.Space(15f);
 
-#if PCSOFT_SHORTCUT
+#if PCSOFT_SHORTCUT && PCSOFT_ENV
             GUILayout.Label("Shortcut Actions", EditorStyles.boldLabel);
             _actionList.DoLayoutList();
 
@@ -83,6 +93,8 @@ namespace UnityUIEx.Editor.ui_ex.Scripts.Editor.Provider
             GUILayout.Space(10f);
             GUILayout.Label("Environment Assignment", EditorStyles.boldLabel);
             _assignmentList.DoLayoutList();
+#elif !PCSOFT_ENV
+            EditorGUILayout.HelpBox("Environment System deactivated but required", MessageType.Warning);
 #else
             EditorGUILayout.HelpBox("Shortcut Input System deactivated", MessageType.Info);
 #endif

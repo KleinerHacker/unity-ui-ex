@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿#if PCSOFT_SHORTCUT && PCSOFT_ENV
+using UnityEditor;
 using UnityEditor.Overlays;
 using UnityEditor.Toolbars;
 using UnityEngine;
@@ -53,3 +54,4 @@ namespace UnityUIEx.Editor.ui_ex.Scripts.Editor.Overlay
         }
     }
 }
+#endif
