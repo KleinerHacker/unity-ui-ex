@@ -12,12 +12,12 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
         {
             _canvasGroup.Hide();
             AnimationBuilder.Create(this, AnimationType.Unscaled)
-                .Animate(animationCurve, animationSpeed, v => _canvasGroup.alpha = v)
+                .Animate(animationCurve, animationSpeed, v => _canvasGroup.alpha = Mathf.LerpUnclamped(0f, 1f, v))
                 .WithFinisher(() =>
                 {
                     _canvasGroup.Show();
                     EnableInputs();
-                    
+
                     OnShown();
                     Shown?.Invoke(this, EventArgs.Empty);
                     onFinished?.Invoke();
@@ -40,11 +40,11 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
             t.position = new Vector3(startPosition, t.position.y);
             _canvasGroup.Show();
             AnimationBuilder.Create(this, AnimationType.Unscaled)
-                .Animate(animationCurve, animationSpeed, v => t.position = new Vector3(Mathf.Lerp(startPosition, endPosition, v), t.position.y))
+                .Animate(animationCurve, animationSpeed, v => t.position = new Vector3(Mathf.LerpUnclamped(startPosition, endPosition, v), t.position.y))
                 .WithFinisher(onFinished)
                 .Start();
         }
-        
+
         private void ShowSlidingRight(Action onFinished)
         {
             var canvas = GetComponentInParent<Canvas>();
@@ -60,11 +60,11 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
             t.position = new Vector3(startPosition, t.position.y);
             _canvasGroup.Show();
             AnimationBuilder.Create(this, AnimationType.Unscaled)
-                .Animate(animationCurve, animationSpeed, v => t.position = new Vector3(Mathf.Lerp(startPosition, endPosition, v), t.position.y))
+                .Animate(animationCurve, animationSpeed, v => t.position = new Vector3(Mathf.LerpUnclamped(startPosition, endPosition, v), t.position.y))
                 .WithFinisher(onFinished)
                 .Start();
         }
-        
+
         private void ShowSlidingTop(Action onFinished)
         {
             var canvas = GetComponentInParent<Canvas>();
@@ -80,11 +80,11 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
             t.position = new Vector3(t.position.x, startPosition);
             _canvasGroup.Show();
             AnimationBuilder.Create(this, AnimationType.Unscaled)
-                .Animate(animationCurve, animationSpeed, v => t.position = new Vector3(t.position.x, Mathf.Lerp(startPosition, endPosition, v)))
+                .Animate(animationCurve, animationSpeed, v => t.position = new Vector3(t.position.x, Mathf.LerpUnclamped(startPosition, endPosition, v)))
                 .WithFinisher(onFinished)
                 .Start();
         }
-        
+
         private void ShowSlidingBottom(Action onFinished)
         {
             var canvas = GetComponentInParent<Canvas>();
@@ -100,27 +100,43 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
             t.position = new Vector3(t.position.x, startPosition);
             _canvasGroup.Show();
             AnimationBuilder.Create(this, AnimationType.Unscaled)
-                .Animate(animationCurve, animationSpeed, v => t.position = new Vector3(t.position.x, Mathf.Lerp(startPosition, endPosition, v)))
+                .Animate(animationCurve, animationSpeed, v => t.position = new Vector3(t.position.x, Mathf.LerpUnclamped(startPosition, endPosition, v)))
                 .WithFinisher(onFinished)
                 .Start();
         }
 
+        private void ShowScaling(Action onFinished)
+        {
+            transform.localScale = Vector3.zero;
+            _canvasGroup.Show();
+            AnimationBuilder.Create(this, AnimationType.Unscaled)
+                .Animate(animationCurve, animationSpeed, v => transform.localScale = Vector3.one * Mathf.LerpUnclamped(0f, 1f, v))
+                .WithFinisher(onFinished)
+                .Start();
+        }
+
+        /****************************************************************/
+        /****************************************************************/
+        /****************************************************************/
+
         private void HideFading(Action onFinished)
         {
-            _canvasGroup.Hide();
-            _canvasGroup.alpha = 1f;
+            _canvasGroup.Show();
             DisableInputs();
             AnimationBuilder.Create(this, AnimationType.Unscaled)
-                .Animate(animationCurve, animationSpeed, v => _canvasGroup.alpha = 1f - v)
+                .Animate(animationCurve, animationSpeed, revertAnimationOnHide,
+                    v => _canvasGroup.alpha = revertAnimationOnHide ? Mathf.LerpUnclamped(0f, 1f, v) : Mathf.LerpUnclamped(1f, 0f, v))
                 .WithFinisher(() =>
                 {
+                    _canvasGroup.Hide();
+
                     OnHidden();
                     Hidden?.Invoke(this, EventArgs.Empty);
                     onFinished?.Invoke();
                 })
                 .Start();
         }
-        
+
         private void HideSlidingLeft(Action onFinished)
         {
             var canvas = GetComponentInParent<Canvas>();
@@ -136,7 +152,8 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
             t.position = new Vector3(startPosition, t.position.y);
             _canvasGroup.Show();
             AnimationBuilder.Create(this, AnimationType.Unscaled)
-                .Animate(animationCurve, animationSpeed, v => t.position = new Vector3(Mathf.Lerp(startPosition, endPosition, v), t.position.y))
+                .Animate(animationCurve, animationSpeed, revertAnimationOnHide,
+                    v => t.position = new Vector3(revertAnimationOnHide ? Mathf.LerpUnclamped(endPosition, startPosition, v) : Mathf.LerpUnclamped(startPosition, endPosition, v), t.position.y))
                 .WithFinisher(() =>
                 {
                     _canvasGroup.Hide();
@@ -144,7 +161,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
                 })
                 .Start();
         }
-        
+
         private void HideSlidingRight(Action onFinished)
         {
             var canvas = GetComponentInParent<Canvas>();
@@ -160,7 +177,8 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
             t.position = new Vector3(startPosition, t.position.y);
             _canvasGroup.Show();
             AnimationBuilder.Create(this, AnimationType.Unscaled)
-                .Animate(animationCurve, animationSpeed, v => t.position = new Vector3(Mathf.Lerp(startPosition, endPosition, v), t.position.y))
+                .Animate(animationCurve, animationSpeed, revertAnimationOnHide,
+                    v => t.position = new Vector3(revertAnimationOnHide ? Mathf.LerpUnclamped(endPosition, startPosition, v) : Mathf.LerpUnclamped(startPosition, endPosition, v), t.position.y))
                 .WithFinisher(() =>
                 {
                     _canvasGroup.Hide();
@@ -168,7 +186,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
                 })
                 .Start();
         }
-        
+
         private void HideSlidingTop(Action onFinished)
         {
             var canvas = GetComponentInParent<Canvas>();
@@ -184,7 +202,8 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
             t.position = new Vector3(t.position.x, startPosition);
             _canvasGroup.Show();
             AnimationBuilder.Create(this, AnimationType.Unscaled)
-                .Animate(animationCurve, animationSpeed, v => t.position = new Vector3(t.position.x, Mathf.Lerp(startPosition, endPosition, v)))
+                .Animate(animationCurve, animationSpeed, revertAnimationOnHide,
+                    v => t.position = new Vector3(t.position.x, revertAnimationOnHide ? Mathf.LerpUnclamped(endPosition, startPosition, v) : Mathf.LerpUnclamped(startPosition, endPosition, v)))
                 .WithFinisher(() =>
                 {
                     _canvasGroup.Hide();
@@ -192,7 +211,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
                 })
                 .Start();
         }
-        
+
         private void HideSlidingBottom(Action onFinished)
         {
             var canvas = GetComponentInParent<Canvas>();
@@ -208,7 +227,23 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
             t.position = new Vector3(t.position.x, startPosition);
             _canvasGroup.Show();
             AnimationBuilder.Create(this, AnimationType.Unscaled)
-                .Animate(animationCurve, animationSpeed, v => t.position = new Vector3(t.position.x, Mathf.Lerp(startPosition, endPosition, v)))
+                .Animate(animationCurve, animationSpeed, revertAnimationOnHide,
+                    v => t.position = new Vector3(t.position.x, revertAnimationOnHide ? Mathf.LerpUnclamped(endPosition, startPosition, v) : Mathf.LerpUnclamped(startPosition, endPosition, v)))
+                .WithFinisher(() =>
+                {
+                    _canvasGroup.Hide();
+                    onFinished?.Invoke();
+                })
+                .Start();
+        }
+
+        private void HideScaling(Action onFinished)
+        {
+            transform.localScale = Vector3.one;
+            _canvasGroup.Show();
+            AnimationBuilder.Create(this, AnimationType.Unscaled)
+                .Animate(animationCurve, animationSpeed, revertAnimationOnHide,
+                    v => transform.localScale = Vector3.one * (revertAnimationOnHide ? Mathf.LerpUnclamped(0f, 1f, v) : Mathf.LerpUnclamped(1f, 0f, v)))
                 .WithFinisher(() =>
                 {
                     _canvasGroup.Hide();
