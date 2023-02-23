@@ -26,13 +26,17 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
 
         [SerializeField]
         protected UIStageAnimationType animationType = UIStageAnimationType.Fading;
-        
+
+        [FormerlySerializedAs("revertAnimationCurveOnHide")]
+        [SerializeField]
+        protected bool revertAnimationOnHide;
+
         [Header("Behavior")]
         [SerializeField]
         protected ViewableState initialState = ViewableState.Hidden;
 
         #endregion
-        
+
         #region Properties
 
         public ViewableState State => _canvasGroup.IsShown() ? ViewableState.Shown : ViewableState.Hidden;
@@ -47,7 +51,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
         public event EventHandler Hidden;
 
         #endregion
-        
+
         private CanvasGroup _canvasGroup;
 #if PCSOFT_SHORTCUT && PCSOFT_ENV
         private UIInput[] _inputs;
@@ -78,15 +82,15 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
                     throw new NotImplementedException();
             }
         }
-        
+
 #if UNITY_EDITOR
         protected override void OnValidate()
         {
             if (EditorApplication.isPlaying)
                 return;
-            
+
             var canvasGroup = GetComponent<CanvasGroup>();
-            
+
             switch (initialState)
             {
                 case ViewableState.Hidden:
@@ -107,7 +111,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
         {
             Show(null);
         }
-        
+
         public void Show(Action onFinished)
         {
             if (State == ViewableState.Shown)
@@ -115,7 +119,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
                 Debug.LogWarning("Dialog already shown", this);
                 return;
             }
-            
+
             Debug.Log("Show dialog", this);
 
             StopAllCoroutines();
@@ -139,6 +143,9 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
                 case UIStageAnimationType.SlidingBottom:
                     ShowSlidingBottom(onFinished);
                     break;
+                case UIStageAnimationType.Scaling:
+                    ShowScaling(onFinished);
+                    break;
                 default:
                     throw new NotImplementedException(animationType.ToString());
             }
@@ -156,7 +163,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
                 Debug.LogWarning("Dialog already hidden", this);
                 return;
             }
-            
+
             Debug.Log("Hide dialog", this);
 
             StopAllCoroutines();
@@ -179,6 +186,9 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
                     break;
                 case UIStageAnimationType.SlidingBottom:
                     HideSlidingBottom(onFinished);
+                    break;
+                case UIStageAnimationType.Scaling:
+                    HideScaling(onFinished);
                     break;
                 default:
                     throw new NotImplementedException(animationType.ToString());
@@ -204,12 +214,22 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
             }
 #endif
         }
-        
-        protected virtual void OnShowing() {}
-        protected virtual void OnShown() {}
-        
-        protected virtual void OnHiding() {}
-        protected virtual void OnHidden() {}
+
+        protected virtual void OnShowing()
+        {
+        }
+
+        protected virtual void OnShown()
+        {
+        }
+
+        protected virtual void OnHiding()
+        {
+        }
+
+        protected virtual void OnHidden()
+        {
+        }
     }
 
     public enum UIStageAnimationType
@@ -218,6 +238,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
         SlidingLeft,
         SlidingRight,
         SlidingTop,
-        SlidingBottom
+        SlidingBottom,
+        Scaling,
     }
 }

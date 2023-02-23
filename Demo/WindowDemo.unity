@@ -240,7 +240,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 674402652}
-  m_RootOrder: 2
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -272,6 +272,15 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
+      time: 0.5
+      value: 1.2
+      inSlope: 1.4999934
+      outSlope: 1.4999934
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
       time: 1
       value: 1
       inSlope: 0
@@ -285,6 +294,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   animationSpeed: 1
   animationType: 3
+  revertAnimationOnHide: 1
   initialState: 1
   escapeAction: 0
 --- !u!225 &174671843
@@ -370,7 +380,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 674402652}
-  m_RootOrder: 3
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -402,6 +412,15 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
+      time: 0.5
+      value: 1.2
+      inSlope: 1.4999934
+      outSlope: 1.4999934
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
       time: 1
       value: 1
       inSlope: 0
@@ -415,6 +434,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   animationSpeed: 1
   animationType: 4
+  revertAnimationOnHide: 1
   initialState: 1
   escapeAction: 0
 --- !u!225 &400318190
@@ -560,16 +580,16 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 966167026}
-  - {fileID: 1808491810}
-  - {fileID: 174671841}
-  - {fileID: 400318188}
-  - {fileID: 1352096889}
   - {fileID: 2125854246}
   - {fileID: 1480493320}
   - {fileID: 1061147739}
   - {fileID: 2042580848}
   - {fileID: 1124816202}
+  - {fileID: 966167026}
+  - {fileID: 1808491810}
+  - {fileID: 174671841}
+  - {fileID: 400318188}
+  - {fileID: 1352096889}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -763,7 +783,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 674402652}
-  m_RootOrder: 0
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
@@ -833,6 +853,15 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
+      time: 0.5
+      value: 1.2
+      inSlope: 1.4999934
+      outSlope: 1.4999934
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
       time: 1
       value: 1
       inSlope: 0
@@ -846,6 +875,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   animationSpeed: 1
   animationType: 1
+  revertAnimationOnHide: 1
   initialState: 1
   escapeAction: 0
 --- !u!225 &966167030
@@ -1028,7 +1058,7 @@ RectTransform:
   m_Children:
   - {fileID: 757190309}
   m_Father: {fileID: 674402652}
-  m_RootOrder: 7
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1163,7 +1193,7 @@ RectTransform:
   m_Children:
   - {fileID: 1720693966}
   m_Father: {fileID: 674402652}
-  m_RootOrder: 9
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1433,7 +1463,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 674402652}
-  m_RootOrder: 4
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1465,6 +1495,15 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
+      time: 0.5
+      value: 1.2
+      inSlope: 1.4999934
+      outSlope: 1.4999934
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
       time: 1
       value: 1
       inSlope: 0
@@ -1478,6 +1517,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   animationSpeed: 1
   animationType: 0
+  revertAnimationOnHide: 1
   initialState: 1
   escapeAction: 0
 --- !u!225 &1352096891
@@ -1678,7 +1718,7 @@ RectTransform:
   m_Children:
   - {fileID: 1170510077}
   m_Father: {fileID: 674402652}
-  m_RootOrder: 6
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1948,7 +1988,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 674402652}
-  m_RootOrder: 1
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1980,6 +2020,15 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
+      time: 0.5
+      value: 1.2
+      inSlope: 1.4999934
+      outSlope: 1.4999934
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
       time: 1
       value: 1
       inSlope: 0
@@ -1993,6 +2042,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   animationSpeed: 1
   animationType: 2
+  revertAnimationOnHide: 1
   initialState: 1
   escapeAction: 0
 --- !u!225 &1808491812
@@ -2213,7 +2263,7 @@ RectTransform:
   m_Children:
   - {fileID: 1843811077}
   m_Father: {fileID: 674402652}
-  m_RootOrder: 8
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2348,7 +2398,7 @@ RectTransform:
   m_Children:
   - {fileID: 1056421647}
   m_Father: {fileID: 674402652}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
