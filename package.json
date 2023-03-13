@@ -11,7 +11,7 @@
   ],
   "dependencies": {
     "org.pcsoft.base": "1.0.0",
-    "org.pcsoft.extension": "1.12.6",
+    "org.pcsoft.extension": "1.12.7",
     "org.pcsoft.animation": "1.2.7",
     "org.pcsoft.asset-loader": "2.0.1",
     "org.pcsoft.editor-ex": "1.1.17",
