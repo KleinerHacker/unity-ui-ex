@@ -41,7 +41,14 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
             _canvasGroup.Show();
             AnimationBuilder.Create(this, AnimationType.Unscaled)
                 .Animate(animationCurve, animationSpeed, v => t.position = new Vector3(Mathf.LerpUnclamped(startPosition, endPosition, v), t.position.y))
-                .WithFinisher(onFinished)
+                .WithFinisher(() =>
+                {
+                    EnableInputs();
+
+                    OnShown();
+                    Shown?.Invoke(this, EventArgs.Empty);
+                    onFinished?.Invoke();
+                })
                 .Start();
         }
 
@@ -61,7 +68,14 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
             _canvasGroup.Show();
             AnimationBuilder.Create(this, AnimationType.Unscaled)
                 .Animate(animationCurve, animationSpeed, v => t.position = new Vector3(Mathf.LerpUnclamped(startPosition, endPosition, v), t.position.y))
-                .WithFinisher(onFinished)
+                .WithFinisher(() =>
+                {
+                    EnableInputs();
+
+                    OnShown();
+                    Shown?.Invoke(this, EventArgs.Empty);
+                    onFinished?.Invoke();
+                })
                 .Start();
         }
 
@@ -81,7 +95,14 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
             _canvasGroup.Show();
             AnimationBuilder.Create(this, AnimationType.Unscaled)
                 .Animate(animationCurve, animationSpeed, v => t.position = new Vector3(t.position.x, Mathf.LerpUnclamped(startPosition, endPosition, v)))
-                .WithFinisher(onFinished)
+                .WithFinisher(() =>
+                {
+                    EnableInputs();
+
+                    OnShown();
+                    Shown?.Invoke(this, EventArgs.Empty);
+                    onFinished?.Invoke();
+                })
                 .Start();
         }
 
@@ -101,7 +122,14 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
             _canvasGroup.Show();
             AnimationBuilder.Create(this, AnimationType.Unscaled)
                 .Animate(animationCurve, animationSpeed, v => t.position = new Vector3(t.position.x, Mathf.LerpUnclamped(startPosition, endPosition, v)))
-                .WithFinisher(onFinished)
+                .WithFinisher(() =>
+                {
+                    EnableInputs();
+
+                    OnShown();
+                    Shown?.Invoke(this, EventArgs.Empty);
+                    onFinished?.Invoke();
+                })
                 .Start();
         }
 
@@ -111,7 +139,14 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
             _canvasGroup.Show();
             AnimationBuilder.Create(this, AnimationType.Unscaled)
                 .Animate(animationCurve, animationSpeed, v => transform.localScale = Vector3.one * Mathf.LerpUnclamped(0f, 1f, v))
-                .WithFinisher(onFinished)
+                .WithFinisher(() =>
+                {
+                    EnableInputs();
+
+                    OnShown();
+                    Shown?.Invoke(this, EventArgs.Empty);
+                    onFinished?.Invoke();
+                })
                 .Start();
         }
 
@@ -151,12 +186,16 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
             var t = transform;
             t.position = new Vector3(startPosition, t.position.y);
             _canvasGroup.Show();
+            DisableInputs();
             AnimationBuilder.Create(this, AnimationType.Unscaled)
                 .Animate(animationCurve, animationSpeed, revertAnimationOnHide,
                     v => t.position = new Vector3(revertAnimationOnHide ? Mathf.LerpUnclamped(endPosition, startPosition, v) : Mathf.LerpUnclamped(startPosition, endPosition, v), t.position.y))
                 .WithFinisher(() =>
                 {
                     _canvasGroup.Hide();
+
+                    OnHidden();
+                    Hidden?.Invoke(this, EventArgs.Empty);
                     onFinished?.Invoke();
                 })
                 .Start();
@@ -176,12 +215,16 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
             var t = transform;
             t.position = new Vector3(startPosition, t.position.y);
             _canvasGroup.Show();
+            DisableInputs();
             AnimationBuilder.Create(this, AnimationType.Unscaled)
                 .Animate(animationCurve, animationSpeed, revertAnimationOnHide,
                     v => t.position = new Vector3(revertAnimationOnHide ? Mathf.LerpUnclamped(endPosition, startPosition, v) : Mathf.LerpUnclamped(startPosition, endPosition, v), t.position.y))
                 .WithFinisher(() =>
                 {
                     _canvasGroup.Hide();
+
+                    OnHidden();
+                    Hidden?.Invoke(this, EventArgs.Empty);
                     onFinished?.Invoke();
                 })
                 .Start();
@@ -201,12 +244,16 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
             var t = transform;
             t.position = new Vector3(t.position.x, startPosition);
             _canvasGroup.Show();
+            DisableInputs();
             AnimationBuilder.Create(this, AnimationType.Unscaled)
                 .Animate(animationCurve, animationSpeed, revertAnimationOnHide,
                     v => t.position = new Vector3(t.position.x, revertAnimationOnHide ? Mathf.LerpUnclamped(endPosition, startPosition, v) : Mathf.LerpUnclamped(startPosition, endPosition, v)))
                 .WithFinisher(() =>
                 {
                     _canvasGroup.Hide();
+
+                    OnHidden();
+                    Hidden?.Invoke(this, EventArgs.Empty);
                     onFinished?.Invoke();
                 })
                 .Start();
@@ -226,12 +273,16 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
             var t = transform;
             t.position = new Vector3(t.position.x, startPosition);
             _canvasGroup.Show();
+            DisableInputs();
             AnimationBuilder.Create(this, AnimationType.Unscaled)
                 .Animate(animationCurve, animationSpeed, revertAnimationOnHide,
                     v => t.position = new Vector3(t.position.x, revertAnimationOnHide ? Mathf.LerpUnclamped(endPosition, startPosition, v) : Mathf.LerpUnclamped(startPosition, endPosition, v)))
                 .WithFinisher(() =>
                 {
                     _canvasGroup.Hide();
+
+                    OnHidden();
+                    Hidden?.Invoke(this, EventArgs.Empty);
                     onFinished?.Invoke();
                 })
                 .Start();
@@ -241,12 +292,16 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
         {
             transform.localScale = Vector3.one;
             _canvasGroup.Show();
+            DisableInputs();
             AnimationBuilder.Create(this, AnimationType.Unscaled)
                 .Animate(animationCurve, animationSpeed, revertAnimationOnHide,
                     v => transform.localScale = Vector3.one * (revertAnimationOnHide ? Mathf.LerpUnclamped(0f, 1f, v) : Mathf.LerpUnclamped(1f, 0f, v)))
                 .WithFinisher(() =>
                 {
                     _canvasGroup.Hide();
+
+                    OnHidden();
+                    Hidden?.Invoke(this, EventArgs.Empty);
                     onFinished?.Invoke();
                 })
                 .Start();
