@@ -105,7 +105,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Components
         {
             if (ContentData == null)
                 return;
-        
+
             foreach (var data in ContentData)
             {
                 AddItem(data);
@@ -114,7 +114,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Components
 
         protected void AddItem(TM data)
         {
-            var go = InstantiateItem(itemPrefab.gameObject, Vector3.zero, Quaternion.identity, content);
+            var go = InstantiateItem(itemPrefab.gameObject, Vector3.zero, Quaternion.identity, content, data);
 
             var listItem = go.GetComponent<TI>();
             listItem.Model = data;
@@ -138,6 +138,11 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Components
         protected virtual GameObject InstantiateItem(GameObject prefab, Vector3 pos, Quaternion rot, Transform target)
         {
             return Instantiate(prefab, pos, rot, target);
+        }
+
+        protected virtual GameObject InstantiateItem(GameObject prefab, Vector3 pos, Quaternion rot, Transform target, TM data)
+        {
+            return InstantiateItem(prefab, pos, rot, target);
         }
 
         protected virtual void DestroyItem(TI listItem)
