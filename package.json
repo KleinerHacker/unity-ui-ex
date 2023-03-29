@@ -1,6 +1,6 @@
 {
   "name": "org.pcsoft.ui-ex",
-  "version": "1.9.5",
+  "version": "1.9.6",
   "displayName": "Unity UI Extension",
   "description": "Extension for Unity UI system.",
   "unity": "2021.3",
@@ -10,13 +10,13 @@
     "tooling"
   ],
   "dependencies": {
-    "org.pcsoft.base": "1.0.0",
+    "org.pcsoft.base": "1.0.1",
     "org.pcsoft.extension": "1.12.7",
     "org.pcsoft.animation": "1.2.7",
     "org.pcsoft.asset-loader": "2.0.1",
     "org.pcsoft.editor-ex": "1.1.17",
     "org.pcsoft.input-ex": "1.1.11",
-    "org.pcsoft.common-ex": "1.1.10",
+    "org.pcsoft.common-ex": "1.1.12",
     "org.pcsoft.android-ex": "1.0.1",
     "org.pcsoft.analytics-ex": "1.0.3",
     "org.pcsoft.audio-system": "2.0.2"
