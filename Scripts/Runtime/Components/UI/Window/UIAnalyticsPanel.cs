@@ -1,3 +1,4 @@
+#if PCSOFT_ANALYTICS
 using UnityAnalyticsEx.Runtime.analytics_ex.Scripts.Runtime;
 using UnityAnalyticsEx.Runtime.analytics_ex.Scripts.Runtime.Utils;
 using UnityAnimation.Runtime.animation.Scripts.Runtime.Utils;
@@ -14,22 +15,16 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
     {
         #region Inspector Data
 
-        [Header("Behavior")]
-        [SerializeField]
-        private bool autoOpenIfRequired = true;
+        [Header("Behavior")] [SerializeField] private bool autoOpenIfRequired = true;
 
-        [SerializeField]
-        private float autoOpenDelay = 1f;
+        [SerializeField] private float autoOpenDelay = 1f;
 
-        [Header("References")]
-        [SerializeField]
+        [Header("References")] [SerializeField]
         private Toggle ageToggle;
 
-        [SerializeField]
-        private Toggle allowToggle;
+        [SerializeField] private Toggle allowToggle;
 
-        [SerializeField]
-        private Button infoButton;
+        [SerializeField] private Button infoButton;
 
         #endregion
 
@@ -39,7 +34,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
         {
             ageToggle.onValueChanged.AddListener(AgeChanged);
             infoButton.onClick.AddListener(InfoClick);
-            
+
             ageToggle.isOn = false;
             allowToggle.isOn = false;
 
@@ -86,3 +81,4 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
         }
     }
 }
+#endif
