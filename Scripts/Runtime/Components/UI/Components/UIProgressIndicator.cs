@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
 
-namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Components
+namespace UnityUIEx.Runtime.Projects.unity_ui_ex.Scripts.Runtime.Components.UI.Components
 {
     [AddComponentMenu(UnityUIExConstants.Menu.Component.UI.ComponentMenu + "/Progress Indicator")]
     [DisallowMultipleComponent]

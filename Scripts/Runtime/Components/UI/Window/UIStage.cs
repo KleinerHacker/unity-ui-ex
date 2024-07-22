@@ -3,13 +3,13 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
-using UnityExtension.Runtime.extension.Scripts.Runtime.Utils.Extensions;
-using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Utils.Extensions;
+using UnityExtension.Runtime.Projects.unity_extension.Scripts.Runtime.Utils.Extensions;
+using UnityUIEx.Runtime.Projects.unity_ui_ex.Scripts.Runtime.Utils.Extensions;
 #if PCSOFT_SHORTCUT && PCSOFT_ENV
 using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Components.Input;
 #endif
 
-namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
+namespace UnityUIEx.Runtime.Projects.unity_ui_ex.Scripts.Runtime.Components.UI.Window
 {
     public abstract partial class UIStage : UIBehaviour, IViewable
     {

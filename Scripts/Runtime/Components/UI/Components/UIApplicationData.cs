@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Components
+namespace UnityUIEx.Runtime.Projects.unity_ui_ex.Scripts.Runtime.Components.UI.Components
 {
     public abstract class UIApplicationData : UIBehaviour
     {

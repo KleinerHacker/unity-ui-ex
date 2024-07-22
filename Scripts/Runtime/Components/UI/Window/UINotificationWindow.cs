@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
+namespace UnityUIEx.Runtime.Projects.unity_ui_ex.Scripts.Runtime.Components.UI.Window
 {
     [AddComponentMenu(UnityUIExConstants.Menu.Component.UI.WindowMenu + "/Notification Window")]
     [DisallowMultipleComponent]

@@ -1,9 +1,9 @@
 #if PCSOFT_CURSOR
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityExtension.Runtime.extension.Scripts.Runtime;
+using UnityExtension.Runtime.Projects.unity_extension.Scripts.Runtime;
 
-namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Components.Cursor
+namespace UnityUIEx.Runtime.Projects.unity_ui_ex.Scripts.Runtime.Components.UI.Components.Cursor
 {
     [AddComponentMenu(UnityUIExConstants.Menu.Component.UI.Component.CursorMenu + "/Cursor Change")]
     [DisallowMultipleComponent]

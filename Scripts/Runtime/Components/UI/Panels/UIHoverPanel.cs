@@ -1,12 +1,12 @@
 using System;
-using UnityCommonEx.Runtime.common_ex.Scripts.Runtime.Utils;
-using UnityCommonEx.Runtime.common_ex.Scripts.Runtime.Utils.Extensions;
+using UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Utils;
+using UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Utils.Extensions;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
-using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets;
+using UnityUIEx.Runtime.Projects.unity_ui_ex.Scripts.Runtime.Assets;
 
-namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Panels
+namespace UnityUIEx.Runtime.Projects.unity_ui_ex.Scripts.Runtime.Components.UI.Panels
 {
     [AddComponentMenu(UnityUIExConstants.Menu.Component.UI.PanelMenu + "/Hover Panel")]
     [DisallowMultipleComponent]

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets
+namespace UnityUIEx.Runtime.Projects.unity_ui_ex.Scripts.Runtime.Assets
 {
     [Serializable]
     public sealed class UIHover

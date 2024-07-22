@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityExtension.Runtime.extension.Scripts.Runtime.Utils;
+using UnityExtension.Runtime.Projects.unity_extension.Scripts.Runtime.Utils;
 
-namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window.Misc
+namespace UnityUIEx.Runtime.Projects.unity_ui_ex.Scripts.Runtime.Components.UI.Window.Misc
 {
     [AddComponentMenu(UnityUIExConstants.Menu.Component.UI.Window.MiscMenu + "/Game Time Stopper")]
     [DisallowMultipleComponent]

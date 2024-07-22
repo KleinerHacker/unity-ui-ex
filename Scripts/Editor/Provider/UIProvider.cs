@@ -1,11 +1,9 @@
-using System.Linq;
-using UnityCommonEx.Runtime.common_ex.Scripts.Runtime.Utils.Extensions;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
-using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets;
+using UnityUIEx.Runtime.Projects.unity_ui_ex.Scripts.Runtime.Assets;
 
-namespace UnityUIEx.Editor.ui_ex.Scripts.Editor.Provider
+namespace UnityUIEx.Editor.Projects.unity_ui_ex.Scripts.Editor.Provider
 {
     public sealed partial class UIProvider : SettingsProvider
     {

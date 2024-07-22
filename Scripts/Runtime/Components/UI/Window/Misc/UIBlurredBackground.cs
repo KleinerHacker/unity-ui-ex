@@ -1,16 +1,17 @@
 using System;
-using UnityAnimation.Runtime.animation.Scripts.Runtime.Types;
-using UnityAnimation.Runtime.animation.Scripts.Runtime.Utils;
+using UnityAnimation.Runtime.Projects.unity_animation.Scripts.Runtime.Types;
+using UnityAnimation.Runtime.Projects.unity_animation.Scripts.Runtime.Utils;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
-#if URP
 using UnityEngine.Rendering.Universal;
+#if URP
+
 #elif HDRP
 using UnityEngine.Rendering.HighDefinition;
 #endif
 
-namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window.Misc
+namespace UnityUIEx.Runtime.Projects.unity_ui_ex.Scripts.Runtime.Components.UI.Window.Misc
 {
     [AddComponentMenu(UnityUIExConstants.Menu.Component.UI.Window.MiscMenu + "/Blurred Background")]
     [DisallowMultipleComponent]

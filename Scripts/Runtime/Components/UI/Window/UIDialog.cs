@@ -1,10 +1,10 @@
-using UnityAnimation.Runtime.animation.Scripts.Runtime.Types;
-using UnityAnimation.Runtime.animation.Scripts.Runtime.Utils;
+using UnityAnimation.Runtime.Projects.unity_animation.Scripts.Runtime.Types;
+using UnityAnimation.Runtime.Projects.unity_animation.Scripts.Runtime.Utils;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Utils.Extensions;
+using UnityUIEx.Runtime.Projects.unity_ui_ex.Scripts.Runtime.Utils.Extensions;
 
-namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
+namespace UnityUIEx.Runtime.Projects.unity_ui_ex.Scripts.Runtime.Components.UI.Window
 {
     [AddComponentMenu(UnityUIExConstants.Menu.Component.UI.WindowMenu + "/Dialog")]
     [DisallowMultipleComponent]
