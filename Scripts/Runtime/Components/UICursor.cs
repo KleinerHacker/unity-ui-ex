@@ -1,10 +1,12 @@
 using UnityCommons.Runtime.Projects.unity_commons.Scripts.Runtime;
-using UnityCommons.Runtime.Projects.unity_commons.Scripts.Runtime.Assets;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace UnityUIEx.Runtime.Projects.unity_ui_ex.Scripts.Runtime.Components
 {
+    /// <summary>
+    /// Cursor for a UI scene component. Requires an event system.
+    /// </summary>
     [AddComponentMenu(UnityUIExConstants.Root + "/UI Cursor")]
     [DisallowMultipleComponent]
     public sealed class UICursor : UIBehaviour, IPointerEnterHandler, IPointerExitHandler
