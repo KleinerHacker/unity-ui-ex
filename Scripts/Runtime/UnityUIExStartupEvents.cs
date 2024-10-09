@@ -1,14 +1,9 @@
-using System.Linq;
-using UnityAssetLoader.Runtime.asset_loader.Scripts.Runtime;
-#if UNITY_EDITOR
 using UnityEditor;
-#endif
 using UnityEngine;
-using UnityExtension.Runtime.extension.Scripts.Runtime;
-using UnityExtension.Runtime.extension.Scripts.Runtime.Assets;
-using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets;
+#if UNITY_EDITOR
+#endif
 
-namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime
+namespace UnityUIEx.Runtime.Projects.unity_ui_ex.Scripts.Runtime
 {
     public static class UnityUIExStartupEvents
     {
@@ -18,9 +13,7 @@ namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime
 #endif
         public static void Initialize()
         {
-            Debug.Log("Initialize UI input");
-            AssetResourcesLoader.LoadFromResources<UIShortcutInputSettings>("");
-            AssetResourcesLoader.LoadFromResources<UIAudioSettings>("");
+            Debug.Log("Initialize UI extensions");
         }
     }
 }

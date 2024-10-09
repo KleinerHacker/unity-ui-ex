@@ -1,4 +1,4 @@
-﻿namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime
+﻿namespace UnityUIEx.Runtime.Projects.unity_ui_ex.Scripts.Runtime
 {
     internal static class UnityUIExConstants
     {

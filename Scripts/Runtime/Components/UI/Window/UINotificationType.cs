@@ -1,4 +1,4 @@
-namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
+namespace UnityUIEx.Runtime.Projects.unity_ui_ex.Scripts.Runtime.Components.UI.Window
 {
     public enum UINotificationType
     {

@@ -1,13 +1,14 @@
 {
     "name": "UnityUIEx.Editor",
     "rootNamespace": "UnityUIEx.Editor",
-    "references": ["GUID:f038db6d5194feb459e744a110d08027",
-"GUID:5d0595cabca3f65418ec01a472735d07",
-"GUID:626cca1954403c942aaa892ce194af26",
-"GUID:ba2442629f6ce0343b00f9e6891a9ce3",
-"GUID:7e0e70507eb6bf44e9f9fd2a3026ac35",
-"GUID:75469ad4d38634e559750d17036d5f7c",
-"GUID:86c5ae22b787083498226e9faa99731d"],
+    "references": [
+        "GUID:f038db6d5194feb459e744a110d08027",
+        "GUID:5d0595cabca3f65418ec01a472735d07",
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:86c5ae22b787083498226e9faa99731d",
+        "GUID:64c52e74a682df04189ccbd30b6ca5aa",
+        "GUID:3d5224c516c856c4bb9a5993e6431b13"
+    ],
     "includePlatforms": [
         "Editor"
     ],
