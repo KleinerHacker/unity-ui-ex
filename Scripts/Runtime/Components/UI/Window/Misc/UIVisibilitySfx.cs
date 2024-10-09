@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.EventSystems;
 
-namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window.Misc
+namespace UnityUIEx.Runtime.Projects.unity_ui_ex.Scripts.Runtime.Components.UI.Window.Misc
 {
     [AddComponentMenu(UnityUIExConstants.Menu.Component.UI.Window.MiscMenu + "/Visibility Sfx")]
     [DisallowMultipleComponent]

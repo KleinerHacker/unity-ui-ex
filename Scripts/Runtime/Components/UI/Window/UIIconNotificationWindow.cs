@@ -2,9 +2,9 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets;
+using UnityUIEx.Runtime.Projects.unity_ui_ex.Scripts.Runtime.Assets;
 
-namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window
+namespace UnityUIEx.Runtime.Projects.unity_ui_ex.Scripts.Runtime.Components.UI.Window
 {
     [AddComponentMenu(UnityUIExConstants.Menu.Component.UI.WindowMenu + "/Icon Notification Window")]
     [DisallowMultipleComponent]

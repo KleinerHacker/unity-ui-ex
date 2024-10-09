@@ -2,7 +2,7 @@ using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 
-namespace UnityUIEx.Editor.ui_ex.Scripts.Editor.Provider
+namespace UnityUIEx.Editor.Projects.unity_ui_ex.Scripts.Editor.Provider
 {
     public sealed class UIHoverList : ReorderableList
     {

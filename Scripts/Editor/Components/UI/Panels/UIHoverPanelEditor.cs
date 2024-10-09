@@ -1,13 +1,13 @@
 using System;
 using System.Linq;
-using UnityCommonEx.Runtime.common_ex.Scripts.Runtime.Utils.Extensions;
+using UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Utils.Extensions;
 using UnityEditor;
-using UnityEditorEx.Editor.editor_ex.Scripts.Editor;
-using UnityEditorEx.Editor.editor_ex.Scripts.Editor.Commons;
-using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets;
-using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Panels;
+using UnityEditorEx.Editor.Projects.unity_editor_ex.Scripts.Editor;
+using UnityEditorEx.Editor.Projects.unity_editor_ex.Scripts.Editor.Commons;
+using UnityUIEx.Runtime.Projects.unity_ui_ex.Scripts.Runtime.Assets;
+using UnityUIEx.Runtime.Projects.unity_ui_ex.Scripts.Runtime.Components.UI.Panels;
 
-namespace UnityUIEx.Editor.ui_ex.Scripts.Editor.Components.UI.Panels
+namespace UnityUIEx.Editor.Projects.unity_ui_ex.Scripts.Editor.Components.UI.Panels
 {
     [CustomEditor(typeof(UIHoverPanel))]
     public sealed class UIHoverPanelEditor : AutoEditor

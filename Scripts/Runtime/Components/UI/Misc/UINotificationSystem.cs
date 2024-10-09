@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityAnimation.Runtime.animation.Scripts.Runtime.Utils;
-using UnityCommonEx.Runtime.common_ex.Scripts.Runtime.Utils.Extensions;
+using UnityAnimation.Runtime.Projects.unity_animation.Scripts.Runtime.Utils;
+using UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Utils.Extensions;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window;
+using UnityUIEx.Runtime.Projects.unity_ui_ex.Scripts.Runtime.Components.UI.Window;
 
-namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Misc
+namespace UnityUIEx.Runtime.Projects.unity_ui_ex.Scripts.Runtime.Components.UI.Misc
 {
     [AddComponentMenu(UnityUIExConstants.Menu.Component.UI.MiscMenu + "/Notification System")]
     [DisallowMultipleComponent]

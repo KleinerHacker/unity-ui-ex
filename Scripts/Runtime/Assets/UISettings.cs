@@ -1,8 +1,8 @@
 using UnityEditor;
-using UnityEditorEx.Runtime.editor_ex.Scripts.Runtime.Assets;
+using UnityEditorEx.Runtime.Projects.unity_editor_ex.Scripts.Runtime.Assets;
 using UnityEngine;
 
-namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Assets
+namespace UnityUIEx.Runtime.Projects.unity_ui_ex.Scripts.Runtime.Assets
 {
     public sealed class UISettings : ProviderAsset<UISettings>
     {

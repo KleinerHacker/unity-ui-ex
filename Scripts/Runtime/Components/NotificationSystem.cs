@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
-using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Misc;
-using UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components.UI.Window;
+using UnityUIEx.Runtime.Projects.unity_ui_ex.Scripts.Runtime.Components.UI.Misc;
+using UnityUIEx.Runtime.Projects.unity_ui_ex.Scripts.Runtime.Components.UI.Window;
 
-namespace UnityUIEx.Runtime.ui_ex.Scripts.Runtime.Components
+namespace UnityUIEx.Runtime.Projects.unity_ui_ex.Scripts.Runtime.Components
 {
     public static class NotificationSystem
     {
