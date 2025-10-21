@@ -1,3 +1,4 @@
+#if PCSOFT_CURSOR
 using System.Linq;
 using UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Utils.Extensions;
 using UnityCommons.Runtime.Projects.unity_commons.Scripts.Runtime.Assets;
@@ -45,3 +46,4 @@ namespace UnityUIEx.Editor.Projects.unity_ui_ex.Scripts.Editor.Components
         }
     }
 }
+#endif

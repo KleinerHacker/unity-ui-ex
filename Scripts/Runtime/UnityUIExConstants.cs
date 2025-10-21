@@ -6,7 +6,7 @@
 
         public static class Menu
         {
-            private const string ComponentMenu = Root + "/Component";
+            private const string ComponentMenu = Root + "/Components";
             
             public static class Component
             {

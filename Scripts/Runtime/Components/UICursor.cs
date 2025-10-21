@@ -1,3 +1,4 @@
+#if PCSOFT_CURSOR
 using UnityCommons.Runtime.Projects.unity_commons.Scripts.Runtime;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -34,3 +35,4 @@ namespace UnityUIEx.Runtime.Projects.unity_ui_ex.Scripts.Runtime.Components
         }
     }
 }
+#endif
