@@ -1,5 +1,10 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
+#if ENABLE_INPUT_SYSTEM
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
+#endif
 
 namespace UnityUIEx.Runtime.Projects.unity_ui_ex.Scripts.Runtime.Components.UI.Window
 {
@@ -15,23 +20,29 @@ namespace UnityUIEx.Runtime.Projects.unity_ui_ex.Scripts.Runtime.Components.UI.W
 
         #endregion
 
-        #region Properties
-
-        public DialogEscapeAction EscapeAction => escapeAction;
-
-        #endregion
-
         #region Builtin Methods
 
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+#if ENABLE_INPUT_SYSTEM
+            EventSystem.current.GetComponent<InputSystemUIInputModule>().cancel.action.performed += CancelPerformed;
+#endif
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+#if ENABLE_INPUT_SYSTEM           
+            EventSystem.current.GetComponent<InputSystemUIInputModule>().cancel.action.performed -= CancelPerformed;
+#endif
+        }
+
         #endregion
 
-        /// <summary>
-        /// Call this to handle toggle action based on given <see cref="EscapeAction"/>
-        /// </summary>
-        /// <exception cref="NotImplementedException"></exception>
-        public void ToggleVisibility()
+        private void HandleEscape()
         {
-            switch (EscapeAction)
+            switch (escapeAction)
             {
                 case DialogEscapeAction.None:
                     break;
@@ -51,9 +62,13 @@ namespace UnityUIEx.Runtime.Projects.unity_ui_ex.Scripts.Runtime.Components.UI.W
 
                     break;
                 default:
-                    throw new NotImplementedException();
+                    throw new ArgumentOutOfRangeException("escapeAction", escapeAction, null);
             }
         }
+
+#if ENABLE_INPUT_SYSTEM
+        private void CancelPerformed(InputAction.CallbackContext obj) => HandleEscape();
+#endif
     }
 
     public enum DialogEscapeAction
